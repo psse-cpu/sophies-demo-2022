@@ -1,0 +1,15 @@
+{
+  "name": "sophies-demo-2022",
+  "version": "0.0.1",
+  "description": "Demo project for sophomores AY 2022 (SE-2223 + SE-2226).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "commitizen": "^4.2.4",
+    "commitizen-emoji": "^1.0.5"
+  }
+}
