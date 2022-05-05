@@ -3,7 +3,7 @@
   "config": {
     "commitizenEmoji": {
       "symbol": true,
-      "conventionalFormat": true,
+      "conventionalFormat": true
     }
   }
 }
