@@ -1,9 +1,9 @@
-const emojiPattern =
-  '(?:\\u00a9|\\u00ae|[\\u2000-\\u3300]|\\ud83c[\\ud000-\\udfff]|\\ud83d[\\ud000-\\udfff]|\\ud83e[\\ud000-\\udfff])'
+const gitmojis = require('commitizen-emoji/dist/data/gitmojis.json')
+const { TYPE_NAMES: types } = require('commitizen-emoji/dist/constants/types')
 
-const defaultHeaderPatternWithEmoji = 
-// ⚗️ poc is repeated since the emoji has an invisible space extra-wide thingy
-  `^(${emojiPattern}\\s\\w*|⚗️ poc)(?:\\((.*)\\))?!?: (.*)$`
+const gitmojiLookup = new Map(gitmojis.map(gitmoji => [gitmoji.code, gitmoji.emoji]))
+const typeEnum = types.map(([code, text]) => `${gitmojiLookup.get(code)} ${text}`)
+const defaultHeaderPatternWithEmoji = `^(${typeEnum.join('|')})(?:\\((.*)\\))?!?: (.*)$`
 
 module.exports = {
   extends: ['@commitlint/config-conventional'],
@@ -13,77 +13,6 @@ module.exports = {
     }
   },
   rules: {
-    // TODO: refactor such that commitizen-emoji is the SSOT
-    "type-enum": [
-      2,
-      'always',
-      [
-        '🎨 codestyle',
-        '⚡️ perf',
-        '🔥 prune',
-        '🐛 bugfix',
-        '🚑️ hotfix',
-        '✨ feature',
-        '📝 docs',
-        '🚀 deploy',
-        '💄 ui',
-        '🎉 init',
-        '✅ tests',
-        '🔒️ security',
-        '🔖 tags',
-        '🚨 lint',
-        '🚧 wip',
-        '💚 fixci',
-        '⬇️ downgrade',
-        '⬆️ upgrade',
-        '📌 depver',
-        '👷 ci',
-        '📈 analytics',
-        '♻️ refactor',
-        '➕ depadd',
-        '➖ deprm',
-        '🔧 config',
-        '🔨 devscripts',
-        '🌐 i18n',
-        '✏️ typo',
-        '💩 flaky',
-        '⏪️ revert',
-        '🔀 merge',
-        '📦️ binary',
-        '👽️ contract',
-        '🚚 relocate',
-        '📄 license',
-        '💥 breaking',
-        '🍱 assets',
-        '♿️ a11y',
-        '💡 comment',
-        '🍻 gibberish',
-        '💬 text',
-        '🗃️ db',
-        '🔊 addlogs',
-        '🔇 rmlogs',
-        '👥 contrib',
-        '🚸 ux',
-        '🏗️ arch',
-        '📱 responsive',
-        '🤡 mock',
-        '🥚 joke',
-        '🙈 gitignore',
-        '📸 snapshots',
-        '⚗️ poc',
-        '🔍️ seo',
-        '🏷️ types',
-        '🌱 seed',
-        '🚩 flags',
-        '🥅 detect',
-        '💫 animation',
-        '🗑️ deprecate',
-        '🛂 auth',
-        '🩹 fix',
-        '🧐 explore',
-        '⚰️ clean',
-        '🧪 fall'
-      ]
-    ]
+    "type-enum": [2, 'always', typeEnum]
   }
 }
