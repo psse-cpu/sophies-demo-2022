@@ -5,6 +5,7 @@
     "types": [
       "node"
     ],
+    "skipLibCheck": true,
     "paths": {
       "src/*": [
         "src/*"
