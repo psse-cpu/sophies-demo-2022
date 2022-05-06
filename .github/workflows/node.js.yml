@@ -42,10 +42,5 @@ jobs:
         version: 6.x
         run_install: true
 
-  qa:
-    runs-on: ubuntu-latest
-    needs: [build]
-
-    steps:
     - name: Lint
       run: pnpm lint
