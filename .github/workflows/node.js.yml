@@ -42,5 +42,8 @@ jobs:
         version: 6.x
         run_install: true
 
+    - name: Typecheck and Build
+      run: pnpm --parallel build
+
     - name: Lint
       run: pnpm lint
