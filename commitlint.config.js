@@ -13,6 +13,7 @@ module.exports = {
     }
   },
   rules: {
+    // TODO: refactor such that commitizen-emoji is the SSOT
     "type-enum": [
       2,
       'always',
