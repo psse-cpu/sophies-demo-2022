@@ -20,11 +20,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout Git repo
+      uses: actions/checkout@v3
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+
     - name: Cache pnpm modules
       uses: actions/cache@v2
       with:
@@ -33,7 +36,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-
 
-    - uses: pnpm/action-setup@v2.1.0
+    - name: Setup PNPM 
+      uses: pnpm/action-setup@v2.1.0
       with:
         version: 6.x
         run_install: true
+
+    - name: Lint
+      run: pnpm lint
