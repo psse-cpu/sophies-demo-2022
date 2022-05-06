@@ -4,8 +4,7 @@
   "description": "Demo project for sophomores AY 2022 (SE-2223 + SE-2226).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
