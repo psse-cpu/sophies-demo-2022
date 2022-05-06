@@ -23,7 +23,7 @@ npm () {
 }
 ```
 
-[:point*up_2: \_credits*](https://stackoverflow.com/a/65831302/2310634)
+[:point_up_2: _credits_](https://stackoverflow.com/a/65831302/2310634)
 
 It lowers the risk of typing `npm` instead of `pnpm`, since they're usually
 typed in the monorepo root or `frontend/`/`backend/` roots.
