@@ -10,8 +10,7 @@
 
 const { configure } = require('quasar/wrappers')
 
-module.exports = configure(function (/* ctx */) {
-  return {
+module.exports = configure((/* ctx */) => ({
     eslint: {
       // fix: true,
       // include = [],
@@ -195,5 +194,4 @@ module.exports = configure(function (/* ctx */) {
       // extendBexScriptsConf (esbuildConf) {}
       // extendBexManifestJson (json) {}
     },
-  }
-})
+  }))
