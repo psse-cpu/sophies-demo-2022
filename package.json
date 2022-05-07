@@ -4,9 +4,11 @@
   "description": "Demo project for sophomores AY 2022 (SE-2223 + SE-2226).",
   "main": "index.js",
   "scripts": {
-    "typecheck": "pnpm --paralle typecheck",
-    "lint": "pnpm --filter frontend lint && pnpm --filter backend lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "pnpm --parallel --aggregate-output typecheck",
+    "build": "pnpm --parallel --aggregate-output build",
+    "ci": "pnpm build && pnpm test && pnpm lint",
+    "lint": "pnpm --parallel --aggregate-output lint",
+    "test": "pnpm --parallel --aggregate-output test && pnpm --filter backend test:e2e"
   },
   "author": "",
   "license": "MIT",
