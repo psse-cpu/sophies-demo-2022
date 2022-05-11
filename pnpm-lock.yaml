@@ -51,12 +51,14 @@ importers:
       '@nestjs/platform-express': ^8.0.0
       '@nestjs/schematics': ^8.0.0
       '@nestjs/testing': ^8.0.0
+      '@nestjs/typeorm': ^8.0.3
       '@types/express': ^4.17.13
       '@types/jest': 27.5.0
       '@types/node': ^16.0.0
       '@types/passport': ^1.0.7
       '@types/passport-local': ^1.0.34
       '@types/supertest': ^2.0.11
+      dotenv: ^16.0.1
       jest: 28.0.3
       passport: ^0.5.2
       passport-local: ^1.0.0
@@ -70,7 +72,7 @@ importers:
       ts-loader: ^9.2.3
       ts-node: ^10.0.0
       tsconfig-paths: 4.0.0
-      typeorm: ^0.3.6
+      typeorm: '0.2'
       typescript: ^4.3.5
       webpack: ^5.72.0
     dependencies:
@@ -78,13 +80,15 @@ importers:
       '@nestjs/core': 8.4.4_wy6cne2gpevj2v6pvodnemcq2i
       '@nestjs/passport': 8.2.1_tys52mabdspwpuru4mnhbd7smy
       '@nestjs/platform-express': 8.4.4_u6bxr3c7htwmhq2t5wi3k6ht4y
+      '@nestjs/typeorm': 8.0.3_kvs4m6j2eakw2dq3erjkezkywa
+      dotenv: 16.0.1
       passport: 0.5.2
       passport-local: 1.0.0
       pg: 8.7.3
       reflect-metadata: 0.1.13
       rimraf: 3.0.2
       rxjs: 7.5.5
-      typeorm: 0.3.6_pg@8.7.3+ts-node@10.7.0
+      typeorm: 0.2.45_pg@8.7.3
     devDependencies:
       '@nestjs/cli': 8.2.5
       '@nestjs/schematics': 8.0.11_typescript@4.6.4
@@ -1205,6 +1209,23 @@ packages:
       tslib: 2.3.1
     dev: true
 
+  /@nestjs/typeorm/8.0.3_kvs4m6j2eakw2dq3erjkezkywa:
+    resolution: {integrity: sha512-tf9rTXP6LeFInkwd+tktQhtLRsKp4RRYImprqT8gcHcJDx+xMP1IygnXELOKwF5vo2/mnhrGtBlRQ/iiS6170g==}
+    peerDependencies:
+      '@nestjs/common': ^8.0.0
+      '@nestjs/core': ^8.0.0
+      reflect-metadata: ^0.1.13
+      rxjs: ^7.2.0
+      typeorm: ^0.2.34
+    dependencies:
+      '@nestjs/common': 8.4.4_47vcjb2de6lyibr6g4enoa5lyu
+      '@nestjs/core': 8.4.4_wy6cne2gpevj2v6pvodnemcq2i
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.5
+      typeorm: 0.2.45_pg@8.7.3
+      uuid: 8.3.2
+    dev: false
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -1587,6 +1608,10 @@ packages:
     dependencies:
       '@types/yargs-parser': 21.0.0
     dev: true
+
+  /@types/zen-observable/0.8.3:
+    resolution: {integrity: sha512-fbF6oTd4sGGy0xjHPKAt+eS2CrxJ3+6gQ3FGcBoIJR2TLAyCkCyI8JqZNy+FeON0AhVgNJoUumVoZQjBFUqHkw==}
+    dev: false
 
   /@typescript-eslint/eslint-plugin/5.22.0_lnjlwhtxjffjmj5o7dnwvwyqxq:
     resolution: {integrity: sha512-YCiy5PUzpAeOPGQ7VSGDEY2NeYUV1B0swde2e0HzokRsHBYjSdF6DZ51OuRZxVPHx0032lXGLvOMls91D8FXlg==}
@@ -3010,11 +3035,6 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /date-fns/2.28.0:
-    resolution: {integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==}
-    engines: {node: '>=0.11'}
-    dev: false
-
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     peerDependencies:
@@ -3210,6 +3230,11 @@ packages:
   /dotenv/16.0.1:
     resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
     engines: {node: '>=12'}
+    dev: false
+
+  /dotenv/8.6.0:
+    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
+    engines: {node: '>=10'}
     dev: false
 
   /eastasianwidth/0.2.0:
@@ -7830,12 +7855,10 @@ packages:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=}
     dev: false
 
-  /typeorm/0.3.6_pg@8.7.3+ts-node@10.7.0:
-    resolution: {integrity: sha512-DRqgfqcelMiGgWSMbBmVoJNFN2nPNA3EeY2gC324ndr2DZoGRTb9ILtp2oGVGnlA+cu5zgQ6it5oqKFNkte7Aw==}
-    engines: {node: '>= 12.9.0'}
+  /typeorm/0.2.45_pg@8.7.3:
+    resolution: {integrity: sha512-c0rCO8VMJ3ER7JQ73xfk0zDnVv0WDjpsP6Q1m6CVKul7DB9iVdWLRjPzc8v2eaeBuomsbZ2+gTaYr8k1gm3bYA==}
     hasBin: true
     peerDependencies:
-      '@google-cloud/spanner': ^5.18.0
       '@sap/hana-client': ^2.11.14
       better-sqlite3: ^7.1.2
       hdb-pool: ^0.1.6
@@ -7847,14 +7870,11 @@ packages:
       pg: ^8.5.1
       pg-native: ^3.0.0
       pg-query-stream: ^4.0.0
-      redis: ^3.1.1 || ^4.0.0
+      redis: ^3.1.1
       sql.js: ^1.4.0
       sqlite3: ^5.0.2
-      ts-node: ^10.7.0
       typeorm-aurora-data-api-driver: ^2.0.0
     peerDependenciesMeta:
-      '@google-cloud/spanner':
-        optional: true
       '@sap/hana-client':
         optional: true
       better-sqlite3:
@@ -7883,8 +7903,6 @@ packages:
         optional: true
       sqlite3:
         optional: true
-      ts-node:
-        optional: true
       typeorm-aurora-data-api-driver:
         optional: true
     dependencies:
@@ -7893,20 +7911,19 @@ packages:
       buffer: 6.0.3
       chalk: 4.1.2
       cli-highlight: 2.1.11
-      date-fns: 2.28.0
       debug: 4.3.4
-      dotenv: 16.0.1
+      dotenv: 8.6.0
       glob: 7.2.0
       js-yaml: 4.1.0
       mkdirp: 1.0.4
       pg: 8.7.3
       reflect-metadata: 0.1.13
       sha.js: 2.4.11
-      ts-node: 10.7.0_7vfv75elicf7ijnl73ckmqo2cm
       tslib: 2.4.0
       uuid: 8.3.2
       xml2js: 0.4.23
       yargs: 17.4.1
+      zen-observable-ts: 1.1.0
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -8376,6 +8393,17 @@ packages:
       property-expr: 2.0.5
       toposort: 2.0.2
     dev: true
+
+  /zen-observable-ts/1.1.0:
+    resolution: {integrity: sha512-1h4zlLSqI2cRLPJUHJFL8bCWHhkpuXkF+dbGkRaWjgDIG26DmzyshUMrdV/rL3UnR+mhaX4fRq8LPouq0MYYIA==}
+    dependencies:
+      '@types/zen-observable': 0.8.3
+      zen-observable: 0.8.15
+    dev: false
+
+  /zen-observable/0.8.15:
+    resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
+    dev: false
 
   /zip-stream/4.1.0:
     resolution: {integrity: sha512-zshzwQW7gG7hjpBlgeQP9RuyPGNxvJdzR8SUM3QhxCnLjWN2E7j3dOvpeDcQoETfHx0urRS7EtmVToql7YpU4A==}
