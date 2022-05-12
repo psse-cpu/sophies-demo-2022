@@ -8,7 +8,7 @@
     "build": "pnpm --parallel --aggregate-output build",
     "ci": "pnpm build && pnpm test && pnpm lint",
     "lint": "pnpm --parallel --aggregate-output lint",
-    "test": "pnpm --parallel --aggregate-output test && pnpm --filter backend test:e2e"
+    "test": "pnpm --parallel --aggregate-output test && pnpm --filter backend test:integration"
   },
   "author": "",
   "license": "MIT",
