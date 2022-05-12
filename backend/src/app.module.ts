@@ -9,12 +9,12 @@ import { UsersModule } from './users/users.module'
 
 @Module({
   imports: [
+    // TODO: Make ormconfig.json (or its equivalent for TypeORM 0.3) the SSOT
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      entities: ['src/**/*.entity.ts'],
-      synchronize: process.env.NODE_ENV !== 'production',
+      entities: ['dist/**/*.entity.{js,ts}'],
     }),
     AuthModule,
     UsersModule,
