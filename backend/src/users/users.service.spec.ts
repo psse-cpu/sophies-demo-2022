@@ -52,14 +52,13 @@ describe('UsersService', () => {
   })
 
   describe('#findByEmail', () => {
-    it('returns the first mock user', () => {
-      expect(service.findByEmail('asdf')).resolves.toBe(mockUsers[0])
-    })
+    it('returns the first mock user', () =>
+      expect(service.findByEmail('asdf')).resolves.toBe(mockUsers[0]))
 
     it('gives the correct arguments to repository#find', () => {
       const spy = jest.spyOn(repository, 'findOne')
       service.findByEmail('asdf')
-      expect(spy).toBeCalledWith({ where: { email: 'asdf' } })
+      return expect(spy).toBeCalledWith({ where: { email: 'asdf' } })
     })
   })
 })
