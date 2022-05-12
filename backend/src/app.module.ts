@@ -15,7 +15,7 @@ import { UsersModule } from './users/users.module'
     TypeOrmModule.forRoot({
       type: 'postgres',
       url: process.env.DATABASE_URL,
-      entities: ['dist/**/*.entity.{js,ts}'],
+      entities: [`${__dirname}/**/*.entity.{js,ts}`],
       namingStrategy: new SnakeNamingStrategy(),
     }),
     AuthModule,
