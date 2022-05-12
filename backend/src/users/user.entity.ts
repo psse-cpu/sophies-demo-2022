@@ -11,3 +11,5 @@ export class User {
   @Column('text')
   passwordHash: string
 }
+
+export type UserWithoutHash = Omit<User, 'passwordHash'>
