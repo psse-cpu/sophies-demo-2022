@@ -46,6 +46,7 @@ importers:
     specifiers:
       '@nestjs/cli': ^8.0.0
       '@nestjs/common': ^8.0.0
+      '@nestjs/config': ^2.0.0
       '@nestjs/core': ^8.0.0
       '@nestjs/passport': ^8.2.1
       '@nestjs/platform-express': ^8.0.0
@@ -60,7 +61,6 @@ importers:
       '@types/passport': ^1.0.7
       '@types/passport-local': ^1.0.34
       '@types/supertest': ^2.0.11
-      dotenv: ^16.0.1
       jest: 28.0.3
       passport: ^0.5.2
       passport-local: ^1.0.0
@@ -79,12 +79,12 @@ importers:
       webpack: ^5.72.0
     dependencies:
       '@nestjs/common': 8.4.4_47vcjb2de6lyibr6g4enoa5lyu
+      '@nestjs/config': 2.0.0_ozyn6uy6pikqhtn6hfkzt5a5w4
       '@nestjs/core': 8.4.4_wy6cne2gpevj2v6pvodnemcq2i
       '@nestjs/passport': 8.2.1_tys52mabdspwpuru4mnhbd7smy
       '@nestjs/platform-express': 8.4.4_u6bxr3c7htwmhq2t5wi3k6ht4y
       '@nestjs/typeorm': 8.0.3_kvs4m6j2eakw2dq3erjkezkywa
       '@swc/core': 1.2.182
-      dotenv: 16.0.1
       passport: 0.5.2
       passport-local: 1.0.0
       pg: 8.7.3
@@ -1119,6 +1119,22 @@ packages:
       uuid: 8.3.2
     transitivePeerDependencies:
       - debug
+    dev: false
+
+  /@nestjs/config/2.0.0_ozyn6uy6pikqhtn6hfkzt5a5w4:
+    resolution: {integrity: sha512-Hi1k/1S5ogsS5c0OtNm72thiLSngijOaLDFaGI5ZPxNGpF23lctPg6ox3pYIOhXVRX/u+eiUIp71gswH2k8YNw==}
+    peerDependencies:
+      '@nestjs/common': ^7.0.0 || ^8.0.0
+      reflect-metadata: ^0.1.13
+      rxjs: ^6.0.0 || ^7.2.0
+    dependencies:
+      '@nestjs/common': 8.4.4_47vcjb2de6lyibr6g4enoa5lyu
+      dotenv: 16.0.0
+      dotenv-expand: 8.0.2
+      lodash: 4.17.21
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.5
+      uuid: 8.3.2
     dev: false
 
   /@nestjs/core/8.4.4_wy6cne2gpevj2v6pvodnemcq2i:
@@ -3402,8 +3418,13 @@ packages:
       is-obj: 2.0.0
     dev: true
 
-  /dotenv/16.0.1:
-    resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
+  /dotenv-expand/8.0.2:
+    resolution: {integrity: sha512-vKKAk+VOzAWOV/dPIeSYqhgC/TQY+6L6Ibkzfsr8xd1stdBsTuGu9asCOXgbYbBeS+f2Y6lqqEuw7riOA+xEUQ==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /dotenv/16.0.0:
+    resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
     engines: {node: '>=12'}
     dev: false
 
@@ -5916,7 +5937,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols/4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
