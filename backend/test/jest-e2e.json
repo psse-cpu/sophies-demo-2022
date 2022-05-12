@@ -3,6 +3,16 @@
   "rootDir": ".",
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
+  "reporters": [
+    "default",
+    [
+      "jest-html-reporters",
+      {
+        "publicPath": "./test/reports/integration",
+        "filename": "index.html"
+      }
+    ]
+  ],
   "transform": {
     "^.+\\.(t|j)s$": [
       "@swc/jest",
