@@ -106,4 +106,12 @@ module.exports = {
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': ['error'],
   },
+  overrides: [
+    {
+      files: ['**/*.spec.ts'],
+      rules: {
+        'arrow-body-style': 'off',
+      },
+    },
+  ],
 }
