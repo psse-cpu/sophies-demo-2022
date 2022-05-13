@@ -2,22 +2,18 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
 
-import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
+import omit from 'lodash/omit'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
 
+import ormConfig from '../ormconfig'
+
 @Module({
   imports: [
-    // TODO: Make ormconfig.json (or its equivalent for TypeORM 0.3) the SSOT
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.DATABASE_URL,
-      entities: [`${__dirname}/**/*.entity.{js,ts}`],
-      namingStrategy: new SnakeNamingStrategy(),
-    }),
+    TypeOrmModule.forRoot(omit(ormConfig, 'cli')),
     AuthModule,
     UsersModule,
   ],

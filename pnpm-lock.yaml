@@ -24,6 +24,7 @@ importers:
       '@types/passport-local': ^1.0.34
       '@types/supertest': ^2.0.11
       bcrypt: ^5.0.1
+      dotenv: ^16.0.1
       jest: 28.0.3
       jest-html-reporters: ^3.0.6
       lodash: ^4.17.21
@@ -51,6 +52,7 @@ importers:
       '@nestjs/typeorm': 8.0.3_kvs4m6j2eakw2dq3erjkezkywa
       '@swc/core': 1.2.182
       bcrypt: 5.0.1
+      dotenv: 16.0.1
       lodash: 4.17.21
       passport: 0.5.2
       passport-local: 1.0.0
@@ -2352,6 +2354,11 @@ packages:
 
   /dotenv/16.0.0:
     resolution: {integrity: sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==}
+    engines: {node: '>=12'}
+    dev: false
+
+  /dotenv/16.0.1:
+    resolution: {integrity: sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==}
     engines: {node: '>=12'}
     dev: false
 
