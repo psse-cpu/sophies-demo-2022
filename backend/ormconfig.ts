@@ -1,8 +1,7 @@
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies'
-import dotenv from 'dotenv'
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
+import 'dotenv/config'
 
-dotenv.config()
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions'
 
 // eslint-disable-next-line import/no-default-export
 export default {
