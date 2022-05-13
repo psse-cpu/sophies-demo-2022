@@ -17,7 +17,7 @@ describe('AppController (e2e)', () => {
   let app: INestApplication
   let usersService: UsersService
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule, TypeOrmModule.forFeature([User])],
       providers: [UsersService],
@@ -31,7 +31,7 @@ describe('AppController (e2e)', () => {
     await seedDatabase(usersService)
   })
 
-  afterEach(() => {
+  afterAll(() => {
     return app.close()
   })
 
