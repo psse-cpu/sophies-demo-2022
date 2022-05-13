@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:integration": "jest --config ./test/jest-integration.json",
-    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json  # exists coz test/ aren't typechecked by `nest build`",
     "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
