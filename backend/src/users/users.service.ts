@@ -17,6 +17,7 @@ export class UsersService {
   }
 
   // TODO: this method has no unit tests
+  // labels: tech-debt
   async register(
     email: string,
     plainTextPassword: string
