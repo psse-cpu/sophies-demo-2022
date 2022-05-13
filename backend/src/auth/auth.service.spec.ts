@@ -38,6 +38,7 @@ describe('AuthService', () => {
   describe('#authenticate', () => {
     it('returns undefined if username is invalid (undefined user)', async () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
+
       const result = await authService.authenticate('mike@foo.bar', 'correct')
       expect(result).toBe(undefined)
     })
