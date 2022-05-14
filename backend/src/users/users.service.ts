@@ -16,8 +16,6 @@ export class UsersService {
     })
   }
 
-  // TODO: this method has no unit tests
-  // labels: tech-debt
   async register(email: string, plainTextPassword: string): Promise<User> {
     const passwordHash = await bcrypt.hash(plainTextPassword, 10)
     return this.userRepository.save({ email, passwordHash })

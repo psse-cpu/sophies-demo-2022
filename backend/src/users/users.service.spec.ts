@@ -5,6 +5,10 @@ import { getRepositoryToken } from '@nestjs/typeorm'
 import { UsersService } from './users.service'
 import { User } from './user.entity'
 
+jest.mock('bcrypt', () => ({
+  hash: async (_plainTextPassword: string, _rounds: number) => 'hashedPassword',
+}))
+
 const mockUsers: User[] = [
   {
     id: 1,
@@ -52,13 +56,32 @@ describe('UsersService', () => {
   })
 
   describe('#findByEmail', () => {
-    it('returns the first mock user', () =>
-      expect(service.findByEmail('asdf')).resolves.toBe(mockUsers[0]))
+    it('returns whatever repo#fidnOne returns', () => {
+      expect(service.findByEmail('asdf')).resolves.toBe(mockUsers[0])
+    })
 
-    it('gives the correct arguments to repository#find', () => {
+    it('gives the correct arguments to repository#find', async () => {
       const spy = jest.spyOn(repository, 'findOne')
-      service.findByEmail('asdf')
-      return expect(spy).toBeCalledWith({ where: { email: 'asdf' } })
+      await service.findByEmail('asdf')
+      expect(spy).toBeCalledWith({ where: { email: 'asdf' } })
+    })
+  })
+
+  describe('#register', () => {
+    it('returns whatever repo#save returns', () => {
+      return expect(service.register('what', 'ever')).resolves.toBe(
+        mockUsers[0]
+      )
+    })
+
+    it('calls save on the repository with the correct args', async () => {
+      const spy = jest.spyOn(repository, 'save')
+      await service.register('leni@foo.bar', 'angatbuhay')
+
+      expect(spy).toBeCalledWith({
+        email: 'leni@foo.bar',
+        passwordHash: 'hashedPassword',
+      })
     })
   })
 })
