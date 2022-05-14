@@ -4,6 +4,63 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
 - Showcase baseline expectations and minimum requirements.
 
+### Writing Unit Tests
+
+- test classes with the outer `describe` level containing the class name
+  - inner `describe` will be member names in [JSDoc 3 namepath format][3]
+  - this convention is also used in:
+    - [Yeoman](https://yeoman.io/contributing/testing-guidelines.html)
+    - [Mocha](https://mochajs.org/)
+    - [Better Specs](https://www.betterspecs.org/)
+- Treat top-level functions in a module as static methods
+  - Of course other types like constants won't need tests
+
+```ts
+// Dog.ts
+export class Dog {
+  static fromPojo(pojo: DogLike) {
+    /*...*/
+  }
+
+  bark() {
+    /*...*/
+  }
+}
+```
+
+```ts
+// Dog.spec.ts
+describe('Dog', () => {
+  describe('.fromPojo()', () => {
+    /*...*/
+  })
+  describe('#bark()', () => {
+    /*...*/
+  })
+})
+```
+
+```ts
+// NumberHelper.ts
+export function zeropad(value: number, digits = 2) {/*...*/}
+export function round(value: number, places = 2) {/*...*/}
+
+// this won't need tests
+export GOLDEN_RATIO = 1.61803
+```
+
+```ts
+// NumberHelper.spec.ts
+describe('NumberHelper', () => {
+  describe('.zeropad', () => {
+    /*...*/
+  })
+  describe('.round', () => {
+    /*...*/
+  })
+})
+```
+
 ### Important links
 
 - [TypeORM 0.2.x Docs](https://orkhan.gitbook.io/typeorm/docs)
@@ -41,3 +98,4 @@ but it doesn't [seem reliable](https://stackoverflow.com/a/63238108/2310634).
 
 [1]: https://github.com/nestjs/typeorm/pull/1233
 [2]: https://docs.nestjs.com/techniques/database#typeorm-integration
+[3]: https://jsdoc.app/about-namepaths.html
