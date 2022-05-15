@@ -22,29 +22,37 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
    cd sophies-demo-2022
    pnpm install
    ```
-3. Replicate the Git-ignored `backend/.env` file:
+3. Manage secrets:
+
+   - Replicate the Git-ignored `backend/.env` file:
+
+     ```sh
+     # replace with your own Postgre username, password, and database
+     DATABASE_URL=postgres://postgres:postgres@localhost:5432/sophies_demo
+
+     # replace with your own
+     GOOGLE_OAUTH_CLIENT_ID=#<your client_id here>
+     GOOGLE_OAUTH_CLIENT_SECRET=#<your client_secret here>
+     GOOGLE_OAUTH_REDIRECT_URL=http://localhost:3000/auth/google/redirect
+     ```
 
    - Follow [this tutorial][4] to set-up Google OAuth if you've never done it before
-
-   ```sh
-   # replace with your own Postgre username, password, and database
-   DATABASE_URL=postgres://postgres:postgres@localhost:5432/sophies_demo
-
-   # replace with your own
-   GOOGLE_OAUTH_CLIENT_ID=#<your client_id here>
-   GOOGLE_OAUTH_CLIENT_SECRET=#<your client_secret here>
-   GOOGLE_OAUTH_REDIRECT_URL=http://localhost:3000/auth/google/redirect
-   ```
-
-4. If you fork this for your own projects, [configure secrets for your repo][5] as well,
-   such that CI will :white_check_mark: pass.
-
+   - If you fork this for your own projects, [configure secrets for your repo][5] as well,
+     such that CI will :white_check_mark: pass.
    - Do not change this part of the Github Actions config **OR YOU WILL BE _:fire: "FIRED"_!**
 
-   ```yaml
-   env:
-     GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
-     GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+     ```yaml
+     env:
+       GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+       GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+     ```
+
+4. Run migrations and optionally, seeds:
+
+   ```sh
+   pnpm typeorm migration:run
+
+   # TODO: add seed instructions
    ```
 
 5. Start both frontend and backend:
