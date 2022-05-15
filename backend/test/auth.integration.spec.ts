@@ -1,10 +1,10 @@
 import { INestApplication } from '@nestjs/common'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from '../src/auth/auth.module'
 import { User } from '../src/users/user.entity'
 import { UsersService } from '../src/users/users.service'
+import { typeOrmInMemoryModules } from './helpers/typeOrmInMemoryModules'
 
 const seedDatabase = async (usersService: UsersService) => {
   return Promise.all([
@@ -19,17 +19,7 @@ describe('AuthController (integration)', () => {
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [
-        TypeOrmModule.forRoot({
-          type: 'better-sqlite3',
-          database: ':memory:',
-          autoLoadEntities: true,
-          dropSchema: true,
-          synchronize: true,
-        }),
-        TypeOrmModule.forFeature([User]),
-        AuthModule,
-      ],
+      imports: [...typeOrmInMemoryModules([User]), AuthModule],
       providers: [UsersService],
     }).compile()
 
