@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { ConfigModule } from '@nestjs/config'
 import omit from 'lodash/omit'
 
 import { AuthModule } from './auth/auth.module'
@@ -9,6 +10,7 @@ import ormConfig from '../ormconfig'
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot(omit(ormConfig, 'cli')),
     AuthModule,
     UsersModule,

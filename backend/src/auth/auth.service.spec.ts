@@ -1,3 +1,5 @@
+import crypto from 'crypto'
+
 import { Test, TestingModule } from '@nestjs/testing'
 
 import { User } from '../users/user.entity'
@@ -22,6 +24,7 @@ describe('AuthService', () => {
           provide: UsersService,
           useValue: {
             findByEmail: jest.fn(),
+            register: jest.fn(),
           },
         },
       ],
@@ -30,6 +33,8 @@ describe('AuthService', () => {
     authService = module.get(AuthService)
     usersService = module.get(UsersService)
   })
+
+  afterEach(() => jest.clearAllMocks())
 
   it('should be defined', () => {
     expect(authService).toBeDefined()
@@ -62,6 +67,62 @@ describe('AuthService', () => {
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
       expect(result).not.toHaveProperty('passwordHash')
+    })
+  })
+
+  describe('#handleProviderLogin()', () => {
+    it('throws an Error if email is falsy', () => {
+      expect(() =>
+        authService.handleProviderLogin('', 'google-oauth')
+      ).rejects.toThrow(/no email found with google-oauth/i)
+    })
+
+    it('logs-in via email for registered users', async () => {
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
+
+      const result = await authService.handleProviderLogin(
+        'mike@foo.bar',
+        'google-oauth'
+      )
+      expect(result).toEqual({ id: 1, email: 'mike@foo.bar' })
+    })
+
+    it('registers and logs-in via email for unregistered users', async () => {
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
+      jest.spyOn(usersService, 'register').mockResolvedValue(mockUser)
+
+      const result = await authService.handleProviderLogin(
+        'mike@foo.bar',
+        'google-oauth'
+      )
+      expect(result).toEqual({ id: 1, email: 'mike@foo.bar' })
+    })
+
+    it('calls findByEmail with the correct args', async () => {
+      const findByEmailSpy = jest
+        .spyOn(usersService, 'findByEmail')
+        .mockResolvedValue(mockUser)
+      const registerSpy = jest.spyOn(usersService, 'register')
+
+      await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
+
+      await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
+      expect(findByEmailSpy).toBeCalledWith('mike@foo.bar')
+      expect(registerSpy).not.toHaveBeenCalled()
+    })
+
+    it('calls register with the correct args', async () => {
+      jest.spyOn(crypto, 'randomUUID').mockReturnValue('randomuuid-ftw')
+      const findByEmailSpy = jest
+        .spyOn(usersService, 'findByEmail')
+        .mockResolvedValue(undefined)
+      const registerSpy = jest
+        .spyOn(usersService, 'register')
+        .mockResolvedValue(mockUser)
+
+      await authService.handleProviderLogin('joke@foo.bar', 'google-oauth')
+      expect(findByEmailSpy).toBeCalledWith('joke@foo.bar')
+      expect(registerSpy).toBeCalledWith('joke@foo.bar', 'randomuuid-ftw')
     })
   })
 })
