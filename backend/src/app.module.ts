@@ -11,7 +11,7 @@ import ormConfig from '../ormconfig'
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot(omit(ormConfig, 'cli')),
+    TypeOrmModule.forRoot(omit(ormConfig, 'cli', 'migrations')),
     AuthModule,
     UsersModule,
   ],
