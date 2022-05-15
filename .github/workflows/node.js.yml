@@ -13,6 +13,10 @@ jobs:
   build_and_qa:
     runs-on: ubuntu-latest
     container: node:lts
+    env:
+      GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+      GOOGLE_OAUTH_REDIRECT_URL: http://localhost:3000/auth/google/redirect
 
     services:
       postgres:
