@@ -4,7 +4,55 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
 - Showcase baseline expectations and minimum requirements.
 
-### Writing Unit Tests
+## Getting Started
+
+1. Install [`pnpm`](https://pnpm.io/) for your OS, or use NPM:
+   - Windows
+     ```sh
+     choco install pnpm
+     ```
+   - Linux
+     - Arch-based
+     ```sh
+     paru -S pnpm-bin # pnpm is flagged out-of-date
+     ```
+2. Clone repo and install dependencies:
+   ```sh
+   git clone git@github.com:psse-cpu/sophies-demo-2022.git
+   cd sophies-demo-2022
+   pnpm install
+   ```
+3. Replicate the Git-ignored `backend/.env` file:
+
+   - Follow [this tutorial][4] to set-up Google OAuth if you've never done it before
+
+   ```sh
+   # replace with your own Postgre username, password, and database
+   DATABASE_URL=postgres://postgres:postgres@localhost:5432/sophies_demo
+
+   # replace with your own
+   GOOGLE_OAUTH_CLIENT_ID=#<your client_id here>
+   GOOGLE_OAUTH_CLIENT_SECRET=#<your client_secret here>
+   GOOGLE_OAUTH_REDIRECT_URL=http://localhost:3000/auth/google/redirect
+   ```
+
+4. If you fork this for your own projects, [configure secrets for your repo][5] as well,
+   such that CI will :white_check_mark: pass.
+
+   - Do not change this part of the Github Actions config **OR YOU WILL BE _:fire: "FIRED"_!**
+
+   ```yaml
+   env:
+     GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+     GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+   ```
+
+5. Start both frontend and backend:
+   ```sh
+   pnpm start:dev
+   ```
+
+### Naming Convention used for Unit Tests
 
 - test classes with the outer `describe` level containing the class name
   - inner `describe` will be member names in [JSDoc 3 namepath format][3]
@@ -99,3 +147,5 @@ but it doesn't [seem reliable](https://stackoverflow.com/a/63238108/2310634).
 [1]: https://github.com/nestjs/typeorm/pull/1233
 [2]: https://docs.nestjs.com/techniques/database#typeorm-integration
 [3]: https://jsdoc.app/about-namepaths.html
+[4]: https://dev.to/imichaelowolabi/how-to-implement-login-with-google-in-nest-js-2aoa
+[5]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
