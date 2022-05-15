@@ -1,4 +1,5 @@
 import { INestApplication } from '@nestjs/common'
+import { ConfigModule, ConfigService } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 import { AuthModule } from '../src/auth/auth.module'
@@ -19,8 +20,12 @@ describe('AuthController (integration)', () => {
 
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [...typeOrmInMemoryModules([User]), AuthModule],
-      providers: [UsersService],
+      imports: [
+        ...typeOrmInMemoryModules([User]),
+        AuthModule,
+        ConfigModule.forRoot(),
+      ],
+      providers: [UsersService, ConfigService],
     }).compile()
 
     app = moduleFixture.createNestApplication()
