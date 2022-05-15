@@ -8,7 +8,7 @@ export default {
   type: 'postgres',
   url: process.env.DATABASE_URL,
   entities: [`${__dirname}/**/*.entity.{ts,js}`],
-  migrations: ['migrations/*'],
+  migrations: ['database/migrations/*'],
   namingStrategy: new SnakeNamingStrategy(),
   cli: {
     migrationsDir: 'migrations',
