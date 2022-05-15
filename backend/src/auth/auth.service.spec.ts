@@ -2,6 +2,8 @@ import crypto from 'crypto'
 
 import { Test, TestingModule } from '@nestjs/testing'
 
+import { ConfigService } from '@nestjs/config'
+import { JwtModule, JwtService } from '@nestjs/jwt'
 import { User } from '../users/user.entity'
 import { UsersService } from '../users/users.service'
 import { AuthService } from './auth.service'
@@ -15,10 +17,18 @@ jest.mock('bcrypt', () => ({
 describe('AuthService', () => {
   let authService: AuthService
   let usersService: UsersService
+  let jwtService: JwtService
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        JwtModule.register({
+          secret: 'haha',
+          signOptions: { expiresIn: '60s' },
+        }),
+      ],
       providers: [
+        ConfigService,
         AuthService,
         {
           provide: UsersService,
@@ -32,6 +42,7 @@ describe('AuthService', () => {
 
     authService = module.get(AuthService)
     usersService = module.get(UsersService)
+    jwtService = module.get(JwtService)
   })
 
   afterEach(() => jest.clearAllMocks())
@@ -123,6 +134,23 @@ describe('AuthService', () => {
       await authService.handleProviderLogin('joke@foo.bar', 'google-oauth')
       expect(findByEmailSpy).toBeCalledWith('joke@foo.bar')
       expect(registerSpy).toBeCalledWith('joke@foo.bar', 'randomuuid-ftw')
+    })
+  })
+
+  describe('#signJwt()', () => {
+    it('signs a JWT', () => {
+      jest.spyOn(jwtService, 'sign').mockReturnValue('some-jwt')
+      return expect(
+        authService.signJwt({ id: 1, email: 'mike@foo.bar' })
+      ).resolves.toEqual({
+        accessToken: 'some-jwt',
+      })
+    })
+
+    it('calls jwtService#sign with the correct args', async () => {
+      const spy = jest.spyOn(jwtService, 'sign')
+      await authService.signJwt({ id: 3, email: 'john@snow.ph' })
+      expect(spy).toBeCalledWith({ email: 'john@snow.ph', sub: 3 })
     })
   })
 })

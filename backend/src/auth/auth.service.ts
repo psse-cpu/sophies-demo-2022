@@ -3,12 +3,27 @@ import bcrypt from 'bcrypt'
 import omit from 'lodash/omit'
 import crypto from 'crypto'
 
+import { JwtService } from '@nestjs/jwt'
 import { User, UserWithoutHash } from '../users/user.entity'
 import { UsersService } from '../users/users.service'
 
+interface Tokens {
+  accessToken: string
+  // TODO: implement refresh tokens
+  // labels: security
+}
+
+export interface JwtPayload {
+  sub: number
+  email: string
+}
+
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService
+  ) {}
 
   async authenticate(
     email: string,
@@ -40,5 +55,13 @@ export class AuthService {
 
     // TODO: delegate omission of hash to usersService
     return omit(user, 'passwordHash')
+  }
+
+  async signJwt({ id, email }: UserWithoutHash): Promise<Tokens> {
+    const payload: JwtPayload = { email, sub: id }
+
+    return {
+      accessToken: this.jwtService.sign(payload),
+    }
   }
 }
