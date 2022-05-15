@@ -19,6 +19,13 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-empty-function': [
+      'error',
+      {
+        allow: ['decoratedFunctions'],
+      },
+    ],
+
     'class-methods-use-this': 'off',
 
     // https://basarat.gitbook.io/typescript/main-1/defaultisbad
