@@ -51,16 +51,6 @@ describe('AuthController (integration)', () => {
         .expect(401)
     })
 
-    it('returns 401 with wrong credentials (bad username)', () => {
-      return request(app.getHttpServer())
-        .post('/auth/login')
-        .send({
-          email: 'bbm@gov.ph',
-          password: 'like',
-        })
-        .expect(401)
-    })
-
     it('returns 401 with wrong credentials (bad password)', () => {
       return request(app.getHttpServer())
         .post('/auth/login')
@@ -84,7 +74,7 @@ describe('AuthController (integration)', () => {
         })
     })
 
-    it('returns 201 for correct credentials', async () => {
+    it('sets a JWT cookie for correct credentials', async () => {
       return request(app.getHttpServer())
         .post('/auth/login')
         .send({

@@ -56,7 +56,7 @@ describe('AuthService', () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
-      expect(result).toBe(undefined)
+      expect(result).toBeUndefined()
     })
 
     it('returns undefined for a valid email (truthy user), but invalid password', async () => {
@@ -70,7 +70,7 @@ describe('AuthService', () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
-      expect(result).toEqual({ id: 1, email: 'mike@foo.bar' })
+      expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
     })
 
     it('returns users without the passwordHash field', async () => {
@@ -83,7 +83,7 @@ describe('AuthService', () => {
 
   describe('#handleProviderLogin()', () => {
     it('throws an Error if email is falsy', () => {
-      expect(() =>
+      return expect(() =>
         authService.handleProviderLogin('', 'google-oauth')
       ).rejects.toThrow(/no email found with google-oauth/i)
     })
@@ -95,7 +95,7 @@ describe('AuthService', () => {
         'mike@foo.bar',
         'google-oauth'
       )
-      expect(result).toEqual({ id: 1, email: 'mike@foo.bar' })
+      expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
     })
 
     it('registers and logs-in via email for unregistered users', async () => {
@@ -106,7 +106,7 @@ describe('AuthService', () => {
         'mike@foo.bar',
         'google-oauth'
       )
-      expect(result).toEqual({ id: 1, email: 'mike@foo.bar' })
+      expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
     })
 
     it('calls findByEmail with the correct args', async () => {
@@ -118,7 +118,7 @@ describe('AuthService', () => {
       await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
 
       await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
-      expect(findByEmailSpy).toBeCalledWith('mike@foo.bar')
+      expect(findByEmailSpy).toHaveBeenCalledWith('mike@foo.bar')
       expect(registerSpy).not.toHaveBeenCalled()
     })
 
@@ -132,8 +132,8 @@ describe('AuthService', () => {
         .mockResolvedValue(mockUser)
 
       await authService.handleProviderLogin('joke@foo.bar', 'google-oauth')
-      expect(findByEmailSpy).toBeCalledWith('joke@foo.bar')
-      expect(registerSpy).toBeCalledWith('joke@foo.bar', 'randomuuid-ftw')
+      expect(findByEmailSpy).toHaveBeenCalledWith('joke@foo.bar')
+      expect(registerSpy).toHaveBeenCalledWith('joke@foo.bar', 'randomuuid-ftw')
     })
   })
 
@@ -142,7 +142,7 @@ describe('AuthService', () => {
       jest.spyOn(jwtService, 'sign').mockReturnValue('some-jwt')
       return expect(
         authService.signJwt({ id: 1, email: 'mike@foo.bar' })
-      ).resolves.toEqual({
+      ).resolves.toStrictEqual({
         accessToken: 'some-jwt',
       })
     })
@@ -150,7 +150,7 @@ describe('AuthService', () => {
     it('calls jwtService#sign with the correct args', async () => {
       const spy = jest.spyOn(jwtService, 'sign')
       await authService.signJwt({ id: 3, email: 'john@snow.ph' })
-      expect(spy).toBeCalledWith({ email: 'john@snow.ph', sub: 3 })
+      expect(spy).toHaveBeenCalledWith({ email: 'john@snow.ph', sub: 3 })
     })
   })
 })

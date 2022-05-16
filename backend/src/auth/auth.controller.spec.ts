@@ -37,7 +37,7 @@ describe('AuthController', () => {
         } as unknown as Express.Response
       )
 
-      expect(spy).toBeCalledWith('jwt', 'token', { httpOnly: true })
+      expect(spy).toHaveBeenCalledWith('jwt', 'token', { httpOnly: true })
     })
   })
 
@@ -51,7 +51,7 @@ describe('AuthController', () => {
         } as unknown as Express.Response
       )
 
-      expect(spy).toBeCalledWith('jwt', 'token', { httpOnly: true })
+      expect(spy).toHaveBeenCalledWith('jwt', 'token', { httpOnly: true })
     })
   })
 })

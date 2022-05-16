@@ -57,13 +57,13 @@ describe('UsersService', () => {
 
   describe('#findByEmail', () => {
     it('returns whatever repo#fidnOne returns', () => {
-      expect(service.findByEmail('asdf')).resolves.toBe(mockUsers[0])
+      return expect(service.findByEmail('asdf')).resolves.toBe(mockUsers[0])
     })
 
     it('gives the correct arguments to repository#find', async () => {
       const spy = jest.spyOn(repository, 'findOne')
       await service.findByEmail('asdf')
-      expect(spy).toBeCalledWith({ where: { email: 'asdf' } })
+      expect(spy).toHaveBeenCalledWith({ where: { email: 'asdf' } })
     })
   })
 
@@ -78,7 +78,7 @@ describe('UsersService', () => {
       const spy = jest.spyOn(repository, 'save')
       await service.register('leni@foo.bar', 'angatbuhay')
 
-      expect(spy).toBeCalledWith({
+      expect(spy).toHaveBeenCalledWith({
         email: 'leni@foo.bar',
         passwordHash: 'hashedPassword',
       })
