@@ -1,5 +1,3 @@
-// eslint-disable -- needed for lint-staged (doesn't respect .eslintignore?)
-
 // Forces TS to apply `@quasar/app-vite` augmentations of `quasar` package
 // Removing this would break `quasar/wrappers` imports as those typings are declared
 //  into `@quasar/app-vite`
