@@ -14,7 +14,7 @@ export class AuthController {
   @Post('/login')
   async login(
     @Req() request: Express.Request,
-    @Res() response: Express.Response
+    @Res({ passthrough: true }) response: Express.Response
   ): Promise<UserWithoutHash | undefined> {
     await this.setJwtCookie(request, response)
     return request.user as UserWithoutHash
@@ -28,7 +28,7 @@ export class AuthController {
   @UseGuards(GoogleOAuthGuard)
   async googleLoginRedirect(
     @Req() request: Express.Request,
-    @Res() response: Express.Response
+    @Res({ passthrough: true }) response: Express.Response
   ): Promise<UserWithoutHash | undefined> {
     await this.setJwtCookie(request, response)
     return request.user as UserWithoutHash

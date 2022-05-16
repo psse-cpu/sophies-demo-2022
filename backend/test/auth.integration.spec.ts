@@ -1,5 +1,5 @@
 import { INestApplication } from '@nestjs/common'
-import { ConfigModule, ConfigService } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 import { AuthModule } from '../src/auth/auth.module'
@@ -21,11 +21,11 @@ describe('AuthController (integration)', () => {
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
+        ConfigModule.forRoot(),
         ...typeOrmInMemoryModules([User]),
         AuthModule,
-        ConfigModule.forRoot(),
       ],
-      providers: [UsersService, ConfigService],
+      providers: [UsersService],
     }).compile()
 
     app = moduleFixture.createNestApplication()
@@ -82,6 +82,16 @@ describe('AuthController (integration)', () => {
         .then((response) => {
           expect((response.body as User).email).toBe('mike@foo.bar')
         })
+    })
+
+    it('returns 201 for correct credentials', async () => {
+      return request(app.getHttpServer())
+        .post('/auth/login')
+        .send({
+          email: 'mike@foo.bar',
+          password: 'like',
+        })
+        .expect('set-cookie', /jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9/i)
     })
   })
 })

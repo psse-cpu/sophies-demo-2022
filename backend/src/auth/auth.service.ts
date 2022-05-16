@@ -59,7 +59,6 @@ export class AuthService {
 
   async signJwt({ id, email }: UserWithoutHash): Promise<Tokens> {
     const payload: JwtPayload = { email, sub: id }
-
     return {
       accessToken: this.jwtService.sign(payload),
     }
