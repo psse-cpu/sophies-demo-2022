@@ -71,7 +71,7 @@ describe('AuthController (integration)', () => {
         .expect(401)
     })
 
-    it('returns 200 for correct credentials', async () => {
+    it('returns 201 for correct credentials', async () => {
       return request(app.getHttpServer())
         .post('/auth/login')
         .send({
