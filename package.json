@@ -9,6 +9,8 @@
     "build": "pnpm --parallel --aggregate-output build",
     "ci": "pnpm build && pnpm test && pnpm lint",
     "lint": "pnpm --parallel --aggregate-output lint",
+    "badges": "istanbul-badges-readme --coverageDir=./backend/coverage --statementsLabel='Backend Code Coverage' --style='for-the-badge' --logo=jest",
+    "test:cov": "pnpm --parallel --aggregate-output test:cov && pnpm badges",
     "test": "pnpm --parallel --aggregate-output test && pnpm --filter backend test:integration",
     "typeorm": "pnpm --filter backend typeorm"
   },
@@ -34,6 +36,7 @@
     "eslint-plugin-unicorn": "^42.0.0",
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
+    "istanbul-badges-readme": "^1.8.1",
     "lint-staged": "^12.4.1",
     "postcss": "^8.4.13",
     "prettier": "^2.6.2",

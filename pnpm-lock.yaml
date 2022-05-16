@@ -23,6 +23,7 @@ importers:
       eslint-plugin-unicorn: ^42.0.0
       eslint-plugin-vue: ^8.7.1
       husky: ^7.0.4
+      istanbul-badges-readme: ^1.8.1
       lint-staged: ^12.4.1
       postcss: ^8.4.13
       prettier: ^2.6.2
@@ -48,6 +49,7 @@ importers:
       eslint-plugin-unicorn: 42.0.0_eslint@8.15.0
       eslint-plugin-vue: 8.7.1_eslint@8.15.0
       husky: 7.0.4
+      istanbul-badges-readme: 1.8.1
       lint-staged: 12.4.1
       postcss: 8.4.13
       prettier: 2.6.2
@@ -5889,6 +5891,11 @@ packages:
   /isobject/3.0.1:
     resolution: {integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /istanbul-badges-readme/1.8.1:
+    resolution: {integrity: sha512-I7cEFAFlWc5VB17a71U0TgQbez5+U78F0f4kky1w33L4t3BC4/8gbN1tbmX4LVaki52Op4LrkttpvcdZ6kd/jg==}
+    hasBin: true
     dev: true
 
   /istanbul-lib-coverage/3.2.0:
