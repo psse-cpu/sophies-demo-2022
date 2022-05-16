@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/prefer-module */
+
 module.exports = {
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
   // This option interrupts the configuration hierarchy at this file
@@ -42,6 +44,7 @@ module.exports = {
     // usage with Prettier, provided by 'eslint-config-prettier'.
     // Turn-off all Airbnb stylistic rules
     'prettier',
+    'plugin:unicorn/recommended',
   ],
 
   plugins: [
