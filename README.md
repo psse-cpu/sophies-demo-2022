@@ -34,6 +34,10 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
      GOOGLE_OAUTH_CLIENT_ID=#<your client_id here>
      GOOGLE_OAUTH_CLIENT_SECRET=#<your client_secret here>
      GOOGLE_OAUTH_REDIRECT_URL=http://localhost:3000/auth/google/redirect
+
+     # DON'T USE THE PROD SECRET HERE, OR YOU WILL BE 🔥D!
+     JWT_SECRET=#<your JWT secret here>
+     JWT_EXPIRES_IN: 1w
      ```
 
    - Follow [this tutorial][4] to set-up Google OAuth if you've never done it before
@@ -43,8 +47,10 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
      ```yaml
      env:
+       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/sophies_demo
        GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
        GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+       JWT_SECRET: ${{ secrets.JWT_SECRET }}
      ```
 
 4. Run migrations and optionally, seeds:
