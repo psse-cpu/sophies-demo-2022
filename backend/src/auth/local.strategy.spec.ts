@@ -42,7 +42,7 @@ describe('LocalStrategy', () => {
     })
 
     it('throws an UnauthorizedException when authService#authenticate is falsy', async () => {
-      jest.spyOn(authService, 'authenticate').mockResolvedValue()
+      jest.spyOn(authService, 'authenticate').mockResolvedValue(undefined)
 
       return expect(() =>
         localStrategy.validate('mike@foo.bar', 'whatever')

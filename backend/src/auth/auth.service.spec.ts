@@ -53,7 +53,7 @@ describe('AuthService', () => {
 
   describe('#authenticate', () => {
     it('returns undefined if username is invalid (undefined user)', async () => {
-      jest.spyOn(usersService, 'findByEmail').mockResolvedValue()
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
       expect(result).toBe(undefined)
@@ -99,7 +99,7 @@ describe('AuthService', () => {
     })
 
     it('registers and logs-in via email for unregistered users', async () => {
-      jest.spyOn(usersService, 'findByEmail').mockResolvedValue()
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
       jest.spyOn(usersService, 'register').mockResolvedValue(mockUser)
 
       const result = await authService.handleProviderLogin(
@@ -126,7 +126,7 @@ describe('AuthService', () => {
       jest.spyOn(crypto, 'randomUUID').mockReturnValue('randomuuid-ftw')
       const findByEmailSpy = jest
         .spyOn(usersService, 'findByEmail')
-        .mockResolvedValue()
+        .mockResolvedValue(undefined)
       const registerSpy = jest
         .spyOn(usersService, 'register')
         .mockResolvedValue(mockUser)
