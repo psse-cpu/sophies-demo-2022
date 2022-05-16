@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
-import { Profile, Strategy } from 'passport-google-oauth20'
+import { Profile, Strategy, StrategyOptions } from 'passport-google-oauth20'
 import { UserWithoutHash } from 'src/users/user.entity'
 
 import { AuthService } from './auth.service'
@@ -20,7 +20,7 @@ export class GoogleOauthStrategy extends PassportStrategy(
       clientSecret: configService.get('GOOGLE_OAUTH_CLIENT_SECRET'),
       callbackURL: configService.get('GOOGLE_OAUTH_REDIRECT_URL'),
       scope: ['email', 'profile'],
-    })
+    } as StrategyOptions)
   }
 
   async validate(
