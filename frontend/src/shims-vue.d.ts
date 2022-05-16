@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable -- needed for lint-staged (doesn't respect .eslintignore?)
 
 /// <reference types="vite/client" />
 /// <reference types="vue/ref-macros" />

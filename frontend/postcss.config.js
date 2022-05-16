@@ -1,11 +1,11 @@
-/* eslint-disable unicorn/prefer-module */
+// eslint-disable -- needed for lint-staged (doesn't respect .eslintignore?)
 
 // https://github.com/michael-ciniawsky/postcss-load-config
 
 module.exports = {
   plugins: [
     // https://github.com/postcss/autoprefixer
-    // eslint-disable-next-line global-require
+    // eslint-disable-next-line global-require -- ran via CommonJS (Node CLI)
     require('autoprefixer')({
       overrideBrowserslist: [
         'last 4 Chrome versions',

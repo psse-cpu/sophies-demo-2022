@@ -1,5 +1,4 @@
-/* eslint-env node */
-/* eslint-disable unicorn/prefer-module */
+/* eslint-env node -- Ran inside Node CLI */
 
 /*
  * This file runs in a Node context (it's NOT transpiled by Babel), so use only

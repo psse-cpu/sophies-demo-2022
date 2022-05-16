@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable unicorn/prevent-abbreviations -- Env is well-accepted */
 
 declare namespace NodeJS {
   interface ProcessEnv {
@@ -7,3 +7,5 @@ declare namespace NodeJS {
     VUE_ROUTER_BASE: string | undefined
   }
 }
+
+/* eslint-enable unicorn/prevent-abbreviations */
