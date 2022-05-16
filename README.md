@@ -1,4 +1,4 @@
-![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-82.17%25-yellow.svg?style=for-the-badge&logo=jest)
+![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-80.58%25-yellow.svg?style=for-the-badge&logo=jest)
 
 # Sophies Demo
 
