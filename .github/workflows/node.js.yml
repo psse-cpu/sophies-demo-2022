@@ -14,9 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     container: node:lts
     env:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/sophies_demo
       GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
       GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
       GOOGLE_OAUTH_REDIRECT_URL: http://localhost:3000/auth/google/redirect
+
+      # DON'T USE THE PROD SECRET HERE, OR YOU WILL BE 🔥D!
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      JWT_EXPIRES_IN: 1w
 
     services:
       postgres:
@@ -70,5 +75,3 @@ jobs:
 
       - name: Unit and Integration Tests
         run: pnpm test
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@postgres:5432/sophies_demo
