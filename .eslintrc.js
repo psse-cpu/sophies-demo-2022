@@ -44,6 +44,7 @@ module.exports = {
     'prettier',
     'plugin:unicorn/recommended',
     'plugin:eslint-comments/recommended',
+    'plugin:jsonc/base',
   ],
 
   plugins: [
@@ -57,6 +58,7 @@ module.exports = {
     // https://github.com/typescript-eslint/typescript-eslint/issues/389#issuecomment-509292674
     // Prettier has not been included as plugin to avoid performance impact
     // add it as an extension for your IDE
+    'no-secrets',
   ],
 
   globals: {
@@ -109,14 +111,35 @@ module.exports = {
     '@typescript-eslint/no-useless-constructor': ['error'],
     'eslint-comments/require-description': 'warn',
     'eslint-comments/no-unused-disable': 'warn',
+    'no-secrets/no-secrets': ['error'],
   },
   overrides: [
     {
       files: ['**/*.spec.ts'],
+      extends: ['plugin:jest/recommended', 'plugin:jest/style'],
       rules: {
         'arrow-body-style': 'off',
         // some mocks must return undefined, and autofixing will produce TS errors
         'unicorn/no-useless-undefined': 'off',
+
+        'jest/consistent-test-it': 'error',
+        'jest/max-nested-describe': ['error', { max: 2 }],
+        'jest/no-duplicate-hooks': 'error',
+        'jest/prefer-comparison-matcher': 'error',
+        'jest/prefer-equality-matcher': 'error',
+        'jest/prefer-hooks-on-top': 'error',
+        'jest/prefer-spy-on': 'error',
+        'jest/prefer-strict-equal': 'error',
+        'jest/prefer-todo': 'error',
+        'jest/require-top-level-describe': 'error',
+        'jest/expect-expect': [
+          'error',
+          { assertFunctionNames: ['expect', 'request.**.expect'] },
+        ],
+        'jest/prefer-lowercase-title': [
+          'error',
+          { ignoreTopLevelDescribe: true },
+        ],
       },
     },
     {
