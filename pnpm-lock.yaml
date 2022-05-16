@@ -14,6 +14,7 @@ importers:
       eslint: ^8.14.0
       eslint-config-airbnb-base: ^15.0.0
       eslint-config-prettier: ^8.5.0
+      eslint-plugin-boundaries: ^2.9.0
       eslint-plugin-import: ^2.26.0
       eslint-plugin-unicorn: ^42.0.0
       eslint-plugin-vue: ^8.7.1
@@ -34,6 +35,7 @@ importers:
       eslint: 8.15.0
       eslint-config-airbnb-base: 15.0.0_gwd37gqv3vjv3xlpl7ju3ag2qu
       eslint-config-prettier: 8.5.0_eslint@8.15.0
+      eslint-plugin-boundaries: 2.9.0_doddzorl55y6dbr5ij3nshfl64
       eslint-plugin-import: 2.26.0_doddzorl55y6dbr5ij3nshfl64
       eslint-plugin-unicorn: 42.0.0_eslint@8.15.0
       eslint-plugin-vue: 8.7.1_eslint@8.15.0
@@ -68,9 +70,11 @@ importers:
       '@types/passport-jwt': ^3.0.6
       '@types/passport-local': ^1.0.34
       '@types/supertest': ^2.0.11
+      '@typescript-eslint/parser': ^5.23.0
       bcrypt: ^5.0.1
       better-sqlite3: ^7.5.1
       dotenv: ^16.0.1
+      eslint: ^8.14.0
       jest: 28.0.3
       jest-html-reporters: ^3.0.6
       lodash: ^4.17.21
@@ -128,7 +132,9 @@ importers:
       '@types/passport-jwt': 3.0.6
       '@types/passport-local': 1.0.34
       '@types/supertest': 2.0.12
+      '@typescript-eslint/parser': 5.23.0_hcfsmds2fshutdssjqluwm76uu
       better-sqlite3: 7.5.1
+      eslint: 8.15.0
       jest: 28.0.3_24esr3464d2gifgmzdt2yhkw2m
       jest-html-reporters: 3.0.6
       source-map-support: 0.5.21
@@ -4054,6 +4060,25 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-boundaries/2.9.0_doddzorl55y6dbr5ij3nshfl64:
+    resolution: {integrity: sha512-GIRfYrCtG/Z3q0oYRWvOtWMOSIEYjxeQYZKeEg+JfMgo55iPghLp5HCqSlJGO6BKtKwsNEP66/pszjSzrs+ibA==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      eslint: '>=6.0.0'
+    dependencies:
+      chalk: 4.1.2
+      eslint: 8.15.0
+      eslint-import-resolver-node: 0.3.6
+      eslint-module-utils: 2.7.3_cphntlaow2spielwlvsegonsm4
+      is-core-module: 2.8.1
+      micromatch: 4.0.4
+    transitivePeerDependencies:
+      - '@typescript-eslint/parser'
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - supports-color
+    dev: true
+
   /eslint-plugin-import/2.26.0_doddzorl55y6dbr5ij3nshfl64:
     resolution: {integrity: sha512-hYfi3FXaM8WPLf4S1cikh/r4IxnO6zrhZbEGz2b660EJRbuxgpDS5gkCuYgGWg2xxh2rBuIr4Pvhve/7c31koA==}
     engines: {node: '>=4'}
@@ -5233,6 +5258,12 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /is-core-module/2.8.1:
+    resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==}
+    dependencies:
+      has: 1.0.3
+    dev: true
+
   /is-core-module/2.9.0:
     resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
@@ -6404,6 +6435,14 @@ packages:
   /methods/1.1.2:
     resolution: {integrity: sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=}
     engines: {node: '>= 0.6'}
+
+  /micromatch/4.0.4:
+    resolution: {integrity: sha512-pRmzw/XUcwXGpD9aI9q/0XOwLNygjETJ8y0ao0wdqprrzDa4YnxLcz7fQRZr8voh8V10kGhABbNcHVk5wHgWwg==}
+    engines: {node: '>=8.6'}
+    dependencies:
+      braces: 3.0.2
+      picomatch: 2.3.1
+    dev: true
 
   /micromatch/4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
