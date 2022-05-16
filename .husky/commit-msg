@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm -- commitlint --edit "${1}"
+FORCE_COLOR=1 pnpm -- commitlint -c --edit "${1}"

@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-exec < /dev/tty && pnpm cz --hook || true
+FORCE_COLOR=1 exec < /dev/tty && pnpm cz --hook || true
