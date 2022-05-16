@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/prefer-module */
+ 
 
 module.exports = {
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
@@ -45,6 +45,7 @@ module.exports = {
     // Turn-off all Airbnb stylistic rules
     'prettier',
     'plugin:unicorn/recommended',
+    'plugin:eslint-comments/recommended',
   ],
 
   plugins: [
@@ -108,6 +109,8 @@ module.exports = {
 
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': ['error'],
+    'eslint-comments/require-description': 'warn',
+    'eslint-comments/no-unused-disable': 'warn',
   },
   overrides: [
     {
@@ -116,6 +119,18 @@ module.exports = {
         'arrow-body-style': 'off',
         // some mocks must return undefined, and autofixing will produce TS errors
         'unicorn/no-useless-undefined': 'off',
+      },
+    },
+    {
+      // config files use CommonJS
+      files: [
+        '*.js',
+        'backend/*.js',
+        'frontend/*.js',
+        'frontend/src/{env,quasar,shims-vue}.d.ts',
+      ],
+      rules: {
+        'unicorn/prefer-module': 'off',
       },
     },
   ],
