@@ -114,6 +114,8 @@ module.exports = {
       files: ['**/*.spec.ts'],
       rules: {
         'arrow-body-style': 'off',
+        // some mocks must return undefined, and autofixing will produce TS errors
+        'unicorn/no-useless-undefined': 'off',
       },
     },
   ],
