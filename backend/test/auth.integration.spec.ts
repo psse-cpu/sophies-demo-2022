@@ -5,7 +5,7 @@ import request from 'supertest'
 import { AuthModule } from '../src/auth/auth.module'
 import { User } from '../src/users/user.entity'
 import { UsersService } from '../src/users/users.service'
-import { typeOrmInMemoryModules } from './helpers/typeOrmInMemoryModules'
+import { typeOrmInMemoryModules } from './helpers/typeorm-in-memory-modules'
 
 const seedDatabase = async (usersService: UsersService) => {
   return Promise.all([
@@ -91,7 +91,7 @@ describe('AuthController (integration)', () => {
           email: 'mike@foo.bar',
           password: 'like',
         })
-        .expect('set-cookie', /jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9/i)
+        .expect('set-cookie', /jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9/)
     })
   })
 })

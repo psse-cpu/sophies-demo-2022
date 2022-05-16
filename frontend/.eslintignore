@@ -5,3 +5,7 @@
 /node_modules
 .eslintrc.js
 /src-ssr
+postcss.config.js
+env.d.ts
+quasar.d.ts
+shims-vue.d.ts

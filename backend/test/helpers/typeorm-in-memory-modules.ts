@@ -1,7 +1,7 @@
 import { DynamicModule } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
-type Constructor = new (...args: unknown[]) => unknown
+type Constructor = new (...arguments_: unknown[]) => unknown
 
 export const typeOrmInMemoryModules = (
   entities: Constructor[]

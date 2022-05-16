@@ -1,9 +1,11 @@
-/* eslint-disable */
+/* eslint-disable unicorn/prefer-module */
+
 // https://github.com/michael-ciniawsky/postcss-load-config
 
 module.exports = {
   plugins: [
     // https://github.com/postcss/autoprefixer
+    // eslint-disable-next-line global-require
     require('autoprefixer')({
       overrideBrowserslist: [
         'last 4 Chrome versions',

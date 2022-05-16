@@ -31,7 +31,7 @@ export class GoogleOauthStrategy extends PassportStrategy(
     try {
       const email = profile.emails?.[0]?.value ?? ''
       return this.authService.handleProviderLogin(email, 'google-oauth')
-    } catch (e) {
+    } catch {
       throw new UnauthorizedException()
     }
   }

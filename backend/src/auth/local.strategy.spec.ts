@@ -11,7 +11,7 @@ describe('LocalStrategy', () => {
   let authService: AuthService
 
   beforeEach(async () => {
-    const MockAuthServiceDef = {
+    const MockAuthServiceDefinition = {
       provide: AuthService,
       useValue: {
         async authenticate(
@@ -24,7 +24,7 @@ describe('LocalStrategy', () => {
     }
 
     const module = await Test.createTestingModule({
-      providers: [LocalStrategy, MockAuthServiceDef],
+      providers: [LocalStrategy, MockAuthServiceDefinition],
     }).compile()
 
     localStrategy = module.get(LocalStrategy)
@@ -42,7 +42,7 @@ describe('LocalStrategy', () => {
     })
 
     it('throws an UnauthorizedException when authService#authenticate is falsy', async () => {
-      jest.spyOn(authService, 'authenticate').mockResolvedValue(undefined)
+      jest.spyOn(authService, 'authenticate').mockResolvedValue()
 
       return expect(() =>
         localStrategy.validate('mike@foo.bar', 'whatever')

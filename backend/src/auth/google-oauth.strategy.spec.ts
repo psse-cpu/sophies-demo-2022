@@ -13,7 +13,7 @@ describe('GoogleOAuthStrategy', () => {
   let authService: AuthService
 
   beforeEach(async () => {
-    const MockAuthServiceDef = {
+    const MockAuthServiceDefinition = {
       provide: AuthService,
       useValue: {
         async handleProviderLogin(
@@ -27,7 +27,11 @@ describe('GoogleOAuthStrategy', () => {
 
     const module = await Test.createTestingModule({
       imports: [ConfigModule.forRoot()],
-      providers: [ConfigService, GoogleOauthStrategy, MockAuthServiceDef],
+      providers: [
+        ConfigService,
+        GoogleOauthStrategy,
+        MockAuthServiceDefinition,
+      ],
     }).compile()
 
     googleStrategy = module.get(GoogleOauthStrategy)
@@ -49,7 +53,7 @@ describe('GoogleOAuthStrategy', () => {
 
     it('throws an UnauthorizedException when handleProviderLogin throws', async () => {
       jest.spyOn(authService, 'handleProviderLogin').mockImplementation(() => {
-        throw new Error('')
+        throw new Error('mocked error')
       })
 
       return expect(() =>

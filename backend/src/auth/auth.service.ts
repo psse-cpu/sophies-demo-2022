@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import bcrypt from 'bcrypt'
 import omit from 'lodash/omit'
-import crypto from 'crypto'
+import crypto from 'node:crypto'
 
 import { JwtService } from '@nestjs/jwt'
 import { User, UserWithoutHash } from '../users/user.entity'
