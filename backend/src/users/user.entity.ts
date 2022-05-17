@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import { Exercise } from '../exercises/exercise.entity'
 
 @Entity()
 @ObjectType()
@@ -14,6 +15,9 @@ export class User {
 
   @Column('text')
   passwordHash: string
+
+  @OneToMany(() => Exercise, (exercise) => exercise.author)
+  exercises: Exercise[]
 }
 
 export type UserWithoutHash = Omit<User, 'passwordHash'>

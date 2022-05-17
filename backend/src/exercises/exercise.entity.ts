@@ -1,5 +1,6 @@
 import { Field, Int } from '@nestjs/graphql'
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { User } from '../users/user.entity'
 
 @Entity()
 export class Exercise {
@@ -14,4 +15,11 @@ export class Exercise {
   @Field()
   @Column('text')
   testSuite: string
+
+  @Field()
+  @Column('integer')
+  authorId: number
+
+  @ManyToOne(() => User, (user) => user.exercises)
+  author: User
 }
