@@ -2,10 +2,13 @@ import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { ConfigModule } from '@nestjs/config'
 import omit from 'lodash/omit'
+import { DataLoaderInterceptor } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
 
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import path from 'node:path'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+import { getConnection } from 'typeorm'
 import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
 
@@ -24,6 +27,13 @@ import ormConfig from '../ormconfig'
     }),
     AuthModule,
     UsersModule,
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useFactory: (): DataLoaderInterceptor =>
+        new DataLoaderInterceptor({ typeormGetConnection: getConnection }),
+    },
   ],
 })
 export class AppModule {}
