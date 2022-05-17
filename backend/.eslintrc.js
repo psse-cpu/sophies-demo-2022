@@ -110,18 +110,6 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/**/*.entity.ts'],
-      rules: {
-        '@typescript-eslint/no-unused-vars': [
-          'error',
-          {
-            argsIgnorePattern: '^_|^gqlType$',
-            varsIgnorePattern: '^_',
-          },
-        ],
-      },
-    },
-    {
       files: ['src/**/*.resolver.ts'],
       rules: {
         '@typescript-eslint/no-unused-vars': [
