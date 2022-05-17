@@ -19,7 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:integration": "jest --config ./test/jest-integration.json",
     "typecheck": "tsc --noEmit -p tsconfig.json  # exists coz test/ aren't typechecked by `nest build`",
-    "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js",
+    "erd": "ts-node -P tsconfig.json ./node_modules/typeorm-uml/bin/run ormconfig.ts --with-table-names-only -d erd.png --handwritten"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.11",
@@ -74,6 +75,7 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "4.0.0",
+    "typeorm-uml": "^1.6.5",
     "typescript": "^4.3.5",
     "webpack": "^5.72.0"
   }
