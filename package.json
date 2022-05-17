@@ -9,7 +9,7 @@
     "build": "pnpm --parallel --aggregate-output build",
     "qa": "pnpm build && pnpm test && pnpm lint && pnpm badges:ci",
     "lint": "pnpm --parallel --aggregate-output lint",
-    "badges": "istanbul-badges-readme --coverageDir=./backend/coverage --statementsLabel='Backend Code Coverage' --style='for-the-badge' --logo=jest",
+    "badges": "istanbul-badges-readme --coverageDir=./backend/coverage --statementsLabel='Backend Code Coverage' --logo=jest",
     "badges:ci": "pnpm badges --ci --exitCode=1",
     "test:cov": "pnpm --color=always --parallel --aggregate-output test:cov && pnpm badges",
     "test": "pnpm --color=always --parallel --aggregate-output test:cov && pnpm --filter backend test:integration",
