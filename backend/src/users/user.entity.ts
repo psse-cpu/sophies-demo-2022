@@ -1,4 +1,8 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
+import {
+  TypeormLoaderExtension,
+  TypeormLoaderMiddleware,
+} from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { Exercise } from '../exercises/exercise.entity'
 
@@ -6,7 +10,7 @@ import { Exercise } from '../exercises/exercise.entity'
 @ObjectType()
 export class User {
   @PrimaryGeneratedColumn()
-  @Field((gqlType) => Int)
+  @Field(() => Int)
   id: number
 
   @Column({ unique: true })
@@ -17,6 +21,10 @@ export class User {
   passwordHash: string
 
   @OneToMany(() => Exercise, (exercise) => exercise.author)
+  @Field(() => [Exercise], { middleware: [TypeormLoaderMiddleware] })
+  @TypeormLoaderExtension((exercise: Exercise) => exercise.authorId, {
+    selfKey: true,
+  })
   exercises: Exercise[]
 }
 
