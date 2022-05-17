@@ -1,7 +1,7 @@
 import { Controller, Req, Post, UseGuards, Get, Res } from '@nestjs/common'
 
 import Express from 'express'
-import { UserWithoutHash } from 'src/users/user.entity'
+import { PlainUser } from 'src/users/user.entity'
 import { AuthService } from './auth.service'
 import { GoogleOAuthGuard } from './google-oauth.guard'
 import { LocalAuthGuard } from './local-auth.guard'
@@ -15,9 +15,9 @@ export class AuthController {
   async login(
     @Req() request: Express.Request,
     @Res({ passthrough: true }) response: Express.Response
-  ): Promise<UserWithoutHash | undefined> {
+  ): Promise<PlainUser | undefined> {
     await this.setJwtCookie(request, response)
-    return request.user as UserWithoutHash
+    return request.user as PlainUser
   }
 
   @Get('/google')
@@ -29,9 +29,9 @@ export class AuthController {
   async googleLoginRedirect(
     @Req() request: Express.Request,
     @Res({ passthrough: true }) response: Express.Response
-  ): Promise<UserWithoutHash | undefined> {
+  ): Promise<PlainUser | undefined> {
     await this.setJwtCookie(request, response)
-    return request.user as UserWithoutHash
+    return request.user as PlainUser
   }
 
   private async setJwtCookie(
@@ -39,7 +39,7 @@ export class AuthController {
     response: Express.Response
   ): Promise<void> {
     const { accessToken } = await this.authService.signJwt(
-      request.user as UserWithoutHash
+      request.user as PlainUser
     )
     response.cookie('jwt', accessToken, {
       httpOnly: true,

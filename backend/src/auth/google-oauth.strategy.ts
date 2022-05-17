@@ -2,7 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { Profile, Strategy, StrategyOptions } from 'passport-google-oauth20'
-import { UserWithoutHash } from 'src/users/user.entity'
+import { PlainUser } from 'src/users/user.entity'
 
 import { AuthService } from './auth.service'
 
@@ -27,7 +27,7 @@ export class GoogleOauthStrategy extends PassportStrategy(
     _accessToken: string,
     _refreshToken: string,
     profile: Profile
-  ): Promise<UserWithoutHash> {
+  ): Promise<PlainUser> {
     try {
       const email = profile.emails?.[0]?.value ?? ''
       return this.authService.handleProviderLogin(email, 'google-oauth')

@@ -1,6 +1,6 @@
 import { UnauthorizedException } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
-import { UserWithoutHash } from '../users/user.entity'
+import { PlainUser } from '../users/user.entity'
 import { AuthService } from './auth.service'
 import { LocalStrategy } from './local.strategy'
 
@@ -17,7 +17,7 @@ describe('LocalStrategy', () => {
         async authenticate(
           _email: string,
           _password: string
-        ): Promise<UserWithoutHash> {
+        ): Promise<PlainUser> {
           return mockUser
         },
       },

@@ -28,4 +28,4 @@ export class User {
   exercises: Exercise[]
 }
 
-export type UserWithoutHash = Omit<User, 'passwordHash'>
+export type PlainUser = Pick<User, 'id' | 'email'>

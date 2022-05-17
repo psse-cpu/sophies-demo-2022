@@ -4,7 +4,7 @@ import omit from 'lodash/omit'
 import crypto from 'node:crypto'
 
 import { JwtService } from '@nestjs/jwt'
-import { User, UserWithoutHash } from '../users/user.entity'
+import { User, PlainUser } from '../users/user.entity'
 import { UsersService } from '../users/users.service'
 
 interface Tokens {
@@ -42,7 +42,7 @@ export class AuthService {
   async handleProviderLogin(
     email: string,
     provider: 'google-oauth' | 'facebook'
-  ): Promise<UserWithoutHash> {
+  ): Promise<PlainUser> {
     if (!email) {
       throw new Error(`No email found with ${provider} login.`)
     }
@@ -57,7 +57,7 @@ export class AuthService {
     return omit(user, 'passwordHash')
   }
 
-  async signJwt({ id, email }: UserWithoutHash): Promise<Tokens> {
+  async signJwt({ id, email }: PlainUser): Promise<Tokens> {
     const payload: JwtPayload = { email, sub: id }
     return {
       accessToken: this.jwtService.sign(payload),

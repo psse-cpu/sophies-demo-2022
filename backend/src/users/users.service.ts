@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { User, UserWithoutHash } from './user.entity'
+import { User, PlainUser } from './user.entity'
 
 @Injectable()
 export class UsersService {
@@ -21,7 +21,7 @@ export class UsersService {
     return this.userRepository.save({ email, passwordHash })
   }
 
-  async allUsers(): Promise<UserWithoutHash[]> {
+  async allUsers(): Promise<PlainUser[]> {
     return this.userRepository.find()
   }
 }
