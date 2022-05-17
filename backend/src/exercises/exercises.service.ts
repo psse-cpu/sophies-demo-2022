@@ -12,4 +12,8 @@ export class ExercisesService {
   allExercises(): Promise<Exercise[]> {
     return this.exerciseRepository.find()
   }
+
+  createExercise(exercise: Exercise): Promise<Exercise> {
+    return this.exerciseRepository.save(exercise)
+  }
 }

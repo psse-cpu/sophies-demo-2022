@@ -2,9 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Exercise {
+  id: Int!
+  title: String!
+  testSuite: String!
+  authorId: Float!
+  author: User!
+}
+
 type User {
   id: Int!
   email: String!
+  exercises: [Exercise!]!
 }
 
 type Query {

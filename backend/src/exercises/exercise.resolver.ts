@@ -6,7 +6,7 @@ import { ExercisesService } from './exercises.service'
 export class ExerciseResolver {
   constructor(private exercisesService: ExercisesService) {}
 
-  @Query((returns) => Exercise)
+  @Query((returns) => [Exercise])
   allExercises(): Promise<Exercise[]> {
     return this.exercisesService.allExercises()
   }
