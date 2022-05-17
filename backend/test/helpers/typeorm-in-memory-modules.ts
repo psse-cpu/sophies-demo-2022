@@ -9,7 +9,7 @@ export const typeOrmInMemoryModules = (
   TypeOrmModule.forRoot({
     type: 'better-sqlite3',
     database: ':memory:',
-    entities,
+    autoLoadEntities: true,
     dropSchema: true,
     synchronize: true,
   }),
