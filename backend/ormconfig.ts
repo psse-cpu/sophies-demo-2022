@@ -12,6 +12,7 @@ export default {
   // eslint-disable-next-line unicorn/prefer-module -- project uses CommonJS
   entities: [`${__dirname}/src/**/*.entity.{ts,js}`],
   migrations: ['database/migrations/*'],
+  logging: ['error', 'schema', 'query', 'warn'],
   cli: {
     migrationsDir: 'database/migrations',
   },
