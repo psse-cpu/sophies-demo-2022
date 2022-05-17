@@ -3,7 +3,6 @@ import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt'
 import { Request } from 'express'
-import { UserWithoutHash } from 'src/users/user.entity'
 import { JwtPayload } from './auth.service'
 
 const extractJwtFromCookie =
@@ -24,7 +23,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     } as StrategyOptions)
   }
 
-  async validate(payload: JwtPayload): Promise<UserWithoutHash> {
+  async validate(payload: JwtPayload): Promise<{ id: number; email: string }> {
     return { id: payload.sub, email: payload.email }
   }
 }
