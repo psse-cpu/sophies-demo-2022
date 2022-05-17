@@ -33,6 +33,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.3",
     "@swc/core": "^1.2.182",
+    "@webundsoehne/nestjs-graphql-typeorm-dataloader": "^3.3.2",
     "apollo-server-express": "^3.7.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
