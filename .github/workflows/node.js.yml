@@ -75,3 +75,6 @@ jobs:
 
       - name: Unit and Integration Tests
         run: pnpm test
+
+      - name: Check Badges Accuracy
+        run: pnpm badges:ci
