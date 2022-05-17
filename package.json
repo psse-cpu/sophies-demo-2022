@@ -14,7 +14,8 @@
     "test:integration": "pnpm --filter backend test:integration",
     "test": "run-p test:*",
     "qa": "run-p build test lint badges:ci",
-    "typeorm": "pnpm --filter backend typeorm"
+    "typeorm": "pnpm --filter backend typeorm",
+    "be": "pnpm --filter backend"
   },
   "author": "",
   "license": "MIT",

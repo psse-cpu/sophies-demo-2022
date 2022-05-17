@@ -1,4 +1,4 @@
-![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-73.04%25-red.svg?style=flat&logo=jest)
+![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-67.66%25-red.svg?style=flat&logo=jest)
 ![example workflow](https://github.com/psse-cpu/sophies-demo-2022/actions/workflows/node.js.yml/badge.svg)
 
 # Sophies Demo
