@@ -13,6 +13,6 @@ export default {
   entities: [`${__dirname}/src/**/*.entity.{ts,js}`],
   migrations: ['database/migrations/*'],
   cli: {
-    migrationsDir: 'migrations',
+    migrationsDir: 'database/migrations',
   },
 } as PostgresConnectionOptions
