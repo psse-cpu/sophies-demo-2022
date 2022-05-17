@@ -7,6 +7,18 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
 - Showcase baseline expectations and minimum requirements.
 
+<!--ts-->
+
+- [Sophies Demo](#sophies-demo)
+  - [Getting Started](#getting-started)
+    - [Naming Convention used for Unit Tests](#naming-convention-used-for-unit-tests)
+    - [Important links](#important-links)
+  - [For absent-minded / forgetful people](#for-absent-minded--forgetful-people)
+
+<!-- Added by: michael, at: Tuesday, 17 May, 2022 09:40:26 AM PST -->
+
+<!--te-->
+
 ## Getting Started
 
 1. Install [`pnpm`](https://pnpm.io/) for your OS, or use NPM:
