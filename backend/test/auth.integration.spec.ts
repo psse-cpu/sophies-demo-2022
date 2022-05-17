@@ -2,6 +2,7 @@ import { INestApplication } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
+
 import { AuthModule } from '../src/auth/auth.module'
 import { User } from '../src/users/user.entity'
 import { UsersService } from '../src/users/users.service'
@@ -25,7 +26,6 @@ describe('AuthController (integration)', () => {
         ...typeOrmInMemoryModules([User]),
         AuthModule,
       ],
-      providers: [UsersService],
     }).compile()
 
     app = moduleFixture.createNestApplication()
