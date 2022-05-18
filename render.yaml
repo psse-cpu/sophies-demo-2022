@@ -48,7 +48,7 @@ services:
         value: 1w
       - key: JWT_SECRET
         sync: false
-    autoDeploy: true # optional
+    autoDeploy: false # optional
 
   # A static site
   - type: web
@@ -65,7 +65,7 @@ services:
     buildCommand: pnpm fe deploy
     staticPublishPath: ./frontend/dist/spa
     pullRequestPreviewsEnabled: false # optional
-    autoDeploy: true
+    autoDeploy: false
 
 databases:
   - name: sophies_pg_prod
