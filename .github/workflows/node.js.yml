@@ -23,6 +23,9 @@ jobs:
       JWT_SECRET: ${{ secrets.JWT_SECRET }}
       JWT_EXPIRES_IN: 1w
 
+      FRONTEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.FRONTEND_STAGING_DEPLOY_HOOK_URL }}
+      BACKEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.BACKEND_STAGING_DEPLOY_HOOK_URL }}
+
     services:
       postgres:
         image: postgres:13.6
@@ -78,3 +81,9 @@ jobs:
 
       - name: Check Badges Accuracy
         run: pnpm badges:ci
+
+      - name: Deploy to Staging (render.com)
+        run: >
+          echo "CI passed: Automatically deploying frontend and backend to staging..." &&
+          curl -X GET "$FRONTEND_STAGING_DEPLOY_HOOK_URL" &&
+          curl -X GET "$BACKEND_STAGING_DEPLOY_HOOK_URL"
