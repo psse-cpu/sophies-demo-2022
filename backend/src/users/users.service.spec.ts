@@ -14,13 +14,11 @@ const mockUsers: User[] = [
     id: 1,
     email: 'foo@bar.baz',
     passwordHash: 'asdf',
-    exercises: [],
   },
   {
     id: 2,
     email: 'quux@bar.baz',
     passwordHash: 'qwer',
-    exercises: [],
   },
 ]
 const mockRepository = {

@@ -8,13 +8,7 @@ import { User } from '../users/user.entity'
 import { UsersService } from '../users/users.service'
 import { AuthService } from './auth.service'
 
-// TODO: fix this - there's a HUGE underlying issue
-// auth stuff should not have to deal with User's relationships
-const mockUser: Pick<User, 'id' | 'email' | 'passwordHash'> = {
-  id: 1,
-  email: 'mike@foo.bar',
-  passwordHash: 'hash',
-}
+const mockUser: User = { id: 1, email: 'mike@foo.bar', passwordHash: 'hash' }
 
 jest.mock('bcrypt', () => ({
   compare: async (_plain: string, _hashed: string) => _plain === 'correct',
@@ -66,27 +60,21 @@ describe('AuthService', () => {
     })
 
     it('returns undefined for a valid email (truthy user), but invalid password', async () => {
-      jest
-        .spyOn(usersService, 'findByEmail')
-        .mockResolvedValue(mockUser as User)
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
       const result = await authService.authenticate('mike@foo.bar', 'wrong')
       expect(result).toBeUndefined()
     })
 
     it('returns undefined for a valid email (truthy user) and correct password', async () => {
-      jest
-        .spyOn(usersService, 'findByEmail')
-        .mockResolvedValue(mockUser as User)
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
       expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
     })
 
     it('returns users without the passwordHash field', async () => {
-      jest
-        .spyOn(usersService, 'findByEmail')
-        .mockResolvedValue(mockUser as User)
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
       expect(result).not.toHaveProperty('passwordHash')
@@ -101,9 +89,7 @@ describe('AuthService', () => {
     })
 
     it('logs-in via email for registered users', async () => {
-      jest
-        .spyOn(usersService, 'findByEmail')
-        .mockResolvedValue(mockUser as User)
+      jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
       const result = await authService.handleProviderLogin(
         'mike@foo.bar',
@@ -114,7 +100,7 @@ describe('AuthService', () => {
 
     it('registers and logs-in via email for unregistered users', async () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
-      jest.spyOn(usersService, 'register').mockResolvedValue(mockUser as User)
+      jest.spyOn(usersService, 'register').mockResolvedValue(mockUser)
 
       const result = await authService.handleProviderLogin(
         'mike@foo.bar',
@@ -126,7 +112,7 @@ describe('AuthService', () => {
     it('calls findByEmail with the correct args', async () => {
       const findByEmailSpy = jest
         .spyOn(usersService, 'findByEmail')
-        .mockResolvedValue(mockUser as User)
+        .mockResolvedValue(mockUser)
       const registerSpy = jest.spyOn(usersService, 'register')
 
       await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
@@ -143,7 +129,7 @@ describe('AuthService', () => {
         .mockResolvedValue(undefined)
       const registerSpy = jest
         .spyOn(usersService, 'register')
-        .mockResolvedValue(mockUser as User)
+        .mockResolvedValue(mockUser)
 
       await authService.handleProviderLogin('joke@foo.bar', 'google-oauth')
       expect(findByEmailSpy).toHaveBeenCalledWith('joke@foo.bar')

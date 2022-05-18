@@ -2,7 +2,7 @@ import { UnauthorizedException } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { Test } from '@nestjs/testing'
 import { Profile } from 'passport-google-oauth20'
-import { PlainUser } from '../users/user.entity'
+import { UserWithoutHash } from '../users/user.entity'
 import { AuthService } from './auth.service'
 import { GoogleOauthStrategy } from './google-oauth.strategy'
 
@@ -19,7 +19,7 @@ describe('GoogleOAuthStrategy', () => {
         async handleProviderLogin(
           _email: string,
           _provider: string
-        ): Promise<PlainUser> {
+        ): Promise<UserWithoutHash> {
           return mockUser
         },
       },
