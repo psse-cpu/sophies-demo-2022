@@ -13,14 +13,19 @@ async function seed(): Promise<void> {
 
   // need service, and not just a repo coz of bcrypt
   const service = new UsersService(userRepository)
+  const users = await service.allUsers()
 
-  await Promise.all([
-    service.register('mike@cpu.edu.ph', 'lol'),
-    service.register('richard@cpu.edu.ph', 'rich'),
-    service.register('fifi@cpu.edu.ph', 'fifi'),
-  ])
+  if (users.length === 0) {
+    await Promise.all([
+      service.register('mike@cpu.edu.ph', 'lol'),
+      service.register('richard@cpu.edu.ph', 'rich'),
+      service.register('fifi@cpu.edu.ph', 'fifi'),
+    ])
 
-  console.log(`${chalk.green.bold('Seeding complete: ')}: users`)
+    console.log(`${chalk.green.bold('Seeding complete: ')}: users`)
+  } else {
+    console.log(`${chalk.red.bold('Table not empty: ')}: users`)
+  }
 }
 
 seed()
