@@ -13,6 +13,7 @@ import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
 
 import ormConfig from '../ormconfig'
+import { ExercisesModule } from './exercises/exercises.module'
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import ormConfig from '../ormconfig'
     }),
     AuthModule,
     UsersModule,
+    ExercisesModule,
   ],
   providers: [
     {

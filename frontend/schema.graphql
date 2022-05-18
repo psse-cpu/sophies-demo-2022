@@ -18,4 +18,5 @@ type User {
 
 type Query {
   users: [User!]!
+  allExercises: [Exercise!]!
 }
