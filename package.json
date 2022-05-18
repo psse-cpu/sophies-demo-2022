@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Demo project for sophomores AY 2022 (SE-2223 + SE-2226).",
   "main": "index.js",
+  "engines": {
+    "node": "16.15.0"
+  },
   "scripts": {
     "start:dev": "pnpm --parallel start:dev",
     "typecheck": "pnpm --parallel --aggregate-output typecheck",
