@@ -169,7 +169,10 @@ describe('NumberHelper', () => {
       demo purposes
   - students with no credit cards will face a similar problem
   - and so will low-income guys like [yours truly](https://github.com/myknbani) :wink:
+  - always **MAKE SURE** to generate migrations TWICE! :two: :v:, one for PG, one for SQLite
 - Prod is manually deployed, per our minimum requirement.
+- Heroku is another free no-credit-card alternative, but [there's this ongoing issue][6]
+  as of May 19, 2022.
 
 ## For absent-minded / forgetful people
 
@@ -205,3 +208,4 @@ but it doesn't [seem reliable](https://stackoverflow.com/a/63238108/2310634).
 [3]: https://jsdoc.app/about-namepaths.html
 [4]: https://dev.to/imichaelowolabi/how-to-implement-login-with-google-in-nest-js-2aoa
 [5]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
+[6]: https://status.heroku.com/incidents/2413
