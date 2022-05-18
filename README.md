@@ -160,7 +160,7 @@ describe('NumberHelper', () => {
 
 ## IMPORTANT NOTES: Deployment on [Render](https://render.com)
 
-- Staging is auto-deployed on push to the main branch.
+- Staging is auto-deployed when CI passes after a `git push origin main`
   - It does not **exactly** mirror the production environment, since it uses SQLite
     for the DB, rather than PostgreSQL
   - **this is a bad practice in general**
