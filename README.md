@@ -156,6 +156,13 @@ describe('NumberHelper', () => {
 - TypeORM 0.3.x has breaking changes that don't work with `@nestjs/typeorm ` yet.
   - See [Github Issue][1] and [the warning in their docs][2].
 
+## Deploying
+
+##### [Render](https://render.com/)
+
+- only one free-tier database is allowed, and everything is in the `render.yaml`
+  file.
+
 ## For absent-minded / forgetful people
 
 It's not a good idea to use multiple package managers, and this project has only
