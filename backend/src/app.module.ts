@@ -24,7 +24,7 @@ import { ExercisesModule } from './exercises/exercises.module'
       /* eslint-disable-next-line unicorn/prefer-module -- transpiled using CommonJS no worries */
       autoSchemaFile: path.join(__dirname, '../../../frontend/schema.graphql'),
       debug: process.env.NODE_ENV !== 'production',
-      playground: process.env.NODE_ENV !== 'production',
+      playground: true, // TODO: revert later to ➡ process.env.NODE_ENV !== 'production',
     }),
     AuthModule,
     UsersModule,

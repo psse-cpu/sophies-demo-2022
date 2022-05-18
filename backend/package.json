@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "NODE_ENV=production node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -20,7 +20,12 @@
     "test:integration": "jest --config ./test/jest-integration.json",
     "typecheck": "tsc --noEmit -p tsconfig.json  # exists coz test/ aren't typechecked by `nest build`",
     "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js",
-    "erd": "ts-node -P tsconfig.json ./node_modules/typeorm-uml/bin/run ormconfig.ts --with-table-names-only -d erd.png --handwritten"
+    "erd": "ts-node -P tsconfig.json ./node_modules/typeorm-uml/bin/run ormconfig.ts --with-table-names-only -d erd.png --handwritten",
+    "seed:users": "ts-node ./database/seeds/users.seed.ts",
+    "seed:exercises": "ts-node ./database/seeds/exercises.seed.ts",
+    "seed": "pnpm seed:users && pnpm seed:exercises",
+    "migrate": "pnpm typeorm migration:run",
+    "deploy": "pnpm build && pnpm migrate && pnpm seed"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.11",
