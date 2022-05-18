@@ -25,7 +25,7 @@
     "seed:exercises": "ts-node ./database/seeds/exercises.seed.ts",
     "seed": "pnpm seed:users && pnpm seed:exercises",
     "migrate": "pnpm typeorm migration:run",
-    "deploy": "pnpm build && pnpm migrate && pnpm seed"
+    "deploy": "pnpm install && pnpm build && pnpm migrate && pnpm seed"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.11",

@@ -12,7 +12,8 @@
     "test:cov": "echo \"No test + coverage specified\" && exit 0",
     "start:dev": "quasar dev",
     "build": "pnpm typecheck && quasar build",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "deploy": "pnpm install && pnpm build"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
