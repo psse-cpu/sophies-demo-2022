@@ -58,7 +58,7 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
    - Follow [this tutorial][4] to set-up Google OAuth if you've never done it before
    - If you fork this for your own projects, [configure secrets for your repo][5] as well,
      such that CI will :white_check_mark: pass.
-   - Do not change this part of the Github Actions config **OR YOU WILL BE _:fire: "FIRED"_!**
+   - Do not change these parts of the [Github Actions config][7] **OR YOU WILL BE _:fire: "FIRED"_!**
 
      ```yaml
      env:
@@ -66,6 +66,8 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
        GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
        GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+       FRONTEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.FRONTEND_STAGING_DEPLOY_HOOK_URL }}
+       BACKEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.BACKEND_STAGING_DEPLOY_HOOK_URL }}
      ```
 
 4. Run migrations and optionally, seeds:
@@ -209,3 +211,4 @@ but it doesn't [seem reliable](https://stackoverflow.com/a/63238108/2310634).
 [4]: https://dev.to/imichaelowolabi/how-to-implement-login-with-google-in-nest-js-2aoa
 [5]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 [6]: https://status.heroku.com/incidents/2413
+[7]: .github/workflows/node.js.yml
