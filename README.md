@@ -156,6 +156,21 @@ describe('NumberHelper', () => {
 - TypeORM 0.3.x has breaking changes that don't work with `@nestjs/typeorm ` yet.
   - See [Github Issue][1] and [the warning in their docs][2].
 
+## IMPORTANT NOTES: Deployment on [Render](https://render.com)
+
+- Staging is auto-deployed on push to the main branch.
+  - It does not **exactly** mirror the production environment, since it uses SQLite
+    for the DB, rather than PostgreSQL
+  - **this is a bad practice in general**
+  - but Render does not allow more than one free-tier database, so **NO** staging +
+    prod databases
+  - it bets on TypeORM abstracting the differences between Postgre and SQLite
+    - as long as PG-specific features are avoided, it should be good enough for
+      demo purposes
+  - students with no credit cards will face a similar problem
+  - and so will low-income guys like [yours truly](https://github.com/myknbani) :wink:
+- Prod is manually deployed, per our minimum requirement.
+
 ## For absent-minded / forgetful people
 
 It's not a good idea to use multiple package managers, and this project has only
