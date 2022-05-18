@@ -24,6 +24,7 @@
     "seed:users": "ts-node ./database/seeds/users.seed.ts",
     "seed:exercises": "ts-node ./database/seeds/exercises.seed.ts",
     "seed": "pnpm seed:users && pnpm seed:exercises",
+    "migrate:gen": "pnpm typeorm migration:generate",
     "migrate": "pnpm typeorm migration:run",
     "deploy": "pnpm install && pnpm build && pnpm migrate && pnpm seed"
   },
@@ -73,7 +74,7 @@
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/parser": "^5.23.0",
-    "better-sqlite3": "^7.5.1",
+    "better-sqlite3": "^7.5.3",
     "eslint": "^8.14.0",
     "jest": "28.0.3",
     "jest-html-reporters": "^3.0.6",
