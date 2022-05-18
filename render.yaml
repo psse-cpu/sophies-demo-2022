@@ -26,6 +26,30 @@ services:
         sync: false
     autoDeploy: false # optional
 
+  - type: web
+    name: Sophies Demo API Staging
+    env: node
+    plan: free
+    region: singapore
+    repo: https://github.com/psse-cpu/sophies-demo-2022.git
+    buildCommand: pnpm be deploy
+    startCommand: pnpm be start:prod
+    pullRequestPreviewsEnabled: false
+    envVars:
+      - key: STAGING
+        value: 1
+      - key: GOOGLE_OAUTH_CLIENT_ID
+        sync: false
+      - key: GOOGLE_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_OAUTH_REDIRECT_URL
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 1w
+      - key: JWT_SECRET
+        sync: false
+    autoDeploy: true # optional
+
   # A static site
   - type: web
     name: Sophies Demo
@@ -34,6 +58,14 @@ services:
     staticPublishPath: ./frontend/dist/spa
     pullRequestPreviewsEnabled: false # optional
     autoDeploy: false
+
+  - type: web
+    name: Sophies Demo Staging
+    env: static
+    buildCommand: pnpm fe deploy
+    staticPublishPath: ./frontend/dist/spa
+    pullRequestPreviewsEnabled: false # optional
+    autoDeploy: true
 
 databases:
   - name: sophies_pg_prod
