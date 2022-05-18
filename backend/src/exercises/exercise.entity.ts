@@ -28,5 +28,5 @@ export class Exercise {
   @Field(() => User, { middleware: [TypeormLoaderMiddleware] })
   @ManyToOne(() => User, (user) => user.exercises)
   @TypeormLoaderExtension((exercise: Exercise) => exercise.authorId)
-  author: User
+  author?: User
 }
