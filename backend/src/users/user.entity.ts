@@ -25,7 +25,7 @@ export class User {
   @TypeormLoaderExtension((exercise: Exercise) => exercise.authorId, {
     selfKey: true,
   })
-  exercises: Exercise[]
+  exercises?: Exercise[]
 }
 
 export type UserWithoutHash = Omit<User, 'passwordHash'>
