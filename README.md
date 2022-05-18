@@ -81,6 +81,18 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
    pnpm start:dev
    ```
 
+### Removing packages without breaking the lockfile
+
+Until [this question](https://github.com/pnpm/pnpm/discussions/4754) is answered,
+removing packages from a subproject without a broken lockfile rewrite would be:
+
+```sh
+# from backend or frontend (fe)
+pnpm be remove <some-package>
+```
+
+And from the root, just remove the entry in `package.json` and execute `pnpm i`.
+
 ### Naming Convention used for Unit Tests
 
 - test classes with the outer `describe` level containing the class name
