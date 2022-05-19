@@ -32,7 +32,7 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
    ```sh
    docker pull timescale/timescaledb:latest-pg13
 
-   docker run -d --name pg13 -p 127.0.0.1:5432:5432 \                                ✔  09:55:59  ▓▒░
+   docker run -d --name pg13 -p 127.0.0.1:5432:5432 \
    > -e POSTGRES_PASSWORD=postgres timescale/timescaledb:latest-pg13
 
    # commands to start/stop the Dockerized PG:
