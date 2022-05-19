@@ -71,7 +71,7 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
      # DON'T USE THE PROD SECRET HERE, OR YOU WILL BE 🔥D!
      JWT_SECRET=#<your JWT secret here>
-     JWT_EXPIRES_IN: 1w
+     JWT_EXPIRES_IN=1w
      ```
 
    - Follow [this tutorial][4] to set-up Google OAuth if you've never done it before
