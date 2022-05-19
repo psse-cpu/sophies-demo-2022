@@ -21,7 +21,26 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
 ## Getting Started
 
-1. Install [`pnpm`](https://pnpm.io/) for your OS, or use NPM:
+1. **Optional:** Install Postgres 13 that closely mirrors the staging and prod
+   DB on [Railway](https://railway.app/)
+
+   Stop your existing locally-installed PostgreSQL Server.
+   Two processes can't use the same port, otherwise ERROR -- `bind: address already in use`
+
+   Alternatively, bind your Docker PG on a different port, e.g. `-p 5433:5432`.
+
+   ```sh
+   docker pull timescale/timescaledb:latest-pg13
+
+   docker run -d --name pg13 -p 127.0.0.1:5432:5432 \                                ✔  09:55:59  ▓▒░
+   > -e POSTGRES_PASSWORD=postgres timescale/timescaledb:latest-pg13
+
+   # commands to start/stop the Dockerized PG:
+   docker stop pg13
+   docker start pg13
+   ```
+
+2. Install [`pnpm`](https://pnpm.io/) for your OS, or use NPM:
    - Windows
      ```sh
      choco install pnpm
@@ -31,13 +50,13 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
      ```sh
      paru -S pnpm-bin # pnpm is flagged out-of-date
      ```
-2. Clone repo and install dependencies:
+3. Clone repo and install dependencies:
    ```sh
    git clone git@github.com:psse-cpu/sophies-demo-2022.git
    cd sophies-demo-2022
    pnpm install
    ```
-3. Manage secrets:
+4. Manage secrets:
 
    - Replicate the Git-ignored `backend/.env` file:
 
@@ -70,7 +89,7 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
        BACKEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.BACKEND_STAGING_DEPLOY_HOOK_URL }}
      ```
 
-4. Run migrations and optionally, seeds:
+5. Run migrations and optionally, seeds:
 
    ```sh
    pnpm typeorm migration:run
@@ -78,7 +97,7 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
    # TODO: add seed instructions
    ```
 
-5. Start both frontend and backend:
+6. Start both frontend and backend:
    ```sh
    pnpm start:dev
    ```
@@ -161,18 +180,8 @@ describe('NumberHelper', () => {
 ## IMPORTANT NOTES: Deployment on [Render](https://render.com)
 
 - Staging is auto-deployed when CI passes after a `git push origin main`
-  - It does not **exactly** mirror the production environment, since it uses SQLite
-    for the DB, rather than PostgreSQL
-  - **this is a bad practice in general**
-  - but Render does not allow more than one free-tier database, so **NO** staging +
-    prod databases
-  - it bets on TypeORM abstracting the differences between Postgre and SQLite
-    - as long as PG-specific features are avoided, it should be good enough for
-      demo purposes
-  - students with no credit cards will face a similar problem
-  - and so will low-income guys like [yours truly](https://github.com/myknbani) :wink:
-  - always **MAKE SURE** to generate migrations TWICE! :two: :v:, one for PG, one for SQLite
 - Prod is manually deployed, per our minimum requirement.
+- Databases are provisioned by Railway.
 - Heroku is another free no-credit-card alternative, but [there's this ongoing issue][6]
   as of May 19, 2022.
 
