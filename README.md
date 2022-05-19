@@ -8,14 +8,16 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 - Showcase baseline expectations and minimum requirements.
 
 <!--ts-->
+* [Sophies Demo](#sophies-demo)
+   * [Getting Started](#getting-started)
+      * [Removing packages without breaking the lockfile](#removing-packages-without-breaking-the-lockfile)
+      * [Naming Convention used for Unit Tests](#naming-convention-used-for-unit-tests)
+      * [Important links](#important-links)
+   * [IMPORTANT NOTES: Deployment on <a href="https://render.com" rel="nofollow">Render</a>](#important-notes-deployment-on-render)
+   * [For absent-minded / forgetful people](#for-absent-minded--forgetful-people)
+   * [Contributors <g-emoji class="g-emoji" alias="sparkles" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png">✨</g-emoji>](#contributors-)
 
-- [Sophies Demo](#sophies-demo)
-  - [Getting Started](#getting-started)
-    - [Naming Convention used for Unit Tests](#naming-convention-used-for-unit-tests)
-    - [Important links](#important-links)
-  - [For absent-minded / forgetful people](#for-absent-minded--forgetful-people)
-
-<!-- Added by: michael, at: Tuesday, 17 May, 2022 09:40:26 AM PST -->
+<!-- Added by: michael, at: Thursday, 19 May, 2022 11:41:04 AM PST -->
 
 <!--te-->
 
