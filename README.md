@@ -1,4 +1,7 @@
 ![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-75.62%25-red.svg?style=flat&logo=jest)
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 ![example workflow](https://github.com/psse-cpu/sophies-demo-2022/actions/workflows/node.js.yml/badge.svg)
 
 # Sophies Demo
@@ -221,3 +224,23 @@ but it doesn't [seem reliable](https://stackoverflow.com/a/63238108/2310634).
 [5]: https://docs.github.com/en/actions/security-guides/encrypted-secrets
 [6]: https://status.heroku.com/incidents/2413
 [7]: .github/workflows/node.js.yml
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://hansdaduya.com"><img src="https://avatars.githubusercontent.com/u/49836841?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hans Gabriel B. Daduya</b></sub></a><br /><a href="#ideas-HansGabriel" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-HansGabriel" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#mentoring-HansGabriel" title="Mentoring">🧑‍🏫</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
