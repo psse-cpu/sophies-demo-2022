@@ -15,6 +15,17 @@
         "infra",
         "mentoring"
       ]
+    },
+    {
+      "login": "uLan08",
+      "name": "Patrick Rainier Juen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14162336?v=4",
+      "profile": "https://github.com/uLan08",
+      "contributions": [
+        "ideas",
+        "infra",
+        "mentoring"
+      ]
     }
   ],
   "contributorsPerLine": 7,
