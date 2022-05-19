@@ -1,6 +1,6 @@
 ![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-75.62%25-red.svg?style=flat&logo=jest)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ![example workflow](https://github.com/psse-cpu/sophies-demo-2022/actions/workflows/node.js.yml/badge.svg)
 
@@ -235,6 +235,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://hansdaduya.com"><img src="https://avatars.githubusercontent.com/u/49836841?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hans Gabriel B. Daduya</b></sub></a><br /><a href="#ideas-HansGabriel" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-HansGabriel" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#mentoring-HansGabriel" title="Mentoring">🧑‍🏫</a></td>
+    <td align="center"><a href="https://github.com/uLan08"><img src="https://avatars.githubusercontent.com/u/14162336?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Patrick Rainier Juen</b></sub></a><br /><a href="#ideas-uLan08" title="Ideas, Planning, & Feedback">🤔</a> <a href="#infra-uLan08" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#mentoring-uLan08" title="Mentoring">🧑‍🏫</a></td>
   </tr>
 </table>
 
