@@ -26,6 +26,9 @@ jobs:
       FRONTEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.FRONTEND_STAGING_DEPLOY_HOOK_URL }}
       BACKEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.BACKEND_STAGING_DEPLOY_HOOK_URL }}
 
+      FRONTEND_ORIGIN: http://localhost:9000
+      BACKEND_ORIGIN: http://localhost:3000
+
     services:
       postgres:
         image: postgres:13.6
