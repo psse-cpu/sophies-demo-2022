@@ -1,4 +1,4 @@
-![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-75.62%25-red.svg?style=flat&logo=jest)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-80.48%25-yellow.svg?style=flat&logo=jest)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-) <!-- ALL-CONTRIBUTORS-BADGE:END -->![example workflow](https://github.com/psse-cpu/sophies-demo-2022/actions/workflows/node.js.yml/badge.svg)
 
 # Sophies Demo
@@ -8,14 +8,15 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 - Showcase baseline expectations and minimum requirements.
 
 <!--ts-->
-* [Sophies Demo](#sophies-demo)
-   * [Getting Started](#getting-started)
-      * [Removing packages without breaking the lockfile](#removing-packages-without-breaking-the-lockfile)
-      * [Naming Convention used for Unit Tests](#naming-convention-used-for-unit-tests)
-      * [Important links](#important-links)
-   * [IMPORTANT NOTES: Deployment on <a href="https://render.com" rel="nofollow">Render</a>](#important-notes-deployment-on-render)
-   * [For absent-minded / forgetful people](#for-absent-minded--forgetful-people)
-   * [Contributors <g-emoji class="g-emoji" alias="sparkles" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png">✨</g-emoji>](#contributors-)
+
+- [Sophies Demo](#sophies-demo)
+  - [Getting Started](#getting-started)
+    - [Removing packages without breaking the lockfile](#removing-packages-without-breaking-the-lockfile)
+    - [Naming Convention used for Unit Tests](#naming-convention-used-for-unit-tests)
+    - [Important links](#important-links)
+  - [IMPORTANT NOTES: Deployment on <a href="https://render.com" rel="nofollow">Render</a>](#important-notes-deployment-on-render)
+  - [For absent-minded / forgetful people](#for-absent-minded--forgetful-people)
+  - [Contributors <g-emoji class="g-emoji" alias="sparkles" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2728.png">✨</g-emoji>](#contributors-)
 
 <!-- Added by: michael, at: Thursday, 19 May, 2022 11:41:04 AM PST -->
 

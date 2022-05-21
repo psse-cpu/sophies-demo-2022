@@ -3,8 +3,6 @@ import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 
-import { ExercisesModule } from '../src/exercises/exercises.module'
-
 import { AuthModule } from '../src/auth/auth.module'
 import { User } from '../src/users/user.entity'
 import { UsersService } from '../src/users/users.service'
@@ -27,7 +25,6 @@ describe('AuthController (integration)', () => {
         ConfigModule.forRoot(),
         ...typeOrmInMemoryModules([User]),
         AuthModule,
-        ExercisesModule,
       ],
     }).compile()
 
