@@ -41,10 +41,10 @@ describe('AuthController', () => {
     })
   })
 
-  describe('#googleLoginRedirect', () => {
+  describe('#googleLogin', () => {
     it('sends an HTTP-only cookie of the access token', async () => {
       const spy = jest.fn()
-      await authController.googleLoginRedirect(
+      await authController.googleLogin(
         {} as Express.Request,
         {
           cookie: spy,

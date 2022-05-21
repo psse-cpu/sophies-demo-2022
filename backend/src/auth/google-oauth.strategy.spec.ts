@@ -1,10 +1,9 @@
 import { UnauthorizedException } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { Test } from '@nestjs/testing'
-import { Profile } from 'passport-google-oauth20'
 import { UserWithoutHash } from '../users/user.entity'
 import { AuthService } from './auth.service'
-import { GoogleOauthStrategy } from './google-oauth.strategy'
+import { GoogleIdToken, GoogleOauthStrategy } from './google-oauth.strategy'
 
 const mockUser = { id: 1, email: 'mike@foo.bar' }
 
@@ -43,11 +42,9 @@ describe('GoogleOAuthStrategy', () => {
   })
 
   describe('#validate', () => {
-    const fillerProfile = {} as unknown as Profile
-
     it('returns a user when authService#handleProviderLogin does so', async () => {
       jest.spyOn(authService, 'handleProviderLogin').mockResolvedValue(mockUser)
-      const result = await googleStrategy.validate('', '', fillerProfile)
+      const result = await googleStrategy.validate({} as GoogleIdToken, '')
       return expect(result).toBe(mockUser)
     })
 
@@ -57,7 +54,7 @@ describe('GoogleOAuthStrategy', () => {
       })
 
       return expect(() =>
-        googleStrategy.validate('', '', fillerProfile)
+        googleStrategy.validate({} as GoogleIdToken, '')
       ).rejects.toThrow(UnauthorizedException)
     })
   })

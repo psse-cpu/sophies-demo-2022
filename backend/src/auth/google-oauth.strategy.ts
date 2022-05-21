@@ -1,10 +1,27 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
-import { Profile, Strategy, StrategyOptions } from 'passport-google-oauth20'
-import { UserWithoutHash } from 'src/users/user.entity'
+import { Strategy } from 'passport-google-verify-token'
+import { UserWithoutHash } from '../users/user.entity'
 
 import { AuthService } from './auth.service'
+
+export interface GoogleIdToken {
+  iss: string
+  nbf: number
+  aud: string
+  sub: string
+  email: string
+  email_verified: boolean
+  azp: string
+  name: string
+  picture: string
+  given_name: string
+  family_name: string
+  iat: number
+  exp: number
+  jti: string
+}
 
 @Injectable()
 export class GoogleOauthStrategy extends PassportStrategy(
@@ -17,20 +34,18 @@ export class GoogleOauthStrategy extends PassportStrategy(
   ) {
     super({
       clientID: configService.get('GOOGLE_OAUTH_CLIENT_ID'),
-      clientSecret: configService.get('GOOGLE_OAUTH_CLIENT_SECRET'),
-      callbackURL: configService.get('GOOGLE_OAUTH_REDIRECT_URL'),
-      scope: ['email', 'profile'],
-    } as StrategyOptions)
+    })
   }
 
   async validate(
-    _accessToken: string,
-    _refreshToken: string,
-    profile: Profile
-  ): Promise<UserWithoutHash> {
+    parsedToken: GoogleIdToken,
+    _id: string
+  ): Promise<UserWithoutHash | undefined> {
     try {
-      const email = profile.emails?.[0]?.value ?? ''
-      return this.authService.handleProviderLogin(email, 'google-oauth')
+      return this.authService.handleProviderLogin(
+        parsedToken.email,
+        'google-oauth'
+      )
     } catch {
       throw new UnauthorizedException()
     }

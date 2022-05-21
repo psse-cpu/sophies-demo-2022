@@ -1,4 +1,4 @@
-import { Controller, Req, Post, UseGuards, Get, Res } from '@nestjs/common'
+import { Controller, Req, Post, UseGuards, Res } from '@nestjs/common'
 
 import Express from 'express'
 import { UserWithoutHash } from 'src/users/user.entity'
@@ -20,13 +20,9 @@ export class AuthController {
     return request.user as UserWithoutHash
   }
 
-  @Get('/google')
+  @Post('/google')
   @UseGuards(GoogleOAuthGuard)
-  async googleLogin(@Req() _request: Express.Request): Promise<void> {}
-
-  @Get('/google/redirect')
-  @UseGuards(GoogleOAuthGuard)
-  async googleLoginRedirect(
+  async googleLogin(
     @Req() request: Express.Request,
     @Res({ passthrough: true }) response: Express.Response
   ): Promise<UserWithoutHash | undefined> {
