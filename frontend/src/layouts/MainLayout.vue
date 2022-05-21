@@ -1,7 +1,7 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr fFf">
     <q-header elevated>
-      <q-toolbar>
+      <q-toolbar class="bg-blue-grey-7 q-pa-xs q-pt-sm">
         <q-btn
           flat
           dense
@@ -11,7 +11,14 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title class="branding">
+          <img
+            src="../assets/logo.png"
+            style="vertical-align: middle"
+            height="48"
+          />
+          <h4>ShipThat</h4>
+        </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -104,3 +111,16 @@ export default defineComponent({
   },
 })
 </script>
+
+<style scoped lang="scss">
+.branding {
+  font-family: 'BioRhyme', serif;
+  font-weight: 700;
+  color: $blue-grey-1;
+
+  h4 {
+    display: inline;
+    vertical-align: middle;
+  }
+}
+</style>
