@@ -22,8 +22,7 @@
     "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js",
     "erd": "ts-node -P tsconfig.json ./node_modules/typeorm-uml/bin/run ormconfig.ts --with-table-names-only -d erd.png --handwritten",
     "seed:users": "ts-node ./database/seeds/users.seed.ts",
-    "seed:exercises": "ts-node ./database/seeds/exercises.seed.ts",
-    "seed": "pnpm seed:users && pnpm seed:exercises",
+    "seed": "pnpm seed:users",
     "migrate:gen": "pnpm typeorm migration:generate",
     "migrate": "pnpm typeorm migration:run",
     "deploy": "pnpm install && pnpm build && pnpm migrate && pnpm seed"
