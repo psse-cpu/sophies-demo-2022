@@ -61,7 +61,9 @@ module.exports = configure((/* ctx */) => ({
 
     // publicPath: '/',
     // analyze: true,
-    // env: {},
+
+    /* eslint-disable-next-line global-require -- just for config */
+    env: require('dotenv').config().parsed,
     // rawDefine: {}
     // ignorePublicFolder: true,
     // minify: false,

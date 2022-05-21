@@ -1,5 +1,5 @@
 export function handleCredentialResponse(response) {
-  fetch('http://localhost:3000/auth/google', {
+  fetch(`${process.env.BACKEND_ORIGIN}/auth/google`, {
     method: 'POST',
     credentials: 'include',
     headers: {
