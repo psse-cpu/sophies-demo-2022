@@ -3,6 +3,7 @@
     <q-header elevated>
       <q-toolbar class="bg-blue-grey-7 q-pa-xs q-pt-sm">
         <q-btn
+          v-if="drawerEnabled"
           flat
           dense
           round
@@ -24,7 +25,12 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer
+      v-if="drawerEnabled"
+      v-model="leftDrawerOpen"
+      show-if-above
+      bordered
+    >
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
@@ -45,6 +51,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useRouter } from 'vue-router'
 
 const linksList = [
   {
@@ -100,10 +107,12 @@ export default defineComponent({
 
   setup() {
     const leftDrawerOpen = ref(false)
+    const drawerEnabled = useRouter().currentRoute.value.name !== 'login'
 
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
+      drawerEnabled,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
       },
@@ -117,6 +126,8 @@ export default defineComponent({
   font-family: 'BioRhyme', serif;
   font-weight: 700;
   color: $blue-grey-1;
+  padding: 4px;
+  padding-top: 2px;
 
   h4 {
     display: inline;
