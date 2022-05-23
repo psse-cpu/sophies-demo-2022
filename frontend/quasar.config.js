@@ -70,7 +70,10 @@ module.exports = configure((/* ctx */) => ({
     // polyfillModulePreload: true,
     // distDir
 
-    // extendViteConf (viteConf) {},
+    extendViteConf(viteConfig) {
+      const plugin = viteConfig.plugins.find(({ name }) => name === 'vite:vue')
+      plugin.reactivityTransform = true
+    },
     // viteVuePluginOptions: {},
 
     // vitePlugins: [
