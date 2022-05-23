@@ -2,6 +2,10 @@
   "extends": "@quasar/app-vite/tsconfig-preset",
   "compilerOptions": {
     "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    // TODO: investigate a better way to reuse TypeORM models without this
+    "strictPropertyInitialization": false,
     "types": [
       "node",
       "vite/client",
@@ -37,7 +41,7 @@
     }
   },
   "vueCompilerOptions": {
-    "experimentalImplicitWrapComponentOptionsWithDefineComponent": true
+    "experimentalImplicitWrapComponentOptionsWithDefineComponent": true,
   },
   "include": [
     "src/**/*.ts",
