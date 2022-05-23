@@ -183,6 +183,7 @@ importers:
       autoprefixer: ^10.4.2
       axios: ^0.27.2
       backend: workspace:^0.0.1
+      c8: ^7.11.3
       dotenv: ^16.0.1
       happy-dom: ^4.0.1
       localforage: ^1.10.0
@@ -213,13 +214,14 @@ importers:
       '@types/node': 12.20.52
       '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.33
       autoprefixer: 10.4.7_postcss@8.4.13
+      c8: 7.11.3
       happy-dom: 4.0.1
       postcss: 8.4.13
       prettier: 2.6.2
       rollup: 2.73.0
       ts-node: 10.7.0_ra4rswlll23qdbufyfegjlwyfa
       typescript: 4.6.4
-      vitest: 0.12.9_happy-dom@4.0.1
+      vitest: 0.12.9_c8@7.11.3+happy-dom@4.0.1
       vue-tsc: 0.34.15_typescript@4.6.4
 
 packages:
@@ -3559,6 +3561,25 @@ packages:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
 
+  /c8/7.11.3:
+    resolution: {integrity: sha512-6YBmsaNmqRm9OS3ZbIiL2EZgi1+Xc4O24jL3vMYGE6idixYuGdy76rIfIdltSKDj9DpLNrcXSonUTR1miBD0wA==}
+    engines: {node: '>=10.12.0'}
+    hasBin: true
+    dependencies:
+      '@bcoe/v8-coverage': 0.2.3
+      '@istanbuljs/schema': 0.1.3
+      find-up: 5.0.0
+      foreground-child: 2.0.0
+      istanbul-lib-coverage: 3.2.0
+      istanbul-lib-report: 3.0.0
+      istanbul-reports: 3.1.4
+      rimraf: 3.0.2
+      test-exclude: 6.0.0
+      v8-to-istanbul: 9.0.0
+      yargs: 16.2.0
+      yargs-parser: 20.2.9
+    dev: true
+
   /cachedir/2.2.0:
     resolution: {integrity: sha512-VvxA0xhNqIIfg0V9AmJkDg91DaJwryutH5rVEZAhcNi4iJFj9f+QxmAjgK1LT9I8OgToX27fypX6/MeCXVbBjQ==}
     engines: {node: '>=6'}
@@ -5350,6 +5371,14 @@ packages:
       debug:
         optional: true
     dev: false
+
+  /foreground-child/2.0.0:
+    resolution: {integrity: sha512-dCIq9FpEcyQyXKCkyzmlPTFNgrCzPudOe+mhvJU5zAtlBnGVy2yKxtfsxK2tQBThwq225jcvBjpw1Gr40uzZCA==}
+    engines: {node: '>=8.0.0'}
+    dependencies:
+      cross-spawn: 7.0.3
+      signal-exit: 3.0.7
+    dev: true
 
   /fork-ts-checker-webpack-plugin/7.2.3_a4ckzxkumppc4bhjeqez2vksei:
     resolution: {integrity: sha512-9v308zIFTIFkWJBN/4N1A5oqm/ed9hWG6GH+KYTCBjYCEJOmHoVtDIWpfrJ0eD6cPB7V53HEVoJ6bL2In8QRaw==}
@@ -9986,7 +10015,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitest/0.12.9_happy-dom@4.0.1:
+  /vitest/0.12.9_c8@7.11.3+happy-dom@4.0.1:
     resolution: {integrity: sha512-1NtyUANS72Qw5PwYvoztk067NX4fSiis2xQxhByOWS33eL2er/yupHyLxlBCOkF2ANe0dLFRvT1GVb+nczL5aw==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
@@ -10007,6 +10036,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.1
       '@types/chai-subset': 1.3.3
+      c8: 7.11.3
       chai: 4.3.6
       debug: 4.3.4
       happy-dom: 4.0.1
@@ -10396,7 +10426,6 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 20.2.9
-    dev: false
 
   /yargs/17.4.1:
     resolution: {integrity: sha512-WSZD9jgobAg3ZKuCQZSa3g9QOJeCCqLoLAykiWgmXnDo9EPnn4RPf5qVTtzgOx66o6/oqhcA5tHtJXpG8pMt3g==}
