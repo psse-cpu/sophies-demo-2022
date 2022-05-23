@@ -18,7 +18,9 @@
     </q-page-container>
 
     <q-footer class="bg-grey-8 text-white">
-      <q-toolbar> foo </q-toolbar>
+      <q-toolbar>
+        Copyright Philippine Society of Software Engineers 2022
+      </q-toolbar>
     </q-footer>
   </q-layout>
 </template>
