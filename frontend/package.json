@@ -8,8 +8,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "format": "prettier --write \"**/*.{js,ts,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0",
-    "test:cov": "echo \"No test + coverage specified\" && exit 0",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:cov": "vitest run --coverage",
     "start:dev": "quasar dev",
     "build": "pnpm typecheck && quasar build",
     "typecheck": "vue-tsc --noEmit",
@@ -17,20 +18,28 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "axios": "^0.27.2",
+    "backend": "workspace:^0.0.1",
     "dotenv": "^16.0.1",
+    "localforage": "^1.10.0",
     "quasar": "^2.6.0",
+    "vite": "^2.9.9",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.0.0-alpha.0",
+    "@quasar/vite-plugin": "^1.0.10",
     "@types/node": "^12.20.52",
+    "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.4.2",
+    "happy-dom": "^4.0.1",
     "postcss": "^8.4.13",
     "prettier": "^2.5.1",
     "rollup": "^2.72.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4",
+    "vitest": "^0.12.9",
     "vue-tsc": "^0.34.11"
   },
   "engines": {
