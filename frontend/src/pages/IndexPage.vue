@@ -5,26 +5,19 @@
       active
       :todos="todos"
       :meta="meta"
-    ></example-component>
-
-    <div id="googleSignIn"></div>
-  </q-page>
+    ></example-component> </q-page
+  >y
 </template>
 
 <script lang="ts">
 import { Todo, Meta } from 'components/models'
 import ExampleComponent from 'components/ExampleComponent.vue'
 import { defineComponent, onMounted, ref } from 'vue'
-import { addGoogleSignInButton } from '../untyped-js/google-auth'
 
 export default defineComponent({
   name: 'IndexPage',
   components: { ExampleComponent },
   setup() {
-    onMounted(() => {
-      addGoogleSignInButton()
-    })
-
     const todos = ref<Todo[]>([
       {
         id: 1,

@@ -18,6 +18,11 @@ export function addGoogleSignInButton() {
 
   window.google.accounts.id.renderButton(
     document.querySelector('#googleSignIn'),
-    { theme: 'outline', size: 'large' } // customization attributes
+    {
+      theme: 'filled_blue',
+      shape: 'pill',
+      size: 'large',
+      logo_alignment: 'center',
+    } // customization attributes
   )
 }
