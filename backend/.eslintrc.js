@@ -70,7 +70,6 @@ module.exports = {
 
     // https://basarat.gitbook.io/typescript/main-1/defaultisbad
     'import/prefer-default-export': 'off',
-    'import/no-default-export': 'error',
 
     // architecture
     'boundaries/element-types': [

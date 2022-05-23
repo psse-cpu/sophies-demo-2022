@@ -106,6 +106,8 @@ module.exports = {
     'import/no-unresolved': 'off',
     'import/extensions': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/prefer-default-export': 'off',
+    'import/no-default-export': 'error',
 
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': ['error'],

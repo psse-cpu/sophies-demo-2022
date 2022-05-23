@@ -12,8 +12,11 @@ module.exports = {
           props: {
             properties: false,
           },
+          env: {
+            environment: false,
+          },
         },
-        ignore: [/^props$/i],
+        ignore: [/^props$/i, /^env$/i],
       },
     ],
   },
