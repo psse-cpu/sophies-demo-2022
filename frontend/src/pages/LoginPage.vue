@@ -5,7 +5,7 @@
         <login-jumbotron />
       </div>
       <div class="bg-blue-grey-1 col-xs-12 col-md q-pa-md row">
-        <form class="col-md-8 col-xs-12">
+        <form class="col-md-8 col-xs-12" @submit.prevent="handleSubmit">
           <h6 class="q-mt-none q-mb-none">Already on ShipThat?</h6>
 
           <div class="q-ma-md">
@@ -13,7 +13,7 @@
               dense
               rounded
               outlined
-              v-model="credentials.username"
+              v-model="credentials.email"
               label="E-mail or username"
             >
               <template v-slot:prepend>
@@ -36,6 +36,7 @@
           </div>
           <div class="q-ma-md flex buttons">
             <q-btn
+              type="submit"
               icon="mdi-login"
               color="primary"
               size="md"
@@ -75,15 +76,22 @@ import { onMounted, reactive } from 'vue'
 import LoginJumbotron from 'src/components/LoginJumbotron.vue'
 import AppFeatureCard from 'src/components/AppFeatureCard.vue'
 import { addGoogleSignInButton } from 'src/untyped-js/google-auth'
+import { backend } from 'src/axios'
+import localforage from 'localforage'
 
 onMounted(() => {
   addGoogleSignInButton()
 })
 
 const credentials = reactive({
-  username: '',
+  email: '',
   password: '',
 })
+
+async function handleSubmit() {
+  const { data: user } = await backend.post('/auth/login', credentials)
+  localforage.setItem('currentUser', user)
+}
 
 const features = [
   {

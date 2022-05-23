@@ -14,6 +14,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
+// eslint-disable-next-line import/no-default-export -- will be removed soon
 export default defineComponent({
   name: 'EssentialLink',
   props: {

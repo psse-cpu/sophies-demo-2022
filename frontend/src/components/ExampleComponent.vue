@@ -31,6 +31,7 @@ function useDisplayTodo(todos: Ref<Todo[]>) {
   return { todoCount }
 }
 
+// eslint-disable-next-line import/no-default-export -- will be removed soon
 export default defineComponent({
   name: 'ExampleComponent',
   props: {

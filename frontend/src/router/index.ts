@@ -1,4 +1,5 @@
 import { route } from 'quasar/wrappers'
+import { currentUser } from 'src/auth'
 import {
   createMemoryHistory,
   createRouter,
@@ -38,6 +39,15 @@ export default route((/* { store, ssrContext } */) => {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE),
+  })
+
+  Router.beforeEach(async (to, _from) => {
+    const user = await currentUser()
+    if (!user && to.meta.requiresAuth && to.name !== 'login') {
+      return { name: 'login' }
+    }
+
+    return true
   })
 
   return Router
