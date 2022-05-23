@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/prefer-module */
+
 
 module.exports = {
   rules: {
@@ -8,6 +8,12 @@ module.exports = {
         allowList: {
           props: true,
         },
+        replacements: {
+          props: {
+            properties: false,
+          },
+        },
+        ignore: [/^props$/i],
       },
     ],
   },
