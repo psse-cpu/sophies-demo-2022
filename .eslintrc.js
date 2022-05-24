@@ -119,6 +119,8 @@ module.exports = {
     'eslint-comments/require-description': 'warn',
     'eslint-comments/no-unused-disable': 'warn',
     'no-secrets/no-secrets': ['error'],
+
+    'unicorn/no-array-callback-reference': 'off', // false positives
   },
   overrides: [
     {

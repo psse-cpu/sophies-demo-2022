@@ -22,12 +22,12 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['**/*.vue'],
+      files: ['**/*.vue', '**/*.spec.ts'],
       rules: {
         'unicorn/filename-case': [
           'error',
           {
-            case: 'pascalCase',
+            cases: { 'pascalCase': true, 'camelCase': true },
             ignore: ['^quasar.config.js$'],
           },
         ],
