@@ -8,7 +8,9 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
+const path = require('path')
 const { configure } = require('quasar/wrappers')
+const commonjs = require('vite-plugin-commonjs').default
 
 module.exports = configure((/* ctx */) => ({
   eslint: {
@@ -17,7 +19,7 @@ module.exports = configure((/* ctx */) => ({
     // exclude = [],
     // rawOptions = {},
     warnings: true,
-    errors: true,
+    errors: false,
   },
 
   // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
@@ -52,6 +54,17 @@ module.exports = configure((/* ctx */) => ({
       node: 'node16',
     },
 
+    alias: {
+      typeorm: path.resolve(
+        __dirname,
+        '../backend/node_modules/typeorm/typeorm-model-shim.js'
+      ),
+      '@nestjs/graphql': path.resolve(
+        __dirname,
+        '../backend/node_modules/@nestjs/graphql/dist/extra/graphql-model-shim.js'
+      ),
+    },
+
     vueRouterMode: 'history', // available values: 'hash', 'history'
     // vueRouterBase,
     // vueDevtools,
@@ -71,14 +84,22 @@ module.exports = configure((/* ctx */) => ({
     // distDir
 
     extendViteConf(viteConfig) {
-      const plugin = viteConfig.plugins.find(({ name }) => name === 'vite:vue')
-      plugin.reactivityTransform = true
-    },
-    // viteVuePluginOptions: {},
+      Object.assign(viteConfig.optimizeDeps, {
+        include: ['typeorm', '@nestjs/graphql'],
+      })
 
-    // vitePlugins: [
-    //   [ 'package-name', { ..options.. } ]
-    // ]
+      Object.assign(viteConfig.build, {
+        commonjsOptions: {
+          include: [/typeorm/, /@nestjs\/graphql/, /node_modules/],
+        },
+      })
+    },
+
+    viteVuePluginOptions: {
+      reactivityTransform: true,
+    },
+
+    vitePlugins: [commonjs()],
   },
 
   // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
