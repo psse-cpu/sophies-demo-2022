@@ -2,6 +2,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const { execSync } = require('child_process')
 
 const frontendReadme = fs
   .readFileSync(path.join(__dirname, 'frontend/README.md'))
@@ -24,3 +25,16 @@ const newReadme = rootReadme
   .replace(backendRegex, backendBadge)
 
 fs.writeFileSync(path.join(__dirname, 'README.md'), newReadme)
+
+execSync('git add README.md', {
+  cwd: __dirname,
+  encoding: 'utf-8', // eslint-disable-line unicorn/text-encoding-identifier-case -- follow the docs
+})
+
+execSync(
+  "git diff-index --quiet HEAD || git commit -m '📝 docs: update README badges'",
+  {
+    cwd: __dirname,
+    encoding: 'utf-8', // eslint-disable-line unicorn/text-encoding-identifier-case -- follow the docs
+  }
+)
