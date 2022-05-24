@@ -73,14 +73,19 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
      # replace with your own
      GOOGLE_OAUTH_CLIENT_ID=#<your client_id here>
-     GOOGLE_OAUTH_CLIENT_SECRET=#<your client_secret here>
      GOOGLE_OAUTH_REDIRECT_URL=http://localhost:3000/auth/google/redirect
 
      # DON'T USE THE PROD SECRET HERE, OR YOU WILL BE 🔥D!
      JWT_SECRET=#<your JWT secret here>
      JWT_EXPIRES_IN=1w
+
+     FRONTEND_ORIGIN="http://localhost:9000"
      ```
 
+   - and also for the `frontend/.env` file:
+     ```sh
+     VITE_BACKEND_ORIGIN="http://localhost:3000"
+     ```
    - Follow [this tutorial][4] to set-up Google OAuth if you've never done it before
    - If you fork this for your own projects, [configure secrets for your repo][5] as well,
      such that CI will :white_check_mark: pass.
@@ -99,9 +104,8 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
 5. Run migrations and optionally, seeds:
 
    ```sh
-   pnpm typeorm migration:run
-
-   # TODO: add seed instructions
+   pnpm be migrate
+   pnpm be seed
    ```
 
 6. Start both frontend and backend:
