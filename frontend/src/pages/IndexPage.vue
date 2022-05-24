@@ -5,8 +5,8 @@
       active
       :todos="todos"
       :meta="meta"
-    ></example-component> </q-page
-  >y
+    ></example-component>
+  </q-page>
 </template>
 
 <script setup lang="ts">
