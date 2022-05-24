@@ -80,7 +80,7 @@ import { backend } from 'src/axios'
 import localforage from 'localforage'
 import { useRoute, useRouter } from 'vue-router'
 import { UserWithoutHash } from 'backend/src/users/user.entity'
-import { AxiosError } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import ShipThatFeatures from '../components/ShipThatFeatures.vue'
 
 const router = useRouter()
@@ -88,10 +88,13 @@ const route = useRoute()
 const isLoading = ref(false)
 const authError = ref('')
 
-const saveUserAndRedirect = ({ data: user }) => {
+const saveUserAndRedirect = ({
+  data: user,
+}: AxiosResponse<UserWithoutHash>) => {
   localforage.setItem('currentUser', user)
   router.push(route.redirectedFrom?.fullPath ?? '/')
 }
+
 onMounted(() => {
   addGoogleSignInButton((response) => {
     backend
