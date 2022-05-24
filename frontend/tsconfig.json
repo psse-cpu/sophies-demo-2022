@@ -6,6 +6,7 @@
     "emitDecoratorMetadata": true,
     // TODO: investigate a better way to reuse TypeORM models without this
     "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
     "types": [
       "node",
       "vite/client",
