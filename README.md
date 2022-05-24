@@ -1,5 +1,5 @@
 ![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-80.32%25-yellow.svg?style=flat&logo=jest)
-![Statements](https://img.shields.io/badge/Frontend%20Code%20Coverage-98.97%25-brightgreen.svg?style=flat&logo=jest)
+![Statements](https://img.shields.io/badge/Frontend%20Code%20Coverage-90.95%25-brightgreen.svg?style=flat&logo=jest)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
