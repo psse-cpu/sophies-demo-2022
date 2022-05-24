@@ -1,3 +1,5 @@
+![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-80.32%25-yellow.svg?style=flat&logo=jest)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>

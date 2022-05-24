@@ -1,3 +1,5 @@
+![Statements](https://img.shields.io/badge/Frontend%20Code%20Coverage-98.97%25-brightgreen.svg?style=flat&logo=jest)
+
 # Sophies Demo (frontend)
 
 Demo project for SE-2223 and SE-2226: AY-2021-2022.

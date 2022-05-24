@@ -11,6 +11,9 @@ export default defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,
+    coverage: {
+      reporter: ['lcov', 'text', 'json-summary'],
+    },
   },
   // TODO:  deduplicate with quasar.config.js
   resolve: {
