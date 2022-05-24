@@ -1,11 +1,12 @@
 import { route } from 'quasar/wrappers'
-import { currentUser } from 'src/auth'
 import {
   createMemoryHistory,
   createRouter,
   createWebHashHistory,
   createWebHistory,
 } from 'vue-router'
+
+import authGuard from './auth-guard'
 
 import routes from './routes'
 
@@ -41,14 +42,7 @@ export default route((/* { store, ssrContext } */) => {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   })
 
-  Router.beforeEach(async (to, _from) => {
-    const user = await currentUser()
-    if (!user && to.meta.requiresAuth && to.name !== 'login') {
-      return { name: 'login' }
-    }
-
-    return true
-  })
+  Router.beforeEach(authGuard)
 
   return Router
 })
