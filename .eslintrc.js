@@ -1,3 +1,6 @@
+// TODO: gather all subdirectory .eslint config in one place - HERE
+// labels: enhancement
+// use overrides for subdirectories, easier extraction into a eslint-config-xxx package
 module.exports = {
   // https://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy
   // This option interrupts the configuration hierarchy at this file
