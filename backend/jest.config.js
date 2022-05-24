@@ -1,7 +1,5 @@
 // const tsconfig = require('./tsconfig.json')
 
-const path = require('path');
-
 module.exports = {
   reporters: [
     'default',
