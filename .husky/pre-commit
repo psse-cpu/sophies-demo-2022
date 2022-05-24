@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-FORCE_COLOR=1 pnpm lint-staged && pnpm test:unit && git add README.md
+FORCE_COLOR=1 pnpm lint-staged 
