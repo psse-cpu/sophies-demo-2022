@@ -2,6 +2,7 @@ const { quasar, transformAssetUrls } = require('@quasar/vite-plugin')
 const commonjs = require('vite-plugin-commonjs').default
 const { defineConfig } = require('vitest/config')
 const vue = require('@vitejs/plugin-vue')
+const tsconfigPaths = require('vite-tsconfig-paths').default
 
 const path = require('path')
 
@@ -25,7 +26,6 @@ module.exports = defineConfig({
         __dirname,
         '../backend/node_modules/@nestjs/graphql/dist/extra/graphql-model-shim.js'
       ),
-      src: path.resolve(__dirname, './src'),
     },
   },
   optimizeDeps: {
@@ -41,8 +41,9 @@ module.exports = defineConfig({
       template: { transformAssetUrls },
     }),
     quasar({
-      sassVariables: 'src/quasar-variables.sass',
+      sassVariables: 'src/css/quasar.variables.scss',
     }),
     commonjs(),
+    tsconfigPaths(),
   ],
 })
