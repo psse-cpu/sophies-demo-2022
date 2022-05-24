@@ -1,5 +1,7 @@
 // const tsconfig = require('./tsconfig.json')
 
+const path = require('path');
+
 module.exports = {
   reporters: [
     'default',
@@ -28,13 +30,12 @@ module.exports = {
             syntax: 'typescript',
             decorators: true,
           },
-          // TODO: use aliases when this gets fixed: https://github.com/swc-project/jest/issues/96
-          // baseUrl: '.',
-          // paths: {
-          //   '@src/*': [
-          //     'src/*'
-          //   ]
-          // }
+          baseUrl: __dirname,
+          paths: {
+            'src/*': [
+              'src/*'
+            ]
+          }
         },
       },
     ],
