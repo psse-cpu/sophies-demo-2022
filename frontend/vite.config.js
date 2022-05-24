@@ -1,13 +1,13 @@
-import { defineConfig } from 'vitest/config'
-import vue from '@vitejs/plugin-vue'
-import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
+const { quasar, transformAssetUrls } = require('@quasar/vite-plugin')
+const commonjs = require('vite-plugin-commonjs').default
+const { defineConfig } = require('vitest/config')
+const vue = require('@vitejs/plugin-vue')
 
-import commonjs from 'vite-plugin-commonjs'
-import path from 'node:path'
+const path = require('path')
 
 // https://vitejs.dev/config/
-// eslint-disable-next-line import/no-default-export -- config file
-export default defineConfig({
+
+module.exports = defineConfig({
   test: {
     environment: 'happy-dom',
     globals: true,

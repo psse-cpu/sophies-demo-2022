@@ -8,9 +8,9 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-const path = require('path')
 const { configure } = require('quasar/wrappers')
 const commonjs = require('vite-plugin-commonjs').default
+const viteConfig = require('./vite.config')
 
 module.exports = configure((/* ctx */) => ({
   eslint: {
@@ -55,14 +55,7 @@ module.exports = configure((/* ctx */) => ({
     },
 
     alias: {
-      typeorm: path.resolve(
-        __dirname,
-        '../backend/node_modules/typeorm/typeorm-model-shim.js'
-      ),
-      '@nestjs/graphql': path.resolve(
-        __dirname,
-        '../backend/node_modules/@nestjs/graphql/dist/extra/graphql-model-shim.js'
-      ),
+      ...viteConfig.resolve.alias
     },
 
     vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -83,16 +76,9 @@ module.exports = configure((/* ctx */) => ({
     // polyfillModulePreload: true,
     // distDir
 
-    extendViteConf(viteConfig) {
-      Object.assign(viteConfig.optimizeDeps, {
-        include: ['typeorm', '@nestjs/graphql'],
-      })
-
-      Object.assign(viteConfig.build, {
-        commonjsOptions: {
-          include: [/typeorm/, /@nestjs\/graphql/, /node_modules/],
-        },
-      })
+    extendViteConf(config) {
+      Object.assign(config.optimizeDeps, viteConfig.optimizeDeps)
+      Object.assign(config.build, viteConfig.build)
     },
 
     viteVuePluginOptions: {
