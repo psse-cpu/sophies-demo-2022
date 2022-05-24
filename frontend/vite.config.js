@@ -19,17 +19,14 @@ export default defineConfig({
   resolve: {
     alias: {
       typeorm: path.resolve(
-        __dirname, // eslint-disable-line unicorn/prefer-module -- a config file!
+        __dirname,
         '../backend/node_modules/typeorm/typeorm-model-shim.js'
       ),
       '@nestjs/graphql': path.resolve(
-        __dirname, // eslint-disable-line unicorn/prefer-module -- a config file!
+        __dirname,
         '../backend/node_modules/@nestjs/graphql/dist/extra/graphql-model-shim.js'
       ),
-      src: path.resolve(
-        __dirname, // eslint-disable-line unicorn/prefer-module -- a config file!
-        './src'
-      ),
+      src: path.resolve(__dirname, './src'),
     },
   },
   optimizeDeps: {
