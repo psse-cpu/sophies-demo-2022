@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types -- it's JS! */
 export function handleCredentialResponse(response) {
   fetch(`${import.meta.env.VITE_BACKEND_ORIGIN}/auth/google`, {
     method: 'POST',
@@ -26,3 +27,5 @@ export function addGoogleSignInButton() {
     } // customization attributes
   )
 }
+
+/* eslint-enable @typescript-eslint/explicit-module-boundary-types -- dude it's JS! */
