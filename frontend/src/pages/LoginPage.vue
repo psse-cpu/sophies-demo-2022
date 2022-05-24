@@ -5,8 +5,15 @@
         <login-jumbotron />
       </div>
       <div class="bg-blue-grey-1 col-xs-12 col-md q-pa-md row">
-        <form class="col-md-8 col-xs-12" @submit.prevent="handleSubmit">
+        <form class="col-md-8 col-xs-12" @submit.prevent="login">
           <h6 class="q-mt-none q-mb-none">Already on ShipThat?</h6>
+
+          <q-banner v-if="authError" class="bg-red-9 text-left text-white">
+            <template v-slot:avatar>
+              <q-icon name="mdi-lock" color="white" />
+            </template>
+            {{ authError }}
+          </q-banner>
 
           <div class="q-ma-md">
             <q-input
@@ -36,6 +43,7 @@
           </div>
           <div class="q-ma-md flex buttons">
             <q-btn
+              :loading="isLoading"
               type="submit"
               icon="mdi-login"
               color="primary"
@@ -58,29 +66,52 @@
         </form>
       </div>
     </div>
-    <div class="row ads">
-      <app-feature-card
-        v-for="(feature, key) in features"
-        :key="key"
-        :class="`col-xs-12 col-md bg-${feature.color}`"
-        :icons="feature.icons.map((name) => `mdi-${name}`)"
-      >
-        <span v-html="feature.text"></span>
-      </app-feature-card>
-    </div>
+    <ship-that-features />
   </q-page>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import LoginJumbotron from 'src/components/LoginJumbotron.vue'
-import AppFeatureCard from 'src/components/AppFeatureCard.vue'
-import { addGoogleSignInButton } from 'src/untyped-js/google-auth'
-import { backend } from 'src/axios'
-import localforage from 'localforage'
 
+import { addGoogleSignInButton } from 'src/auth-strategies/google-auth'
+import { backend } from 'src/axios'
+
+import localforage from 'localforage'
+import { useRoute, useRouter } from 'vue-router'
+import { UserWithoutHash } from 'backend/src/users/user.entity'
+import { AxiosError } from 'axios'
+import ShipThatFeatures from '../components/ShipThatFeatures.vue'
+
+const router = useRouter()
+const route = useRoute()
+const isLoading = ref(false)
+const authError = ref('')
+
+const saveUserAndRedirect = ({ data: user }) => {
+  localforage.setItem('currentUser', user)
+  router.push(route.redirectedFrom?.fullPath ?? '/')
+}
 onMounted(() => {
-  addGoogleSignInButton()
+  addGoogleSignInButton((response) => {
+    backend
+      .post(
+        '/auth/google',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${response.credential}`,
+          },
+        }
+      )
+      .then(saveUserAndRedirect)
+      .catch((error: AxiosError) => {
+        authError.value =
+          error.response?.status === 401
+            ? 'Google sign-in failed.'
+            : 'Unexpected error occurred.'
+      })
+  })
 })
 
 const credentials = reactive({
@@ -88,45 +119,22 @@ const credentials = reactive({
   password: '',
 })
 
-async function handleSubmit() {
-  const { data: user } = await backend.post('/auth/login', credentials)
-  localforage.setItem('currentUser', user)
+const login = async () => {
+  isLoading.value = true
+  backend
+    .post<UserWithoutHash>('/auth/login', credentials)
+    .then(saveUserAndRedirect)
+    .catch((error: AxiosError) => {
+      console.log('error', error)
+      authError.value =
+        error.response?.status === 401
+          ? 'Invalid username or password.'
+          : 'Unexpected error occurred.'
+    })
+    .finally(() => {
+      isLoading.value = false
+    })
 }
-
-const features = [
-  {
-    color: 'red-10',
-    icons: ['cancel', 'ninja'],
-    text: `
-      You won't be just another fake Agile team that uses buzzwords,
-      mini-waterfalls, or even an ad-hoc process! 😱
-    `,
-  },
-  {
-    color: 'indigo-10',
-    icons: ['human-male-board', 'hand-extended'],
-    text: `
-      An Agile coach to assist your ScrumMaster, to hold your hands until you
-      learn how to walk on your own.
-    `,
-  },
-  {
-    color: 'amber-8',
-    icons: ['head-lightbulb', 'eject'],
-    text: `
-      When you can walk on your own and need to tailor your team's process,
-      feel free to <b>eject</b>, just like <code>create-react-app</code>!
-    `,
-  },
-  {
-    color: 'green-9',
-    icons: ['calendar-check', 'thumb-up'],
-    text: `
-      We'll make sure your team's process is of high-quality, according to
-      software engineering best practices.
-    `,
-  },
-]
 </script>
 
 <style scoped lang="scss">
@@ -137,11 +145,5 @@ form {
 
 #googleSignIn iframe {
   display: none !important;
-}
-
-.ads {
-  gap: 16px;
-  padding: 0px 16px 16px;
-  color: white;
 }
 </style>
