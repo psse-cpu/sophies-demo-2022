@@ -15,7 +15,6 @@ module.exports = defineConfig({
       reporter: ['lcov', 'text', 'json-summary'],
     },
   },
-  // TODO:  deduplicate with quasar.config.js
   resolve: {
     alias: {
       typeorm: path.resolve(
