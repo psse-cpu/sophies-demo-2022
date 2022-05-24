@@ -1,5 +1,3 @@
-
-
 module.exports = {
   rules: {
     'unicorn/prevent-abbreviations': [
@@ -27,7 +25,7 @@ module.exports = {
         'unicorn/filename-case': [
           'error',
           {
-            cases: { 'pascalCase': true, 'camelCase': true },
+            cases: { pascalCase: true, camelCase: true },
             ignore: ['^quasar.config.js$'],
           },
         ],

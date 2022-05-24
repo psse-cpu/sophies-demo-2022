@@ -55,7 +55,7 @@ module.exports = configure((/* ctx */) => ({
     },
 
     alias: {
-      ...viteConfig.resolve.alias
+      ...viteConfig.resolve.alias,
     },
 
     vueRouterMode: 'history', // available values: 'hash', 'history'
