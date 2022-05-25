@@ -1,4 +1,5 @@
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
+import 'cypress'
 
 type AccountRow = [email: string, password: string]
 

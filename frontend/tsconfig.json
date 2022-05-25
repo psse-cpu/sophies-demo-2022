@@ -7,7 +7,7 @@
     // TODO: investigate a better way to reuse TypeORM models without this
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "vite/client", "vitest/globals", "cypress"],
+    "types": ["node", "vite/client", "vitest/globals"],
     "skipLibCheck": true,
     "allowJs": true,
     "paths": {
@@ -29,6 +29,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "cypress/**/*.ts"
+    "cypress/**/*.ts",
+    "src/**/*.spec.ts"
   ]
 }
