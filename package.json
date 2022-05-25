@@ -21,7 +21,7 @@
     "start:fe": "pnpm fe start:test",
     "start:be": "pnpm be start:test",
     "serve-and-test:e2e": "start-test start:be 3000 start:fe 9000 'NODE_ENV=test pnpm be test:e2e'",
-    "qa": "run-p build test lint badges:ci",
+    "qa": "run-p build test lint badges:ci serve-and-test:e2e",
     "typeorm": "pnpm --filter backend typeorm",
     "be": "pnpm --filter backend",
     "fe": "pnpm --filter frontend"

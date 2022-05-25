@@ -73,14 +73,19 @@ jobs:
           version: 6.x
           run_install: true
 
-      - name: Typecheck and Build
-        run: pnpm --parallel build
+      - name: Typecheck and Build Backend
+        # frontend build is handled during E2E tests, since `quasar dev` does not
+        # work with start-server-and-test
+        run: pnpm be build
 
       - name: Lint
         run: pnpm lint
 
       - name: Unit and Integration Tests
         run: pnpm test
+
+      - name: Build Frontend and Run E2E Test
+        run: pnpm serve-and-test:e2e
 
       - name: Check Badges Accuracy
         run: pnpm badges:ci
