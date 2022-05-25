@@ -7,7 +7,7 @@
     // TODO: investigate a better way to reuse TypeORM models without this
     "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "vite/client", "vitest/globals"],
+    "types": ["node", "vite/client", "vitest/globals", "cypress"],
     "skipLibCheck": true,
     "allowJs": true,
     "paths": {
@@ -24,5 +24,11 @@
   "vueCompilerOptions": {
     "experimentalImplicitWrapComponentOptionsWithDefineComponent": true
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "cypress/**/*.ts"
+  ]
 }
