@@ -15,6 +15,9 @@ jobs:
     container: node:lts
     env:
       DATABASE_URL: postgresql://postgres:postgres@postgres:5432/sophies_demo
+      # note there's no dev DB server here, so no -test suffix, but we'll leave
+      # the above env var just in case some production code references it in tests
+      TEST_DATABASE_URL: postgres://postgres:postgres@postgres:5432/sophies_demo
       GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
       GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
       GOOGLE_OAUTH_REDIRECT_URL: http://localhost:3000/auth/google/redirect
