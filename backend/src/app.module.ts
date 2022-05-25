@@ -11,6 +11,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core'
 import { getConnection } from 'typeorm'
 import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
+import { AppController } from './app.controller'
 
 import ormConfig from '../ormconfig'
 
@@ -35,5 +36,6 @@ import ormConfig from '../ormconfig'
         new DataLoaderInterceptor({ typeormGetConnection: getConnection }),
     },
   ],
+  controllers: [AppController],
 })
 export class AppModule {}

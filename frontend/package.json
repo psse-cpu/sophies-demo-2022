@@ -15,7 +15,7 @@
     "badges": "istanbul-badges-readme --statementsLabel='Frontend Code Coverage' --logo=jest",
     "badges:ci": "pnpm badges --ci --exitCode=1",
     "start:dev": "quasar dev",
-    "start:test": "pnpm build && pnpm dlx @quasar/cli serve dist/spa -p --history",
+    "start:test": "pnpm build && pnpm http-server -p 9000 dist/spa  --proxy \"http://localhost:9000?\"",
     "build": "pnpm typecheck && quasar build",
     "typecheck": "vue-tsc --noEmit",
     "deploy": "pnpm install && pnpm build"
@@ -44,6 +44,7 @@
     "cypress": "^9.7.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "happy-dom": "^4.0.1",
+    "http-server": "^14.1.0",
     "istanbul-badges-readme": "^1.8.1",
     "postcss": "^8.4.13",
     "prettier": "^2.5.1",

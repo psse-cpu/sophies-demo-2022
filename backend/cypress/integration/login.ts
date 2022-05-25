@@ -1,5 +1,4 @@
-import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
-import 'cypress'
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
 
 type AccountRow = [email: string, password: string]
 
@@ -19,11 +18,17 @@ Given(/(that )?I'm on the login page/, () => {
   cy.visit('/guest/login')
 })
 
-When('I login with {string} and {string}', (username, password) => {
-  cy.get('[data-testid="email-input"]').type(username)
-  cy.get('[data-testid="password-input"]').type(password)
-  cy.get('button').contains('Sign-in').click()
-})
+When(
+  'I login with {string} and {string}',
+  (username: string, password: string) => {
+    cy.log('*'.repeat(50))
+    cy.log('fffffffffffffuuuuutttataaaa', username, password)
+
+    cy.get('[data-testid="email-input"]').type(username)
+    cy.get('[data-testid="password-input"]').type(password)
+    cy.get('button').contains('Sign-in').click()
+  }
+)
 
 Then('I should see an error message {string}', (_error) => {
   cy.contains('Invalid username or password.')

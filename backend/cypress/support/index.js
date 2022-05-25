@@ -18,3 +18,9 @@
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+/* global Cypress -- it's documented to have this global */
+Cypress.on(
+  'uncaught:exception',
+  (error) => !error.message.includes('ResizeObserver')
+)

@@ -13,23 +13,29 @@
 // the project's config changing)
 
 const browserify = require('@cypress/browserify-preprocessor')
-const cucumber = require('cypress-cucumber-preprocessor').default
-const resolve = require('resolve')
-const { seeder } = require('backend/database/cypress-seeder')
+const {
+  addCucumberPreprocessorPlugin,
+} = require('@badeball/cypress-cucumber-preprocessor')
+const {
+  preprocessor,
+} = require('@badeball/cypress-cucumber-preprocessor/browserify')
+const { seeder } = require('../../database/cypress-seeder')
 
 /**
  * @type {Cypress.PluginConfig}
  */
-
-module.exports = (on, config) => {
+module.exports = async (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-  const options = {
-    ...browserify.defaultOptions,
-    typescript: resolve.sync('typescript', { basedir: config.projectRoot }),
-  }
+  await addCucumberPreprocessorPlugin(on, config)
 
-  on('file:preprocessor', cucumber(options))
+  on(
+    'file:preprocessor',
+    preprocessor(config, {
+      ...browserify.defaultOptions,
+      typescript: require.resolve('typescript'),
+    })
+  )
 
   on('task', {
     seed([table, data]) {
@@ -37,4 +43,7 @@ module.exports = (on, config) => {
       return seeder(table, data)
     },
   })
+
+  // Make sure to return the config object as it might have been modified by the plugin.
+  return config
 }
