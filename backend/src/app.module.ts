@@ -16,7 +16,9 @@ import ormConfig from '../ormconfig'
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: process.env.NODE_ENV === 'test' ? '.env.test.local' : '.env',
+    }),
     TypeOrmModule.forRoot(omit(ormConfig, 'cli', 'migrations')),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
