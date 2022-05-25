@@ -14,6 +14,7 @@
     "badges": "istanbul-badges-readme --statementsLabel='Frontend Code Coverage' --logo=jest",
     "badges:ci": "pnpm badges --ci --exitCode=1",
     "start:dev": "quasar dev",
+    "start:test": "quasar dev",
     "build": "pnpm typecheck && quasar build",
     "typecheck": "vue-tsc --noEmit",
     "deploy": "pnpm install && pnpm build"
@@ -29,14 +30,18 @@
     "vue-router": "^4.0.0"
   },
   "devDependencies": {
+    "@cypress/browserify-preprocessor": "^3.0.2",
     "@quasar/app-vite": "^1.0.0-alpha.0",
     "@quasar/vite-plugin": "^1.0.10",
+    "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/node": "^12.20.52",
     "@vitejs/plugin-vue": "^2.3.3",
     "@vue/compiler-sfc": "^3.2.36",
     "@vue/test-utils": "^2.0.0",
     "autoprefixer": "^10.4.2",
     "c8": "^7.11.3",
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "happy-dom": "^4.0.1",
     "istanbul-badges-readme": "^1.8.1",
     "postcss": "^8.4.13",
