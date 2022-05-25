@@ -18,12 +18,4 @@ module.exports = {
       },
     ],
   },
-  overrides: [
-    {
-      files: ['**/*.vue', '**/*.spec.ts'],
-      rules: {
-        'unicorn/filename-case': 'off',
-      },
-    },
-  ],
 }

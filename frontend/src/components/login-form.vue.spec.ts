@@ -2,7 +2,7 @@ import { flushPromises, mount } from '@vue/test-utils'
 import { Quasar } from 'quasar'
 import localforage from 'localforage'
 import { backend } from 'src/axios'
-import LoginForm from 'src/components/LoginForm.vue'
+import LoginForm from 'src/components/login-form.vue'
 
 const wrapperFactory = () =>
   mount(LoginForm, {

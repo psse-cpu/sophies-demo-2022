@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import AppFeatureCard from 'src/components/AppFeatureCard.vue'
+import AppFeatureCard from 'src/components/app-feature-card.vue'
 
 const features = [
   {

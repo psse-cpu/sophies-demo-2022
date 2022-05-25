@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import LoginJumbotron from 'src/components/LoginJumbotron.vue'
-import LoginForm from 'src/components/LoginForm.vue'
-import ShipThatFeatures from 'src/components/ShipThatFeatures.vue'
+import LoginJumbotron from 'src/components/login-jumbotron.vue'
+import LoginForm from 'src/components/login-form.vue'
+import ShipThatFeatures from 'src/components/shipthat-features.vue'
 </script>
 
 <style scoped lang="scss">
