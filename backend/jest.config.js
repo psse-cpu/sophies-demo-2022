@@ -30,10 +30,8 @@ module.exports = {
           },
           baseUrl: __dirname,
           paths: {
-            'src/*': [
-              'src/*'
-            ]
-          }
+            'src/*': ['src/*'],
+          },
         },
       },
     ],
