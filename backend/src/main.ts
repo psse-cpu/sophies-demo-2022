@@ -8,6 +8,17 @@ async function bootstrap() {
       credentials: true,
     },
   })
+
+  if (process.env.NODE_ENV === 'test') {
+    setInterval(() => {
+      console.log('*'.repeat(70))
+      console.log(
+        '* WARNING: this is running in a TEST environment, NOT DEV!!!'
+      )
+      console.log('*'.repeat(70))
+    }, 60_000)
+  }
+
   await app.listen(process.env.PORT ?? 3000)
 }
 
