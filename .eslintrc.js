@@ -121,6 +121,7 @@ module.exports = {
     'no-secrets/no-secrets': ['error'],
 
     'unicorn/no-array-callback-reference': 'off', // false positives
+    'unicorn/prefer-spread': 'off', // false positives
   },
   overrides: [
     {
