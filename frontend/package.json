@@ -11,6 +11,7 @@
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:cov": "vitest run --coverage",
+    "test:e2e": "NODE_ENV=test cypress run",
     "badges": "istanbul-badges-readme --statementsLabel='Frontend Code Coverage' --logo=jest",
     "badges:ci": "pnpm badges --ci --exitCode=1",
     "start:dev": "quasar dev",

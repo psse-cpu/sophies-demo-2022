@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start:dev": "pnpm --parallel start:dev",
-    "start:test": "pnpm --parallel start:test",
+    "start:test": "NODE_ENV=test pnpm --parallel start:test",
     "typecheck": "pnpm --parallel --aggregate-output typecheck",
     "build": "pnpm --parallel --aggregate-output build",
     "lint": "pnpm --parallel --aggregate-output lint",
