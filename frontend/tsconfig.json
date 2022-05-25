@@ -29,7 +29,6 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "cypress/**/*.ts",
     "src/**/*.spec.ts"
   ]
 }
