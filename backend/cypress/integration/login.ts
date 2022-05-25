@@ -21,9 +21,6 @@ Given(/(that )?I'm on the login page/, () => {
 When(
   'I login with {string} and {string}',
   (username: string, password: string) => {
-    cy.log('*'.repeat(50))
-    cy.log('fffffffffffffuuuuutttataaaa', username, password)
-
     cy.get('[data-testid="email-input"]').type(username)
     cy.get('[data-testid="password-input"]').type(password)
     cy.get('button').contains('Sign-in').click()
