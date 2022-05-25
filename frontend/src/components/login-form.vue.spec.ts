@@ -63,7 +63,7 @@ describe('LoginPage', () => {
     })
   })
 
-  it('persists the current user to localStorage', async () => {
+  it('persists the current user to localStorage as a side-effect', async () => {
     vi.spyOn(backend, 'post').mockResolvedValue({
       data: {
         id: 1,
@@ -84,7 +84,7 @@ describe('LoginPage', () => {
     })
   })
 
-  it('redirects on successful sign-in', async () => {
+  it('redirects on successful sign-in as a side-effect', async () => {
     vi.spyOn(backend, 'post').mockResolvedValue({
       data: {
         id: 1,
@@ -97,7 +97,25 @@ describe('LoginPage', () => {
     wrapper.find(passwordSelector).setValue('lol')
     await wrapper.find(formSelector).trigger('submit')
 
+    await flushPromises()
     expect(pushSpy).toHaveBeenCalledWith('/somewhere')
+  })
+
+  it('does not show any auth error messages', async () => {
+    vi.spyOn(backend, 'post').mockResolvedValue({
+      data: {
+        id: 1,
+        email: 'mike@yahoo.com',
+      },
+    })
+
+    const wrapper = wrapperFactory()
+    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(formSelector).trigger('submit')
+
+    await flushPromises()
+    expect(wrapper.find(errorBoxSelector).exists()).toBe(false)
   })
 
   it('shows an error message on invalid credentials', async () => {
