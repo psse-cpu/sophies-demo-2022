@@ -108,7 +108,6 @@ onMounted(() => {
       )
       .then(saveUserAndRedirect)
       .catch((error: AxiosError) => {
-        console.log('iiiiiiiiiiaaaaamammmmmhehhhheeeerrreeee', error)
         authError.value =
           error.response?.status === 401
             ? 'Google sign-in failed.'
