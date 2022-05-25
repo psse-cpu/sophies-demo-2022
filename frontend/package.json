@@ -15,7 +15,7 @@
     "badges": "istanbul-badges-readme --statementsLabel='Frontend Code Coverage' --logo=jest",
     "badges:ci": "pnpm badges --ci --exitCode=1",
     "start:dev": "quasar dev",
-    "start:test": "quasar dev",
+    "start:test": "pnpm build && pnpm dlx @quasar/cli serve dist/spa -p --history",
     "build": "pnpm typecheck && quasar build",
     "typecheck": "vue-tsc --noEmit",
     "deploy": "pnpm install && pnpm build"
@@ -48,6 +48,7 @@
     "postcss": "^8.4.13",
     "prettier": "^2.5.1",
     "rollup": "^2.72.0",
+    "start-server-and-test": "^1.14.0",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.4",
     "vite-plugin-commonjs": "^0.4.7",
