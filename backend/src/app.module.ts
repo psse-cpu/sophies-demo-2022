@@ -21,7 +21,6 @@ import ormConfig from '../ormconfig'
     TypeOrmModule.forRoot(omit(ormConfig, 'cli', 'migrations')),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-
       autoSchemaFile: path.join(process.cwd(), '../frontend/schema.graphql'),
       debug: process.env.NODE_ENV !== 'production',
       playground: true, // TODO: revert later to ➡ process.env.NODE_ENV !== 'production',
