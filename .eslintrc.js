@@ -98,6 +98,9 @@ module.exports = {
         varsIgnorePattern: '^_',
       },
     ],
+
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'error',
     'no-underscore-dangle': 'off',
 
     // The core 'no-unused-vars' rules (in the eslint:recommended ruleset)
