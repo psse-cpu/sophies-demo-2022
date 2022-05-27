@@ -71,7 +71,7 @@ export const seedNormalDatabase = async <T>({
   seedName,
   onlyWhenEmpty = true,
   clearOldData = false,
-}: RegularDatabaseSeedOptions<T>): Promise<boolean> => {
+}: RegularDatabaseSeedOptions): Promise<boolean> => {
   // eslint-disable-next-line global-require, import/no-dynamic-require -- need to be dynamic
   const { sampleData, entityClass } = require(`./seeds/${seedName}.seed.ts`)
   const connection = await connect()
