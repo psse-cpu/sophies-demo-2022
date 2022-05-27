@@ -5,6 +5,9 @@
 type User {
   id: Int!
   email: String!
+  familyName: String!
+  givenName: String!
+  registrationSource: String!
 }
 
 type Query {
