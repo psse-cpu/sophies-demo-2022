@@ -21,7 +21,8 @@
     "noFallthroughCasesInSwitch": true,
     "paths": {
       "src/*": ["src/*"]
-    }
+    },
+    "types": ["jest"]
   },
-  "include": ["src/**/*.ts", "database/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "database/**/*.ts"]
 }
