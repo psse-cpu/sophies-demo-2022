@@ -4,23 +4,36 @@ import { getRepositoryToken } from '@nestjs/typeorm'
 
 import { UsersService } from './users.service'
 import { User } from './user.entity'
+import { RegistrationSource } from './registration-source'
 
 jest.mock('bcrypt', () => ({
   hash: async (_plainTextPassword: string, _rounds: number) => 'hashedPassword',
 }))
+
+// TODO: remove  hack
+const hack = {
+  familyName: '',
+  givenName: '',
+  registrationSource: RegistrationSource.LOCAL,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}
 
 const mockUsers: User[] = [
   {
     id: 1,
     email: 'foo@bar.baz',
     passwordHash: 'asdf',
+    ...hack,
   },
   {
     id: 2,
     email: 'quux@bar.baz',
     passwordHash: 'qwer',
+    ...hack,
   },
 ]
+
 const mockRepository = {
   find: jest.fn().mockResolvedValue(mockUsers),
   findOne: jest.fn().mockResolvedValue(mockUsers[0]),
@@ -76,11 +89,12 @@ describe('UsersService', () => {
 
     it('calls save on the repository with the correct args', async () => {
       const spy = jest.spyOn(repository, 'save')
-      await service.register('leni@foo.bar', 'angatbuhay')
+      await service.register('leni@foo.bar', 'angatbuhay', hack)
 
       expect(spy).toHaveBeenCalledWith({
         email: 'leni@foo.bar',
         passwordHash: 'hashedPassword',
+        ...hack,
       })
     })
   })

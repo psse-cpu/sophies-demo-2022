@@ -22,11 +22,16 @@ export class UsersService {
   async register(
     email: string,
     plainTextPassword: string,
+    // eslint-disable-next-line unicorn/no-object-as-default-parameter -- false +
     otherInfo: {
       givenName?: string
       familyName?: string
       registrationSource?: RegistrationSource
-    } = {}
+    } = {
+      givenName: '',
+      familyName: '',
+      registrationSource: RegistrationSource.LOCAL,
+    }
   ): Promise<User> {
     const passwordHash = await bcrypt.hash(plainTextPassword, 10)
     return this.userRepository.save({ email, passwordHash, ...otherInfo })
