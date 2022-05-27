@@ -29,14 +29,14 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@commitlint/cli": "^16.2.4",
+    "@commitlint/cli": "^16.3.0",
     "@commitlint/config-conventional": "^16.2.4",
-    "@types/node": "^12.20.21",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
+    "@types/node": "^12.20.52",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
     "commitizen": "^4.2.4",
     "commitizen-emoji": "^1.0.5",
-    "eslint": "^8.15.0",
+    "eslint": "^8.16.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-boundaries": "^2.9.0",
@@ -49,11 +49,11 @@
     "eslint-plugin-vue": "^8.7.1",
     "husky": "^7.0.4",
     "istanbul-badges-readme": "^1.8.1",
-    "lint-staged": "^12.4.1",
+    "lint-staged": "^12.4.2",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.6.2",
     "start-server-and-test": "^1.14.0",
-    "ts-node": "^10.7.0",
-    "typescript": "^4.5.4"
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
   }
 }
