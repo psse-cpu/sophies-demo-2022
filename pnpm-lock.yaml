@@ -78,6 +78,7 @@ importers:
       '@swc/jest': ^0.2.21
       '@types/bcrypt': ^5.0.0
       '@types/express': ^4.17.13
+      '@types/inflection': ^1.13.0
       '@types/jest': 27.5.0
       '@types/lodash': ^4.14.182
       '@types/node': ^16.11.36
@@ -97,6 +98,7 @@ importers:
       eslint: ^8.14.0
       express: ^4.18.1
       graphql: ^16.5.0
+      inflection: ^1.13.2
       istanbul-badges-readme: ^1.8.1
       jest: 28.0.3
       jest-html-reporters: ^3.0.6
@@ -159,6 +161,7 @@ importers:
       '@swc/jest': 0.2.21_@swc+core@1.2.194
       '@types/bcrypt': 5.0.0
       '@types/express': 4.17.13
+      '@types/inflection': 1.13.0
       '@types/jest': 27.5.0
       '@types/lodash': 4.14.182
       '@types/node': 16.11.36
@@ -171,6 +174,7 @@ importers:
       better-sqlite3: 7.5.3
       cypress: 9.7.0
       eslint: 8.16.0
+      inflection: 1.13.2
       istanbul-badges-readme: 1.8.1
       jest: 28.0.3_2cnx3q6hfnpx7nryv75xx7ahte
       jest-html-reporters: 3.0.8
@@ -3366,6 +3370,10 @@ packages:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}
     dependencies:
       '@types/node': 16.11.36
+    dev: true
+
+  /@types/inflection/1.13.0:
+    resolution: {integrity: sha512-kZSETqAVS74XC/K3mPX/tbMEi/Zy1KP0Wc59dB1i5P72AHz4eSW+UIpzWxmQnDxipoKSX5eRgUXy+wUr+bY73g==}
     dev: true
 
   /@types/istanbul-lib-coverage/2.0.4:
@@ -8459,6 +8467,11 @@ packages:
   /indent-string/4.0.0:
     resolution: {integrity: sha512-EdDDZu4A2OyIK7Lr/2zG+w5jmbuk1DVBnEwREQvBzspBJkCEbRa8GxU1lghYcaGJCnRWibjDXlq779X1/y5xwg==}
     engines: {node: '>=8'}
+    dev: true
+
+  /inflection/1.13.2:
+    resolution: {integrity: sha512-cmZlljCRTBFouT8UzMzrGcVEvkv6D/wBdcdKG7J1QH5cXjtU75Dm+P27v9EKu/Y43UYyCJd1WC4zLebRrC8NBw==}
+    engines: {'0': node >= 0.4.0}
     dev: true
 
   /inflight/1.0.6:

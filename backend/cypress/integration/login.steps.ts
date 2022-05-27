@@ -1,13 +1,14 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
+import { User } from 'src/users/user.entity'
 
 type AccountRow = [email: string, password: string]
 
 Given('the following accounts exist', ({ rawTable }) => {
   const users = rawTable
-    .slice(0)
+    .slice(1)
     .map(([email, password]: AccountRow) => ({ email, password }))
 
-  cy.task('seed', ['user', users], { log: true })
+  cy.task('seed', { entityClass: User, data: users }, { log: true })
 })
 
 Given("that I'm not logged-in", () => {

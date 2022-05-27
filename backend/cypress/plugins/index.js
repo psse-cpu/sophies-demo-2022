@@ -19,7 +19,7 @@ const {
 const {
   preprocessor,
 } = require('@badeball/cypress-cucumber-preprocessor/browserify')
-const { seeder } = require('../../database/cypress-seeder')
+const { seedTestDatabase } = require('../../database/seeder')
 
 /**
  * @type {Cypress.PluginConfig}
@@ -38,10 +38,7 @@ module.exports = async (on, config) => {
   )
 
   on('task', {
-    seed([table, data]) {
-      // NOTE: 👆 is different (destructured)
-      return seeder(table, data)
-    },
+    seed: seedTestDatabase,
   })
 
   // Make sure to return the config object as it might have been modified by the plugin.
