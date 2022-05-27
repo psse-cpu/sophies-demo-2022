@@ -22,7 +22,7 @@
     "paths": {
       "src/*": ["src/*"]
     },
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
-  "include": ["src/**/*.ts", "test/**/*.ts", "database/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts", "database/**/*.ts", "ormconfig.ts"]
 }
