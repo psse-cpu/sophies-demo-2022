@@ -3,6 +3,7 @@ import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User, UserWithoutHash } from './user.entity'
+import { RegistrationSource } from './registration-source'
 
 @Injectable()
 export class UsersService {
@@ -16,9 +17,19 @@ export class UsersService {
     })
   }
 
-  async register(email: string, plainTextPassword: string): Promise<User> {
+  // TODO: fix other info -- just a quick hack since need to run errands
+  // labels: tech-debt
+  async register(
+    email: string,
+    plainTextPassword: string,
+    otherInfo: {
+      givenName?: string
+      familyName?: string
+      registrationSource?: RegistrationSource
+    } = {}
+  ): Promise<User> {
     const passwordHash = await bcrypt.hash(plainTextPassword, 10)
-    return this.userRepository.save({ email, passwordHash })
+    return this.userRepository.save({ email, passwordHash, ...otherInfo })
   }
 
   async allUsers(): Promise<UserWithoutHash[]> {
