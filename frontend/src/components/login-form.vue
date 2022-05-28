@@ -89,7 +89,7 @@ import { backend } from 'src/axios'
 
 import localforage from 'localforage'
 import { useRoute, useRouter } from 'vue-router'
-import { UserWithoutHash } from 'backend/src/users/user.entity'
+import { UserWithoutHash } from 'backend/src/users/user-without-hash.dto'
 import { AxiosError, AxiosResponse } from 'axios'
 
 const router = useRouter()
