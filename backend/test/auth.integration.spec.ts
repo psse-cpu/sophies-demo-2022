@@ -50,8 +50,8 @@ describe('AuthController (integration)', () => {
     await seedDatabase(usersService)
   })
 
-  afterAll(() => {
-    return app.close()
+  afterAll(async () => {
+    await app.close()
   })
 
   describe('/auth/login', () => {
