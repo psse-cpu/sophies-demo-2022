@@ -29,6 +29,7 @@ const emailSelector = '[data-testid="email-input"]'
 const passwordSelector = '[data-testid="password-input"]'
 const formSelector = '[data-testid="login-form"]'
 const errorBoxSelector = '[data-testid="auth-errors"]'
+const eyeIconSelector = '[data-testid="eye-icon"]'
 
 describe('LoginPage', () => {
   afterEach(() => {
@@ -46,6 +47,25 @@ describe('LoginPage', () => {
       email: 'mike@cpu.edu.ph',
       password: 'lol',
     })
+  })
+
+  it('toggles the password from invisible to visible', async () => {
+    const wrapper = wrapperFactory()
+
+    await wrapper.find(passwordSelector).setValue('some')
+    await wrapper.find(eyeIconSelector).trigger('click')
+
+    expect(wrapper.find(passwordSelector).attributes('type')).toBe('text')
+  })
+
+  it('toggles the password from visible to invisible', async () => {
+    const wrapper = wrapperFactory()
+    await wrapper.find(eyeIconSelector).trigger('click')
+
+    await wrapper.find(passwordSelector).setValue('some')
+    await wrapper.find(eyeIconSelector).trigger('click')
+
+    expect(wrapper.find(passwordSelector).attributes('type')).toBe('password')
   })
 
   it('sends the correct args to Axios', async () => {

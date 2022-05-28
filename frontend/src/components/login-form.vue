@@ -20,6 +20,7 @@
     <div class="q-ma-md">
       <q-input
         data-testid="email-input"
+        type="email"
         dense
         rounded
         outlined
@@ -34,6 +35,7 @@
     <div class="q-ma-md">
       <q-input
         data-testid="password-input"
+        :type="passwordVisible ? 'text' : 'password'"
         dense
         rounded
         outlined
@@ -42,6 +44,14 @@
       >
         <template v-slot:prepend>
           <q-icon name="mdi-key" />
+        </template>
+        <template v-slot:append>
+          <q-icon
+            data-testid="eye-icon"
+            :name="passwordVisible ? 'mdi-eye' : 'mdi-eye-off'"
+            class="cursor-pointer"
+            @click="togglePasswordVisibility"
+          />
         </template>
       </q-input>
     </div>
@@ -86,12 +96,17 @@ const router = useRouter()
 const route = useRoute()
 const isLoading = ref(false)
 const authError = ref('')
+const passwordVisible = ref(false)
 
 const saveUserAndRedirect = async ({
   data: user,
 }: AxiosResponse<UserWithoutHash>) => {
   await localforage.setItem('currentUser', user)
   router.push(route.redirectedFrom?.fullPath ?? '/')
+}
+
+const togglePasswordVisibility = (_event: MouseEvent) => {
+  passwordVisible.value = !passwordVisible.value
 }
 
 onMounted(() => {
