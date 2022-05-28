@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing'
 import { RegistrationSource } from './registration-source'
-import { UserWithoutHash } from './user.entity'
+import { UserWithoutHash } from './user-without-hash.dto'
 import { UserResolver } from './user.resolver'
 import { UsersService } from './users.service'
 

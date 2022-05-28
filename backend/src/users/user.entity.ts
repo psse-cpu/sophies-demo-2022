@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql'
+
 import {
   Entity,
   Column,
@@ -7,6 +8,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm'
+import { IsEmail, IsNotEmpty } from 'class-validator'
 import { RegistrationSource } from './registration-source'
 
 @Entity()
@@ -18,6 +20,7 @@ export class User {
 
   @Column({ unique: true })
   @Field()
+  @IsEmail()
   email: string
 
   @Column('text')
@@ -25,10 +28,12 @@ export class User {
 
   @Column()
   @Field()
+  @IsNotEmpty()
   familyName: string
 
   @Column()
   @Field()
+  @IsNotEmpty()
   givenName: string
 
   @Column({
@@ -47,18 +52,3 @@ export class User {
   @DeleteDateColumn()
   deletedAt?: Date
 }
-
-export type UserWithoutHash = Omit<User, 'passwordHash'>
-
-export type Registrant = Omit<
-  UserWithoutHash,
-  'id' | 'createdAt' | 'updatedAt'
-> & {
-  password: string
-}
-
-export type ProviderRegistrant = Omit<Registrant, 'password'>
-
-export type Credentials = { email: string; password: string }
-
-export type UserIdentifiers = { id: number; email: string }

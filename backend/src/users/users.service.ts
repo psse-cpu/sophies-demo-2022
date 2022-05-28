@@ -2,7 +2,9 @@ import bcrypt from 'bcrypt'
 import { Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Registrant, User, UserWithoutHash } from './user.entity'
+import { User } from './user.entity'
+import { Registrant } from './registrant.dto'
+import { UserWithoutHash } from './user-without-hash.dto'
 
 @Injectable()
 export class UsersService {

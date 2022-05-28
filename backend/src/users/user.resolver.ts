@@ -1,7 +1,8 @@
 import { UseGuards } from '@nestjs/common'
 import { Query, Resolver } from '@nestjs/graphql'
 import { JwtGuard } from '../auth/jwt.guard'
-import { User, UserWithoutHash } from './user.entity'
+import { User } from './user.entity'
+import { UserWithoutHash } from './user-without-hash.dto'
 import { UsersService } from './users.service'
 
 @UseGuards(JwtGuard)
