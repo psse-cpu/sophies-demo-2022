@@ -16,6 +16,7 @@ const mockUser: UserWithoutHash = {
 
 const mockUsersService = {
   allUsers: jest.fn().mockResolvedValue([mockUser]),
+  register: jest.fn().mockResolvedValue(mockUser),
 }
 
 describe('UserResolver', () => {
@@ -38,6 +39,20 @@ describe('UserResolver', () => {
   describe('#users()', () => {
     it('returns all users', () => {
       return expect(resolver.users()).resolves.toStrictEqual([mockUser])
+    })
+  })
+
+  describe('#register()', () => {
+    it('registers a user', () => {
+      return expect(
+        resolver.register({
+          email: 'fifi@cpu.ph',
+          password: 'anypass',
+          familyName: 'Coo',
+          givenName: 'Fifi',
+          registrationSource: RegistrationSource.GOOGLE, // is overriden
+        })
+      ).resolves.toStrictEqual(mockUser)
     })
   })
 })

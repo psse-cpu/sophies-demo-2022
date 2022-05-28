@@ -52,3 +52,5 @@ export class User {
   @DeleteDateColumn()
   deletedAt?: Date
 }
+
+console.log('linti gid', (User as any).properties)
