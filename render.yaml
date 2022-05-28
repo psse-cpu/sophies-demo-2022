@@ -46,6 +46,10 @@ services:
     staticPublishPath: ./frontend/dist/spa
     pullRequestPreviewsEnabled: false # optional
     autoDeploy: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
 
   - type: web
     name: Sophies Demo Staging
@@ -54,6 +58,10 @@ services:
     staticPublishPath: ./frontend/dist/spa
     pullRequestPreviewsEnabled: false # optional
     autoDeploy: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
 
 envVarGroups:
   - name: shared-secrets
