@@ -1,10 +1,19 @@
 import { UnauthorizedException } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
+import { RegistrationSource } from '../users/registration-source'
 import { UserWithoutHash } from '../users/user.entity'
 import { AuthService } from './auth.service'
 import { LocalStrategy } from './local.strategy'
 
-const mockUser = { id: 1, email: 'mike@foo.bar' }
+const mockUser = {
+  id: 1,
+  email: 'mike@foo.bar',
+  familyName: 'Coo',
+  givenName: 'Mike',
+  registrationSource: RegistrationSource.LOCAL,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}
 
 describe('LocalStrategy', () => {
   let localStrategy: LocalStrategy
