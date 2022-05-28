@@ -67,8 +67,6 @@ const seedDatabase = async <T>({
     // special treatment due to bcrypt
     const service = new UsersService(repository as unknown as Repository<User>)
 
-    // TODO: remove any and fix this later
-    // labels: tech-debt
     const promises = (data as unknown[] as Registrant[]).map((user) =>
       service.register(user)
     )
