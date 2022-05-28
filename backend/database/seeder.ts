@@ -1,26 +1,28 @@
 /* eslint-disable unicorn/prefer-module -- seeder is ran in CJS */
+/* eslint-disable no-console -- it's a CLI script */
 
 import {
   Connection,
   getConnection,
   getConnectionManager,
-  ObjectType,
   Repository,
 } from 'typeorm'
 import chalk from 'chalk'
-import { tableize } from 'inflection'
 import _ from 'lodash'
-import { User } from '../src/users/user.entity'
+import { Registrant, User } from '../src/users/user.entity'
 import { UsersService } from '../src/users/users.service'
 import ormConfig from '../ormconfig'
 
-interface TestDatabaseSeedOptions<T> {
-  entityClass: ObjectType<T>
+interface DatabaseSeedOptions<T> {
+  tableName: string
   data: T[]
+  onlyWhenEmpty?: boolean
+  clearOldData?: boolean
 }
 
+// Regular here means not seeding from Cypress
 interface RegularDatabaseSeedOptions {
-  seedName: string
+  tableName: string
   onlyWhenEmpty?: boolean
   clearOldData?: boolean
   useFaker?: unknown // TODO: implement this
@@ -39,53 +41,18 @@ const connect = async (): Promise<Connection> => {
   return connection
 }
 
-const seedDatabase = async <T>(
-  seedName: string,
-  entityClass: ObjectType<T>,
-  data: T[]
-): Promise<boolean> => {
+// entity class reference does not work with Cypress
+const seedDatabase = async <T>({
+  tableName,
+  data,
+  onlyWhenEmpty,
+  clearOldData,
+}: DatabaseSeedOptions<T>): Promise<boolean> => {
   const connection = await connect()
-  const repository = connection.getRepository(entityClass)
-
-  if (entityClass === User) {
-    // special treatment due to bcrypt
-    const service = new UsersService(repository as unknown as Repository<User>)
-
-    // TODO: remove any and fix this later
-    // labels: tech-debt
-    const promises = data.map((user: any) => {
-      const { username, password, ...others } = user
-      return service.register(username, password, others)
-    })
-
-    await Promise.all(promises)
-  } else {
-    await repository.insert(data)
-  }
-
-  console.log(`${chalk.green.bold('Seeding complete: ')}: ${seedName}`)
-  return true
-}
-
-export const seedNormalDatabase = async <T>({
-  seedName,
-  onlyWhenEmpty = true,
-  clearOldData = false,
-}: RegularDatabaseSeedOptions): Promise<boolean> => {
-  // eslint-disable-next-line global-require, import/no-dynamic-require -- need to be dynamic
-  const { sampleData, entityClass } = require(`./seeds/${seedName}.seed.ts`)
-  const connection = await connect()
-
-  if (typeof entityClass !== 'function') {
-    console.log(`${chalk.red('The entity must be a class constructor.')}`)
-    return false
-  }
-
-  const repository = connection.getRepository(entityClass)
-  const { tableName } = connection.getMetadata(entityClass)
+  const repository = connection.getRepository(tableName)
 
   if (onlyWhenEmpty) {
-    const count = await connection.getRepository(entityClass).count()
+    const count = await connection.getRepository(tableName).count()
 
     if (count > 0) {
       console.log(`${chalk.red.bold('Table not empty: ')}: ${tableName}`)
@@ -96,22 +63,52 @@ export const seedNormalDatabase = async <T>({
     console.log(`${chalk.yellow.bold('Table truncated: ')}: ${tableName}`)
   }
 
+  if (tableName === 'user') {
+    // special treatment due to bcrypt
+    const service = new UsersService(repository as unknown as Repository<User>)
+
+    // TODO: remove any and fix this later
+    // labels: tech-debt
+    const promises = (data as unknown[] as Registrant[]).map((user) =>
+      service.register(user)
+    )
+
+    await Promise.all(promises)
+  } else {
+    await repository.insert(data)
+  }
+
+  console.log(`${chalk.green.bold('Seeding complete: ')}: ${tableName}`)
+  return true
+}
+
+export const seedNormalDatabase = async ({
+  tableName,
+}: RegularDatabaseSeedOptions): Promise<boolean> => {
+  const {
+    sampleData,
+    _customFunction,
+    // eslint-disable-next-line global-require, import/no-dynamic-require -- need to be dynamic
+  } = require(`./seeds/${tableName}.seed.ts`)
+  // TODO: 👆 custom function may handle special cases like User
+
   if (!Array.isArray(sampleData)) {
     const message = `${chalk.red.bold(
       'Seed data not an array: '
-    )}: ${seedName}.seed.ts`
+    )}: ${tableName}.seed.ts`
 
     console.log(message)
     return false
   }
 
-  return seedDatabase(seedName, entityClass, sampleData)
+  return seedDatabase({ tableName, data: sampleData })
 }
 
-export const seedTestDatabase = async <T>({
-  entityClass,
+export const seedTestDatabase = <T>({
+  tableName,
   data,
-}: TestDatabaseSeedOptions<T>): Promise<boolean> =>
-  seedDatabase(`cypress-${tableize(entityClass.name)}`, entityClass, data)
+}: DatabaseSeedOptions<T>): Promise<boolean> =>
+  seedDatabase({ tableName, data, onlyWhenEmpty: false, clearOldData: true })
 
 /* eslint-enable unicorn/prefer-module -- seeder */
+/* eslint-enable no-console -- it's a CLI script */
