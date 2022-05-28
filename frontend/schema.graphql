@@ -7,7 +7,12 @@ type User {
   email: String!
   familyName: String!
   givenName: String!
-  registrationSource: String!
+  registrationSource: RegistrationSource!
+}
+
+enum RegistrationSource {
+  LOCAL
+  GOOGLE
 }
 
 type Query {
@@ -22,6 +27,6 @@ input Registrant {
   email: String!
   familyName: String!
   givenName: String!
-  registrationSource: String!
+  registrationSource: RegistrationSource!
   password: String!
 }

@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 
 import {
   Entity,
@@ -40,7 +40,7 @@ export class User {
     type: 'simple-enum',
     enum: RegistrationSource,
   })
-  @Field()
+  @Field(() => RegistrationSource)
   registrationSource: RegistrationSource
 
   @CreateDateColumn()
@@ -52,3 +52,5 @@ export class User {
   @DeleteDateColumn()
   deletedAt?: Date
 }
+
+registerEnumType(RegistrationSource, { name: 'RegistrationSource' })
