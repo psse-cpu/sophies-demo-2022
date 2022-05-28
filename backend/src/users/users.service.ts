@@ -16,8 +16,6 @@ export class UsersService {
     })
   }
 
-  // TODO: fix other info -- just a quick hack since need to run errands
-  // labels: tech-debt
   async register(user: Registrant): Promise<User> {
     const { password: plainTextPassword, ...profile } = user
     const passwordHash = await bcrypt.hash(plainTextPassword, 10)
