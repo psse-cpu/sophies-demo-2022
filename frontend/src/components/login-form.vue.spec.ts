@@ -35,12 +35,12 @@ describe('LoginPage', () => {
     vi.clearAllMocks()
   })
 
-  it('updates the model correctly', () => {
+  it('updates the model correctly', async () => {
     vi.spyOn(backend, 'post')
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
 
     expect(wrapper.vm.credentials).toStrictEqual({
       email: 'mike@cpu.edu.ph',
@@ -52,8 +52,8 @@ describe('LoginPage', () => {
     const spy = vi.spyOn(backend, 'post')
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
 
     await wrapper.find(formSelector).trigger('submit')
 
@@ -73,8 +73,8 @@ describe('LoginPage', () => {
     const spy = vi.spyOn(localforage, 'setItem')
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
 
     await wrapper.find(formSelector).trigger('submit')
 
@@ -93,8 +93,8 @@ describe('LoginPage', () => {
     })
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
     await wrapper.find(formSelector).trigger('submit')
 
     await flushPromises()
@@ -110,8 +110,8 @@ describe('LoginPage', () => {
     })
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
     await wrapper.find(formSelector).trigger('submit')
 
     await flushPromises()
@@ -124,8 +124,8 @@ describe('LoginPage', () => {
     })
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
     await wrapper.find(formSelector).trigger('submit')
     await flushPromises()
 
@@ -140,8 +140,8 @@ describe('LoginPage', () => {
     })
 
     const wrapper = wrapperFactory()
-    wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    wrapper.find(passwordSelector).setValue('lol')
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('lol')
     await wrapper.find(formSelector).trigger('submit')
     await flushPromises()
 
