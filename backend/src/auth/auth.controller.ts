@@ -1,7 +1,7 @@
 import { Controller, Req, Post, UseGuards, Res } from '@nestjs/common'
 
 import Express from 'express'
-import { UserWithoutHash } from 'src/users/user.entity'
+import { UserWithoutHash } from 'src/users/user-without-hash.dto'
 import { AuthService } from './auth.service'
 import { GoogleOAuthGuard } from './google-oauth.guard'
 import { LocalAuthGuard } from './local-auth.guard'

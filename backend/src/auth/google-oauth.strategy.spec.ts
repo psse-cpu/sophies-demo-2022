@@ -2,7 +2,7 @@ import { UnauthorizedException } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 import { Test } from '@nestjs/testing'
 import { RegistrationSource } from '../users/registration-source'
-import { UserWithoutHash } from '../users/user.entity'
+import { UserWithoutHash } from '../users/user-without-hash.dto'
 import { AuthService } from './auth.service'
 import { GoogleIdToken, GoogleOauthStrategy } from './google-oauth.strategy'
 

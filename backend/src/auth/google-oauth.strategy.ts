@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy } from 'passport-google-verify-token'
 import { RegistrationSource } from '../users/registration-source'
-import { UserWithoutHash } from '../users/user.entity'
+import { UserWithoutHash } from '../users/user-without-hash.dto'
 
 import { AuthService } from './auth.service'
 

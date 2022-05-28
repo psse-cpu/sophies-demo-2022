@@ -1,15 +1,11 @@
 import { Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import bcrypt from 'bcrypt'
 import omit from 'lodash/fp/omit'
 import crypto from 'node:crypto'
-
-import { JwtService } from '@nestjs/jwt'
-import {
-  ProviderRegistrant,
-  User,
-  UserIdentifiers,
-  UserWithoutHash,
-} from '../users/user.entity'
+import { ProviderRegistrant } from 'src/users/provider-registrant.dto'
+import { UserWithoutHash } from 'src/users/user-without-hash.dto'
+import { UserIdentification } from '../users/user-identification.dto'
 import { UsersService } from '../users/users.service'
 
 interface Tokens {
@@ -33,7 +29,7 @@ export class AuthService {
   async authenticate(
     email: string,
     password: string
-  ): Promise<Omit<User, 'passwordHash'> | undefined> {
+  ): Promise<UserWithoutHash | undefined> {
     const user = await this.usersService.findByEmail(email)
 
     if (!user) {
@@ -68,7 +64,7 @@ export class AuthService {
     return omit('passwordHash', existingUser)
   }
 
-  async signJwt({ id, email }: UserIdentifiers): Promise<Tokens> {
+  async signJwt({ id, email }: UserIdentification): Promise<Tokens> {
     const payload: JwtPayload = { email, sub: id }
     return {
       accessToken: this.jwtService.sign(payload),
