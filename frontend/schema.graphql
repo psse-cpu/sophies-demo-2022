@@ -13,3 +13,15 @@ type User {
 type Query {
   users: [User!]!
 }
+
+type Mutation {
+  register(registrant: Registrant!): User!
+}
+
+input Registrant {
+  email: String!
+  familyName: String!
+  givenName: String!
+  registrationSource: String!
+  password: String!
+}
