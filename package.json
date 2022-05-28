@@ -18,7 +18,7 @@
     "test:unit": "pnpm --color=always --parallel --aggregate-output test:cov && pnpm badges",
     "test:integration": "pnpm --filter backend test:integration",
     "test": "run-p test:*",
-    "start:fe": "pnpm fe start:test",
+    "start:fe": "pnpm fe start:test:compiled",
     "start:be": "pnpm be start:test",
     "serve-and-test:e2e": "start-test start:be 3000 start:fe 9000 'NODE_ENV=test pnpm be test:e2e'",
     "qa": "run-p build test lint badges:ci serve-and-test:e2e",

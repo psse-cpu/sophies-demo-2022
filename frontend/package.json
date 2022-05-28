@@ -15,7 +15,8 @@
     "badges": "istanbul-badges-readme --statementsLabel='Frontend Code Coverage' --logo=jest",
     "badges:ci": "pnpm badges --ci --exitCode=1",
     "start:dev": "quasar dev",
-    "start:test": "pnpm build && pnpm http-server -p 9000 dist/spa  --proxy \"http://localhost:9000?\"",
+    "start:test": "quasar dev",
+    "start:test:compiled": "pnpm build && pnpm http-server -p 9000 dist/spa  --proxy \"http://localhost:9000?\"",
     "build": "pnpm typecheck && quasar build",
     "typecheck": "vue-tsc --noEmit",
     "deploy": "pnpm install && pnpm build"
