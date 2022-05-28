@@ -10,27 +10,26 @@ jest.mock('bcrypt', () => ({
   hash: async (_plainTextPassword: string, _rounds: number) => 'hashedPassword',
 }))
 
-// TODO: remove  hack
-const hack = {
-  familyName: '',
-  givenName: '',
-  registrationSource: RegistrationSource.LOCAL,
-  createdAt: new Date(),
-  updatedAt: new Date(),
-}
-
 const mockUsers: User[] = [
   {
     id: 1,
     email: 'foo@bar.baz',
     passwordHash: 'asdf',
-    ...hack,
+    familyName: 'Too',
+    givenName: 'Foo',
+    registrationSource: RegistrationSource.LOCAL,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
   {
     id: 2,
     email: 'quux@bar.baz',
     passwordHash: 'qwer',
-    ...hack,
+    familyName: 'X',
+    givenName: 'Quu',
+    registrationSource: RegistrationSource.LOCAL,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   },
 ]
 
@@ -82,19 +81,33 @@ describe('UsersService', () => {
 
   describe('#register', () => {
     it('returns whatever repo#save returns', () => {
-      return expect(service.register('what', 'ever')).resolves.toBe(
-        mockUsers[0]
-      )
+      return expect(
+        service.register({
+          email: 'foo@bar.baz',
+          password: 'asdf',
+          familyName: 'Too',
+          givenName: 'Foo',
+          registrationSource: RegistrationSource.LOCAL,
+        })
+      ).resolves.toBe(mockUsers[0])
     })
 
     it('calls save on the repository with the correct args', async () => {
       const spy = jest.spyOn(repository, 'save')
-      await service.register('leni@foo.bar', 'angatbuhay', hack)
+      await service.register({
+        email: 'leni@foo.bar',
+        password: 'angatbuhay', // NOTE the difference
+        familyName: 'Robredo',
+        givenName: 'Leni',
+        registrationSource: RegistrationSource.LOCAL,
+      })
 
       expect(spy).toHaveBeenCalledWith({
         email: 'leni@foo.bar',
-        passwordHash: 'hashedPassword',
-        ...hack,
+        passwordHash: 'hashedPassword', // NOTE the difference
+        familyName: 'Robredo',
+        givenName: 'Leni',
+        registrationSource: RegistrationSource.LOCAL,
       })
     })
   })

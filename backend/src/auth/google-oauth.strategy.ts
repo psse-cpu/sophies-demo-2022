@@ -2,6 +2,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { PassportStrategy } from '@nestjs/passport'
 import { Strategy } from 'passport-google-verify-token'
+import { RegistrationSource } from '../users/registration-source'
 import { UserWithoutHash } from '../users/user.entity'
 
 import { AuthService } from './auth.service'
@@ -42,10 +43,12 @@ export class GoogleOauthStrategy extends PassportStrategy(
     _id: string
   ): Promise<UserWithoutHash | undefined> {
     try {
-      return this.authService.handleProviderLogin(
-        parsedToken.email,
-        'google-oauth'
-      )
+      return this.authService.handleProviderLogin({
+        email: parsedToken.email,
+        familyName: parsedToken.family_name,
+        givenName: parsedToken.given_name,
+        registrationSource: RegistrationSource.GOOGLE,
+      })
     } catch {
       throw new UnauthorizedException()
     }

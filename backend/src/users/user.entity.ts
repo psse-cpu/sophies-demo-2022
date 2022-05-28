@@ -49,3 +49,16 @@ export class User {
 }
 
 export type UserWithoutHash = Omit<User, 'passwordHash'>
+
+export type Registrant = Omit<
+  UserWithoutHash,
+  'id' | 'createdAt' | 'updatedAt'
+> & {
+  password: string
+}
+
+export type ProviderRegistrant = Omit<Registrant, 'password'>
+
+export type Credentials = { email: string; password: string }
+
+export type UserIdentifiers = { id: number; email: string }

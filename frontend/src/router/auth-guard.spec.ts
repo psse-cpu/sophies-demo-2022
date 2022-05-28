@@ -2,8 +2,19 @@
 // https://medium.com/js-dojo/unit-testing-vue-router-1d091241312
 
 import { RouteLocationNormalized } from 'vue-router'
+import { RegistrationSource } from 'app/../backend/src/users/registration-source'
 import authGuard from './auth-guard'
 import * as auth from '../auth'
+
+const mockUser = {
+  id: 1,
+  email: 'a',
+  familyName: '',
+  givenName: '',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  registrationSource: RegistrationSource.GOOGLE,
+}
 
 describe('authGuard', () => {
   afterEach(() => {
@@ -11,7 +22,7 @@ describe('authGuard', () => {
   })
 
   it('passes when the route does not require authentication (logged-in user)', () => {
-    vi.spyOn(auth, 'currentUser').mockResolvedValue({ id: 1, email: 'a' })
+    vi.spyOn(auth, 'currentUser').mockResolvedValue(mockUser)
 
     const to = {
       name: 'guest',
@@ -36,7 +47,7 @@ describe('authGuard', () => {
   })
 
   it('passes when the requires authentication but there is a current user', () => {
-    vi.spyOn(auth, 'currentUser').mockResolvedValue({ id: 1, email: 'a' })
+    vi.spyOn(auth, 'currentUser').mockResolvedValue(mockUser)
 
     const to = {
       name: 'secret',

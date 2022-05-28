@@ -3,6 +3,8 @@ import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 
+import { RegistrationSource } from '../src/users/registration-source'
+
 import { AuthModule } from '../src/auth/auth.module'
 import { User } from '../src/users/user.entity'
 import { UsersService } from '../src/users/users.service'
@@ -10,8 +12,20 @@ import { typeOrmInMemoryModules } from './helpers/typeorm-in-memory-modules'
 
 const seedDatabase = async (usersService: UsersService) => {
   return Promise.all([
-    usersService.register('mike@foo.bar', 'like'),
-    usersService.register('fifi@foo.bar', 'dog'),
+    usersService.register({
+      email: 'mike@foo.bar',
+      password: 'like',
+      familyName: 'Foo',
+      givenName: 'Mike',
+      registrationSource: RegistrationSource.LOCAL,
+    }),
+    usersService.register({
+      email: 'quux@bar.baz',
+      password: 'baz',
+      familyName: 'X',
+      givenName: 'Quu',
+      registrationSource: RegistrationSource.LOCAL,
+    }),
   ])
 }
 

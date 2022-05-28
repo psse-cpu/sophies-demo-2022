@@ -4,11 +4,22 @@ import { Test, TestingModule } from '@nestjs/testing'
 
 import { ConfigService } from '@nestjs/config'
 import { JwtModule, JwtService } from '@nestjs/jwt'
+import { RegistrationSource } from 'src/users/registration-source'
+import { omit } from 'lodash/fp'
 import { User } from '../users/user.entity'
 import { UsersService } from '../users/users.service'
 import { AuthService } from './auth.service'
 
-const mockUser: User = { id: 1, email: 'mike@foo.bar', passwordHash: 'hash' }
+const mockUser: User = {
+  id: 1,
+  email: 'mike@foo.bar',
+  passwordHash: 'hash',
+  familyName: 'Coo',
+  givenName: 'Mike',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  registrationSource: RegistrationSource.LOCAL,
+}
 
 jest.mock('bcrypt', () => ({
   compare: async (_plain: string, _hashed: string) => _plain === 'correct',
@@ -70,7 +81,7 @@ describe('AuthService', () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
       const result = await authService.authenticate('mike@foo.bar', 'correct')
-      expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
+      expect(result).toStrictEqual(omit('passwordHash', mockUser))
     })
 
     it('returns users without the passwordHash field', async () => {
@@ -84,29 +95,38 @@ describe('AuthService', () => {
   describe('#handleProviderLogin()', () => {
     it('throws an Error if email is falsy', () => {
       return expect(() =>
-        authService.handleProviderLogin('', 'google-oauth')
-      ).rejects.toThrow(/no email found with google-oauth/i)
+        authService.handleProviderLogin({
+          email: '',
+          familyName: 'Coo',
+          givenName: 'Mike',
+          registrationSource: RegistrationSource.GOOGLE,
+        })
+      ).rejects.toThrow(/no email found with google/i)
     })
 
     it('logs-in via email for registered users', async () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(mockUser)
 
-      const result = await authService.handleProviderLogin(
-        'mike@foo.bar',
-        'google-oauth'
-      )
-      expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
+      const result = await authService.handleProviderLogin({
+        email: 'mike@foo.bar',
+        familyName: 'Coo',
+        givenName: 'Mike',
+        registrationSource: RegistrationSource.GOOGLE,
+      })
+      expect(result).toStrictEqual(omit('passwordHash', mockUser))
     })
 
     it('registers and logs-in via email for unregistered users', async () => {
       jest.spyOn(usersService, 'findByEmail').mockResolvedValue(undefined)
       jest.spyOn(usersService, 'register').mockResolvedValue(mockUser)
 
-      const result = await authService.handleProviderLogin(
-        'mike@foo.bar',
-        'google-oauth'
-      )
-      expect(result).toStrictEqual({ id: 1, email: 'mike@foo.bar' })
+      const result = await authService.handleProviderLogin({
+        email: 'mike@foo.bar',
+        familyName: 'Coo',
+        givenName: 'Mike',
+        registrationSource: RegistrationSource.GOOGLE,
+      })
+      expect(result).toStrictEqual(omit('passwordHash', mockUser))
     })
 
     it('calls findByEmail with the correct args', async () => {
@@ -115,9 +135,19 @@ describe('AuthService', () => {
         .mockResolvedValue(mockUser)
       const registerSpy = jest.spyOn(usersService, 'register')
 
-      await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
+      await authService.handleProviderLogin({
+        email: 'mike@foo.bar',
+        familyName: 'Coo',
+        givenName: 'Mike',
+        registrationSource: RegistrationSource.GOOGLE,
+      })
 
-      await authService.handleProviderLogin('mike@foo.bar', 'google-oauth')
+      await authService.handleProviderLogin({
+        email: 'mike@foo.bar',
+        familyName: 'Coo',
+        givenName: 'Mike',
+        registrationSource: RegistrationSource.GOOGLE,
+      })
       expect(findByEmailSpy).toHaveBeenCalledWith('mike@foo.bar')
       expect(registerSpy).not.toHaveBeenCalled()
     })
@@ -131,9 +161,20 @@ describe('AuthService', () => {
         .spyOn(usersService, 'register')
         .mockResolvedValue(mockUser)
 
-      await authService.handleProviderLogin('joke@foo.bar', 'google-oauth')
+      await authService.handleProviderLogin({
+        email: 'joke@foo.bar',
+        familyName: 'Batman',
+        givenName: 'Joker',
+        registrationSource: RegistrationSource.GOOGLE,
+      })
       expect(findByEmailSpy).toHaveBeenCalledWith('joke@foo.bar')
-      expect(registerSpy).toHaveBeenCalledWith('joke@foo.bar', 'randomuuid-ftw')
+      expect(registerSpy).toHaveBeenCalledWith({
+        email: 'joke@foo.bar',
+        familyName: 'Batman',
+        givenName: 'Joker',
+        password: 'randomuuid-ftw',
+        registrationSource: RegistrationSource.GOOGLE,
+      })
     })
   })
 
