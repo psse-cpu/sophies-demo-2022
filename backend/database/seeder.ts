@@ -9,7 +9,8 @@ import {
 } from 'typeorm'
 import chalk from 'chalk'
 import _ from 'lodash'
-import { Registrant, User } from '../src/users/user.entity'
+import { User } from '../src/users/user.entity'
+import { Registrant } from '../src/users/registrant.dto'
 import { UsersService } from '../src/users/users.service'
 import ormConfig from '../ormconfig'
 
