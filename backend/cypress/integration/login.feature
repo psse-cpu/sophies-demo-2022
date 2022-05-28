@@ -6,9 +6,9 @@ Feature: Login
 
   Background:
     Given the following accounts exist
-      | email                | password        |
-      | mike@cpu.edu.ph      | mike            |
-      | richard@cpu.edu.ph   | rich            |
+      | email                | password  | given_name   | family_name  |
+      | mike@cpu.edu.ph      | mike      | Mike         | Coo          |
+      | richard@cpu.edu.ph   | rich      | Rich         | Kid          |
 
   Scenario Outline: Wrong credentials
     Given that I'm not logged-in
