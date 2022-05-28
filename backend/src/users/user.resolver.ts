@@ -12,7 +12,9 @@ export class UserResolver {
   constructor(private usersService: UsersService) {}
 
   @Mutation((returns) => User)
-  async register(@Args() registrant: Registrant): Promise<UserWithoutHash> {
+  async register(
+    @Args('registrant') registrant: Registrant
+  ): Promise<UserWithoutHash> {
     return this.usersService.register({
       ...registrant,
       // TODO: this needs redesign, since it overrides whatever the user gives
