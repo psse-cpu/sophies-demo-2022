@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 
+import { getConnection } from 'typeorm'
 import { RegistrationSource } from '../src/users/registration-source'
 
 import { AuthModule } from '../src/auth/auth.module'
@@ -33,7 +34,7 @@ describe('AuthController (integration)', () => {
   let app: INestApplication
   let usersService: UsersService
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot(),
@@ -50,8 +51,10 @@ describe('AuthController (integration)', () => {
     await seedDatabase(usersService)
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     await app.close()
+
+    if (getConnection().isConnected) await getConnection().close()
   })
 
   describe('/auth/login', () => {

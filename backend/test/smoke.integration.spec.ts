@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config'
 import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 
+import { getConnection } from 'typeorm'
 import { AppModule } from '../src/app.module'
 import { UserWithoutHash } from '../src/users/user-without-hash.dto'
 import { RegistrationSource } from '../src/users/registration-source'
@@ -37,7 +38,7 @@ describe('GraphQL Smoke Test (integration)', () => {
   let app: INestApplication
   let usersService: UsersService
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot(),
@@ -55,8 +56,9 @@ describe('GraphQL Smoke Test (integration)', () => {
     await seedDatabase(usersService)
   })
 
-  afterAll(async () => {
+  afterEach(async () => {
     await app.close()
+    if (getConnection().isConnected) await getConnection().close()
   })
 
   describe('auto-validation', () => {
