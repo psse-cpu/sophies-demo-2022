@@ -63,7 +63,12 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
    cd sophies-demo-2022
    pnpm install
    ```
-4. Manage secrets:
+4. Create databases:
+   ```sh
+   createdb sophies_demo -U postgres -h localhost
+   createdb sophies_demo_test -U postgres -h localhost
+   ```
+5. Manage secrets:
 
    - Replicate the Git-ignored `backend/.env` file:
 
@@ -101,14 +106,14 @@ Demo project for SE-2223 and SE-2226: AY-2021-2022.
        BACKEND_STAGING_DEPLOY_HOOK_URL: ${{ secrets.BACKEND_STAGING_DEPLOY_HOOK_URL }}
      ```
 
-5. Run migrations and optionally, seeds:
+6. Run migrations and optionally, seeds:
 
    ```sh
    pnpm be migrate
    pnpm be seed
    ```
 
-6. Start both frontend and backend:
+7. Start both frontend and backend:
    ```sh
    pnpm start:dev
    ```
