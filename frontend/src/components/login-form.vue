@@ -76,65 +76,35 @@
     <p class="q-mt-md">Other ways to sign-in:</p>
 
     <div class="q-ma-md flex buttons">
-      <div id="googleSignIn"></div>
+      <google-sign-in-button @google-error="handleGoogleError" />
     </div>
   </form>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 
-import { addGoogleSignInButton } from 'src/auth-strategies/google-auth'
 import { backend } from 'src/axios'
 
-import localforage from 'localforage'
-import { useRoute, useRouter } from 'vue-router'
 import { UserWithoutHash } from 'backend/src/users/user-without-hash.dto'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError } from 'axios'
+import { useVisibilityToggle } from 'src/composables/use-visibility-toggle'
+import { useSaveAndRedirect } from 'src/composables/use-save-and-redirect'
+import GoogleSignInButton from './google-sign-in-button.vue'
 
-const router = useRouter()
-const route = useRoute()
+const { passwordVisible, togglePasswordVisibility } = useVisibilityToggle()
+const { saveUserAndRedirect } = useSaveAndRedirect()
 const isLoading = ref(false)
 const authError = ref('')
-const passwordVisible = ref(false)
-
-const saveUserAndRedirect = async ({
-  data: user,
-}: AxiosResponse<UserWithoutHash>) => {
-  await localforage.setItem('currentUser', user)
-  router.push(route.redirectedFrom?.fullPath ?? '/')
-}
-
-const togglePasswordVisibility = (_event: MouseEvent) => {
-  passwordVisible.value = !passwordVisible.value
-}
-
-onMounted(() => {
-  addGoogleSignInButton((response) => {
-    backend
-      .post(
-        '/auth/google',
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${response.credential}`,
-          },
-        }
-      )
-      .then(saveUserAndRedirect)
-      .catch((error: AxiosError) => {
-        authError.value =
-          error.response?.status === 401
-            ? 'Google sign-in failed.'
-            : 'Unexpected error occurred.'
-      })
-  })
-})
 
 const credentials = reactive({
   email: '',
   password: '',
 })
+
+const handleGoogleError = (message: string) => {
+  authError.value = message
+}
 
 const login = async () => {
   isLoading.value = true
