@@ -31,3 +31,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+src/**/*.generated.ts
+src/generated/*.ts

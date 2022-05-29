@@ -1,0 +1,29 @@
+schema: ./schema.graphql
+documents: ./src/components/**/*.graphql
+extensions:
+  codegen:
+    overwrite: true
+    generates:
+      src/generated/graphql.ts:
+        hooks:
+          afterOneFileWrite:
+            - prettier --write
+            - eslint --fix
+        plugins:
+          - 'typescript'
+        config:
+          declarationKind: interface
+      src/:
+        hooks:
+          afterOneFileWrite:
+            - prettier --write
+            - eslint --fix
+        preset: near-operation-file
+        presetConfig:
+          extension: .generated.ts
+          baseTypesPath: generated/graphql.ts
+        config:
+          preResolveTypes: false
+        plugins:
+          - typescript-operations
+          - typed-document-node

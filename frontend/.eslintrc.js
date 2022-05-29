@@ -18,4 +18,15 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['src/**/*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      parserOptions: {
+        schema: './schema.graphql',
+        operations: './src/**/*.graphql',
+      },
+      extends: 'plugin:@graphql-eslint/operations-all',
+    },
+  ],
 }
