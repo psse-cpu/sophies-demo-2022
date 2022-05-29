@@ -44,12 +44,15 @@ export class User {
   registrationSource: RegistrationSource
 
   @CreateDateColumn()
+  @Field()
   createdAt: Date
 
   @UpdateDateColumn()
+  @Field()
   updatedAt: Date
 
   @DeleteDateColumn()
+  @Field()
   deletedAt?: Date
 }
 

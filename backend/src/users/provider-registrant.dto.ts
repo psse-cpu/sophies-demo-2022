@@ -6,4 +6,5 @@ export class ProviderRegistrant extends OmitType(UserWithoutHash, [
   'id',
   'createdAt',
   'updatedAt',
+  'deletedAt',
 ] as const) {}
