@@ -13,6 +13,8 @@ extensions:
           - 'typescript'
         config:
           declarationKind: interface
+          namingConvention:
+            enumValues: keep
       src/:
         hooks:
           afterOneFileWrite:
