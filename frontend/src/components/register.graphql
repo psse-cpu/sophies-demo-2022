@@ -1,0 +1,10 @@
+mutation Register($registrant: Registrant!) {
+  newUser: register(registrant: $registrant) {
+    createdAt
+    email
+    familyName
+    givenName
+    id
+    updatedAt
+  }
+}

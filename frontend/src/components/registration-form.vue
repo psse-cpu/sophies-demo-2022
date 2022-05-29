@@ -95,13 +95,16 @@
 
 <script lang="ts" setup>
 import { ref, reactive, watch } from 'vue'
-import { RegistrationSource } from 'backend/src/users/registration-source'
 import { validate as validateClass } from 'class-validator'
 import { plainToClass } from 'class-transformer'
 import { User } from 'backend/src/users/user.entity'
 
-import type { Registrant } from 'backend/src/users/registrant.dto'
 import { useVisibilityToggle } from 'src/composables/use-visibility-toggle'
+import { useMutation } from '@urql/vue'
+import { Registrant, RegistrationSource } from 'src/generated/graphql'
+import { RegisterDocument } from './register.generated'
+
+const { executeMutation } = useMutation(RegisterDocument)
 
 const { passwordVisible, togglePasswordVisibility } = useVisibilityToggle()
 
@@ -155,7 +158,10 @@ const handleSubmit = async () => {
   const valid = await validate()
 
   if (valid) {
-    // save to backend
+    const { data } = await executeMutation({ registrant: user })
+    alert(
+      `${data?.newUser.familyName}, ${data?.newUser.givenName} has been created!`
+    )
   }
 }
 </script>
