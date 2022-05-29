@@ -89,7 +89,7 @@ jobs:
 
       # My educated guess: Node/Nest.js does not run as root:root
       - name: Fix schema.graphql File Permissions
-        run: chmod a+w frontend && chmod a+w frontend/schema.graphql
+        run: chmod -Rv a+w frontend
 
       - name: Install Cypress Dependencies
         run: >
