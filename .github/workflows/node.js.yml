@@ -87,8 +87,8 @@ jobs:
       - name: Unit and Integration Tests
         run: pnpm test
 
-      # My educated guess: Node/Nest.js does not run as root:root
-      - name: Fix schema.graphql File Permissions
+      # My educated guess: Node/Nest.js and Codegen does not run as root:root
+      - name: Fix Frontend Dir File Permissions
         run: chmod -Rv a+w frontend
 
       - name: Install Cypress Dependencies
