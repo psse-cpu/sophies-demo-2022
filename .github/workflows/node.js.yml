@@ -31,6 +31,7 @@ jobs:
 
       FRONTEND_ORIGIN: http://localhost:9000
       VITE_BACKEND_ORIGIN: http://localhost:3000
+      ON_GITHUB_ACTIONS: 1
 
     services:
       postgres:
@@ -93,10 +94,7 @@ jobs:
       # My educated guess: Node/Nest.js and Codegen does not run as root:root
       - name: Fix File Permissions
         # don't do this on the prod server, CI is okay
-        run: >
-          chmod -Rv a+w frontend && 
-          mkdir -p backend/cypress/.run &&
-          touch backend/cypress/.run/cucumber-report.json
+        run: chmod -Rv a+w frontend
 
       - name: Install Cypress Dependencies
         run: >
