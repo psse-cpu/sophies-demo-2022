@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { useRoute, useRouter } from 'vue-router'
 import type { UserWithoutHash } from 'backend/src/users/user-without-hash.dto'
+
 import localforage from 'localforage'
 
 interface ComposableReturn {

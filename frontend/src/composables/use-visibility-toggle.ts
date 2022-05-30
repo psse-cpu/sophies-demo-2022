@@ -10,6 +10,8 @@ export const useVisibilityToggle = (): {
     passwordVisible.value = !passwordVisible.value
   }
 
+  // TODO: make generic, rather than just password-specific
+  // labels: tech-debt
   return {
     passwordVisible,
     togglePasswordVisibility,

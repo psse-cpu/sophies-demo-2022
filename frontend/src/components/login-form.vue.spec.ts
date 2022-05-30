@@ -1,6 +1,5 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { Quasar } from 'quasar'
-import localforage from 'localforage'
 import { backend } from 'src/axios'
 import LoginForm from 'src/components/login-form.vue'
 
@@ -24,6 +23,13 @@ vi.mock('vue-router', () => ({
 }))
 
 vi.mock('src/auth-strategies/google-auth')
+
+const saveRedirectSpy = vi.fn()
+vi.mock('src/composables/use-save-and-redirect', () => ({
+  useSaveAndRedirect: () => ({
+    saveUserAndRedirect: saveRedirectSpy,
+  }),
+}))
 
 const emailSelector = '[data-testid="email-input"]'
 const passwordSelector = '[data-testid="password-input"]'
@@ -83,28 +89,7 @@ describe('LoginPage', () => {
     })
   })
 
-  it('persists the current user to localStorage as a side-effect', async () => {
-    vi.spyOn(backend, 'post').mockResolvedValue({
-      data: {
-        id: 1,
-        email: 'mike@yahoo.com',
-      },
-    })
-    const spy = vi.spyOn(localforage, 'setItem')
-
-    const wrapper = wrapperFactory()
-    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
-    await wrapper.find(passwordSelector).setValue('lol')
-
-    await wrapper.find(formSelector).trigger('submit')
-
-    expect(spy).toHaveBeenCalledWith('currentUser', {
-      id: 1,
-      email: 'mike@yahoo.com',
-    })
-  })
-
-  it('redirects on successful sign-in as a side-effect', async () => {
+  it('persists the current user and redirects as a side-effect', async () => {
     vi.spyOn(backend, 'post').mockResolvedValue({
       data: {
         id: 1,
@@ -115,10 +100,17 @@ describe('LoginPage', () => {
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
     await wrapper.find(passwordSelector).setValue('lol')
+
     await wrapper.find(formSelector).trigger('submit')
 
-    await flushPromises()
-    expect(pushSpy).toHaveBeenCalledWith('/somewhere')
+    expect(saveRedirectSpy).toHaveBeenCalledWith({
+      // TODO: unnest data contents for better design
+      // labels: tech-debt
+      data: {
+        id: 1,
+        email: 'mike@yahoo.com',
+      },
+    })
   })
 
   it('does not show any auth error messages', async () => {
