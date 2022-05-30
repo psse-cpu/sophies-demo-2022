@@ -1,4 +1,4 @@
-import { User } from 'backend/src/users/user.entity'
+import { User } from 'src/generated/graphql'
 import localforage from 'localforage'
 
 export function currentUser(): Promise<Omit<User, 'passwordHash'> | null> {
