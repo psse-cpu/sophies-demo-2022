@@ -20,7 +20,16 @@
           <h4>ShipThat</h4>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <suspense>
+          <template #default> <user-menu /></template>
+
+          <template #fallback>
+            <div>
+              <q-spinner-hourglass color="white" />
+              Loading user...
+            </div>
+          </template>
+        </suspense>
       </q-toolbar>
     </q-header>
 
@@ -45,6 +54,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import EssentialLink from 'components/essential-link.vue'
+import UserMenu from 'src/components/header/user-menu.vue'
 
 const essentialLinks = [
   {
