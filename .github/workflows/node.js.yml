@@ -91,8 +91,9 @@ jobs:
         run: pnpm test
 
       # My educated guess: Node/Nest.js and Codegen does not run as root:root
-      - name: Fix Frontend Dir File Permissions
-        run: chmod -Rv a+w frontend
+      - name: Fix File Permissions
+        run: chmod -Rv a+w frontend && chmod -Rv a+w backend
+        # don't do this on the prod server, CI is okay
 
       - name: Install Cypress Dependencies
         run: >
