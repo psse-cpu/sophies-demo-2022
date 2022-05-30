@@ -105,6 +105,7 @@ importers:
       jest: 28.0.3
       jest-html-reporters: ^3.0.6
       lodash: ^4.17.21
+      multiple-cucumber-html-reporter: ^1.21.2
       passport: ^0.5.2
       passport-google-oauth20: ^2.0.0
       passport-google-verify-token: ^2.2.0
@@ -182,6 +183,7 @@ importers:
       istanbul-badges-readme: 1.8.1
       jest: 28.0.3_2cnx3q6hfnpx7nryv75xx7ahte
       jest-html-reporters: 3.0.8
+      multiple-cucumber-html-reporter: 1.21.2
       source-map-support: 0.5.21
       supertest: 6.2.3
       ts-loader: 9.3.0_d3ofjbjbkerjqvgldod72xzm2y
@@ -8326,6 +8328,12 @@ packages:
       path-exists: 4.0.0
     dev: true
 
+  /find/0.3.0:
+    resolution: {integrity: sha512-iSd+O4OEYV/I36Zl8MdYJO0xD82wH528SaCieTVHhclgiYNe9y+yPKSwK+A7/WsmHL1EZ+pYUJBXWTL5qofksw==}
+    dependencies:
+      traverse-chain: 0.1.0
+    dev: true
+
   /findup-sync/4.0.0:
     resolution: {integrity: sha512-6jvvn/12IC4quLBL1KNokxC7wWTvYncaVUYSoxWw7YykPLuRrnv4qdHcSOywOI5RpkOVGeQRtWM8/q+G6W6qfQ==}
     engines: {node: '>= 8'}
@@ -10528,7 +10536,15 @@ packages:
     dev: true
 
   /jsonfile/4.0.0:
-    resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
+    resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
+    optionalDependencies:
+      graceful-fs: 4.2.10
+    dev: true
+
+  /jsonfile/5.0.0:
+    resolution: {integrity: sha512-NQRZ5CRo74MhMMC3/3r5g2k4fjodJ/wh8MxjFbCViWKFjxrnudWSY5vomh+23ZaXzAS7J3fBZIR2dV6WbmfM0w==}
+    dependencies:
+      universalify: 0.1.2
     optionalDependencies:
       graceful-fs: 4.2.10
     dev: true
@@ -11322,6 +11338,10 @@ packages:
       xtend: 4.0.2
     dev: true
 
+  /moment/2.29.3:
+    resolution: {integrity: sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==}
+    dev: true
+
   /ms/2.0.0:
     resolution: {integrity: sha1-VgiurfwAvmwpAd9fmGF4jeDVl8g=}
 
@@ -11344,6 +11364,19 @@ packages:
       type-is: 1.6.18
       xtend: 4.0.2
     dev: false
+
+  /multiple-cucumber-html-reporter/1.21.2:
+    resolution: {integrity: sha512-+uugOT9dNXKfVUR7ZzK6CiTP5rFhUfTDhH9YQ+V/aDP9XAo+wv2gsAvt6fbKk0y8KWcncY3JWBEvp0PUN/9oSw==}
+    dependencies:
+      chalk: 3.0.0
+      find: 0.3.0
+      fs-extra: 8.1.0
+      jsonfile: 5.0.0
+      lodash: 4.17.21
+      moment: 2.29.3
+      open: 7.4.2
+      uuid: 3.4.0
+    dev: true
 
   /mute-stream/0.0.7:
     resolution: {integrity: sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=}
@@ -11627,6 +11660,14 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       mimic-fn: 2.1.0
+    dev: true
+
+  /open/7.4.2:
+    resolution: {integrity: sha512-MVHddDVweXZF3awtlAS+6pgKLlm/JgxZ90+/NBurBoQctVOOB/zDdVjcyPzQ+0laDGbsWgrRkflI65sQeOgT9Q==}
+    engines: {node: '>=8'}
+    dependencies:
+      is-docker: 2.2.1
+      is-wsl: 2.2.0
     dev: true
 
   /open/8.4.0:
@@ -13902,6 +13943,10 @@ packages:
       punycode: 2.1.1
     dev: true
 
+  /traverse-chain/0.1.0:
+    resolution: {integrity: sha1-YdvC1Ttp/2CRoSoWj9fUMxB+QPE=}
+    dev: true
+
   /tree-kill/1.2.2:
     resolution: {integrity: sha512-L0Orpi8qGpRG//Nd+H90vFB+3iHnue1zSSGmNOOCh1GLJ7rUKVwV2HvijphGQS2UmhUZewS9VgvxYIdgr+fG1A==}
     hasBin: true
@@ -14431,6 +14476,12 @@ packages:
   /utils-merge/1.0.1:
     resolution: {integrity: sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=}
     engines: {node: '>= 0.4.0'}
+
+  /uuid/3.4.0:
+    resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
+    deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
+    hasBin: true
+    dev: true
 
   /uuid/8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
