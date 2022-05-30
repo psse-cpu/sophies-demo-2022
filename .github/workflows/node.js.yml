@@ -81,6 +81,9 @@ jobs:
         # work with start-server-and-test
         run: pnpm be build
 
+      - name: Regenerate Frontend GraphQL Types
+        run: pnpm fe codegen
+
       - name: Lint
         run: pnpm lint
 
