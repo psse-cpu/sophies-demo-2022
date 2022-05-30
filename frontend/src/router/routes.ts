@@ -22,12 +22,12 @@ const routes: RouteRecordRaw[] = [
       {
         name: 'login',
         path: 'login',
-        component: () => import('src/pages/login-page.vue'),
+        component: () => import('src/pages/guest/login-page.vue'),
       },
       {
         name: 'registration',
         path: 'register',
-        component: () => import('src/pages/registration-page.vue'),
+        component: () => import('src/pages/guest/registration-page.vue'),
       },
     ],
   },
