@@ -4,7 +4,7 @@
     data-testid="login-form"
     @submit.prevent="handleSubmit"
   >
-    <h6 class="q-mt-none q-mb-none">Sign Up</h6>
+    <h6 class="q-mt-none q-mb-none">Sign-up</h6>
 
     <div class="q-ma-md">
       <q-input
@@ -13,9 +13,9 @@
         dense
         rounded
         outlined
-        :error="!!validationErrors.email"
-        :error-message="validationErrors.email"
-        @blur="validate"
+        debounce="500"
+        :error="!!validationErrors.email || emailCheckResult?.emailExists"
+        :error-message="validationErrors.email ?? duplicateEmailMessage"
         v-model="user.email"
         label="E-mail"
       />
@@ -30,7 +30,6 @@
         outlined
         :error="!!validationErrors.password"
         :error-message="validationErrors.password"
-        @blur="validate"
         v-model="user.password"
         label="Password"
       >
@@ -54,7 +53,6 @@
         outlined
         :error="!!validationErrors.givenName"
         :error-message="validationErrors.givenName"
-        @blur="validate"
         v-model="user.givenName"
         label="Given Name"
       />
@@ -69,7 +67,6 @@
         outlined
         :error="!!validationErrors.familyName"
         :error-message="validationErrors.familyName"
-        @blur="validate"
         v-model="user.familyName"
         label="Family Name"
       />
@@ -85,6 +82,7 @@
         size="md"
         unelevated
         rounded
+        :disable="hasValidationErrors()"
         style="width: 100%"
       >
         Sign-up
@@ -94,18 +92,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, watch } from 'vue'
+import { ref, reactive, watch, computed } from 'vue'
 import { validate as validateClass } from 'class-validator'
 import { plainToClass } from 'class-transformer'
 import { User } from 'backend/src/users/user.entity'
 
 import { useVisibilityToggle } from 'src/composables/use-visibility-toggle'
-import { useMutation } from '@urql/vue'
+import { useMutation, useQuery } from '@urql/vue'
 import { Registrant, RegistrationSource } from 'src/generated/graphql'
 import { useSaveAndRedirect } from 'src/composables/use-save-and-redirect'
 import { RegisterDocument } from './register.generated'
+import { EmailExistsDocument } from './email-exists.generated'
 
-const { executeMutation } = useMutation(RegisterDocument)
 const { passwordVisible, togglePasswordVisibility } = useVisibilityToggle()
 const { saveUserAndRedirect } = useSaveAndRedirect()
 
@@ -121,10 +119,26 @@ const user: Registrant = reactive(
   )
 )
 
+const { executeMutation } = useMutation(RegisterDocument)
+const emailReactive = computed(() => user.email)
+
+const { data: emailCheckResult } = useQuery({
+  query: EmailExistsDocument,
+  variables: { email: emailReactive as unknown as string },
+})
+
+const duplicateEmailMessage = computed(() =>
+  emailCheckResult.value?.emailExists ? 'Email already exists' : ''
+)
+
 let hasSubmitted = false
 
 const isLoading = ref(false)
 const validationErrors = ref<Partial<Record<keyof Registrant, string>>>({})
+
+const hasValidationErrors = () =>
+  Object.keys(validationErrors.value).length > 0 ||
+  emailCheckResult.value?.emailExists
 
 const validate = async () => {
   if (!hasSubmitted) {
@@ -149,16 +163,18 @@ const validate = async () => {
   }
 
   validationErrors.value = result
-  return Object.keys(result).length === 0
+  return hasValidationErrors()
 }
 
 watch(user, validate)
 
 const handleSubmit = async () => {
   hasSubmitted = true
-  const valid = await validate()
+  await validate()
 
-  if (valid) {
+  // TODO: investigate possible race condition due to debounce
+  // I can't think, it's 2am
+  if (!hasValidationErrors()) {
     const { data } = await executeMutation({ registrant: user })
     if (data) {
       saveUserAndRedirect(data.newUser)
