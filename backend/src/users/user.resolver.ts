@@ -22,6 +22,11 @@ export class UserResolver {
     })
   }
 
+  @Query((returns) => Boolean)
+  async emailExists(@Args('email') email: string): Promise<boolean> {
+    return this.usersService.emailExists(email)
+  }
+
   @UseGuards(JwtGuard)
   @Query((returns) => [User])
   async users(): Promise<UserWithoutHash[]> {

@@ -18,6 +18,10 @@ export class UsersService {
     })
   }
 
+  emailExists(email: string): Promise<boolean> {
+    return this.userRepository.count({ email }).then((count) => count > 0)
+  }
+
   async register(user: Registrant): Promise<User> {
     const { password: plainTextPassword, ...profile } = user
     const passwordHash = await bcrypt.hash(plainTextPassword, 10)

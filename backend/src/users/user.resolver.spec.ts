@@ -17,6 +17,7 @@ const mockUser: UserWithoutHash = {
 const mockUsersService = {
   allUsers: jest.fn().mockResolvedValue([mockUser]),
   register: jest.fn().mockResolvedValue(mockUser),
+  emailExists: jest.fn().mockResolvedValue(true),
 }
 
 describe('UserResolver', () => {
@@ -53,6 +54,28 @@ describe('UserResolver', () => {
           registrationSource: RegistrationSource.GOOGLE, // is overriden
         })
       ).resolves.toStrictEqual(mockUser)
+    })
+  })
+
+  describe('#emailExists()', () => {
+    it('is true when the service method returns true', () => {
+      jest.spyOn(mockUsersService, 'emailExists').mockResolvedValue(true)
+      return expect(resolver.emailExists('some@cpu.edu.ph')).resolves.toBe(true)
+    })
+
+    it('is false when the service method returns false', () => {
+      jest.spyOn(mockUsersService, 'emailExists').mockResolvedValue(false)
+      return expect(resolver.emailExists('some@cpu.edu.ph')).resolves.toBe(
+        false
+      )
+    })
+
+    it('calls the service method correctly', async () => {
+      const spy = jest
+        .spyOn(mockUsersService, 'emailExists')
+        .mockResolvedValue(false)
+      await mockUsersService.emailExists('some@cpu.edu.ph')
+      expect(spy).toHaveBeenCalledWith('some@cpu.edu.ph')
     })
   })
 })
