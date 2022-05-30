@@ -10,18 +10,6 @@ const wrapperFactory = () =>
     },
   })
 
-const pushSpy = vi.fn()
-vi.mock('vue-router', () => ({
-  useRoute: () => ({
-    redirectedFrom: {
-      fullPath: '/somewhere',
-    },
-  }),
-  useRouter: vi.fn(() => ({
-    push: pushSpy,
-  })),
-}))
-
 vi.mock('src/auth-strategies/google-auth')
 
 const saveRedirectSpy = vi.fn()
