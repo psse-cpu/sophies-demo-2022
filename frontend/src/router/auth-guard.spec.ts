@@ -2,7 +2,7 @@
 // https://medium.com/js-dojo/unit-testing-vue-router-1d091241312
 
 import { RouteLocationNormalized } from 'vue-router'
-import { RegistrationSource } from 'app/../backend/src/users/registration-source'
+import { RegistrationSource } from 'src/generated/graphql'
 import authGuard from './auth-guard'
 import * as auth from '../auth'
 
