@@ -19,6 +19,7 @@ const {
 const {
   preprocessor,
 } = require('@badeball/cypress-cucumber-preprocessor/browserify')
+
 const { seedTestDatabase } = require('../../database/seeder')
 
 /**

@@ -107,7 +107,12 @@ export const seedTestDatabase = <T>({
   tableName,
   data,
 }: DatabaseSeedOptions<T>): Promise<boolean> =>
-  seedDatabase({ tableName, data, onlyWhenEmpty: false, clearOldData: true })
+  seedDatabase({
+    tableName,
+    data,
+    onlyWhenEmpty: false,
+    clearOldData: true,
+  })
 
 /* eslint-enable unicorn/prefer-module -- seeder */
 /* eslint-enable no-console -- it's a CLI script */
