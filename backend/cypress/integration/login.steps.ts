@@ -1,24 +1,13 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor'
+import {
+  Given,
+  When,
+  Then,
+  After,
+} from '@badeball/cypress-cucumber-preprocessor'
+import { User } from '../../src/users/user.entity'
 
-type AccountRow = [
-  email: string,
-  password: string,
-  givenName: string,
-  firstName: string
-]
-
-Given('the following accounts exist', ({ rawTable }) => {
-  const users = rawTable
-    .slice(1)
-    .map(([email, password, givenName, familyName]: AccountRow) => ({
-      email,
-      password,
-      givenName,
-      familyName,
-      registrationSource: 'local',
-    }))
-
-  cy.task('seed', { tableName: 'user', data: users }, { log: true })
+After(function clearUser() {
+  this.user = undefined
 })
 
 Given("that I'm not logged-in", () => {
@@ -31,7 +20,8 @@ Given(/(that )?I'm on the login page/, () => {
 
 When(
   'I login with {string} and {string}',
-  (username: string, password: string) => {
+  function completeForm(username: string, password: string) {
+    this.myEmail = username
     cy.get('[data-testid="email-input"]').type(username)
     cy.get('[data-testid="password-input"]').type(password)
     cy.get('button').contains('Sign-in').click()
@@ -46,6 +36,10 @@ Then('I should see an error message {string}', (_error) => {
   )
 })
 
-Then('I should be redirected to the home page', () => {
-  cy.location('pathname').should('equal', '/')
-})
+Then(
+  'I should see myself as the currently logged-in user',
+  function checkCurrentUser() {
+    const me = this.users.find((user: User) => user.email === this.myEmail)
+    cy.get('[data-testid="my-name"').should('have.text', me!.givenName)
+  }
+)

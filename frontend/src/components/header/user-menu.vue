@@ -5,7 +5,9 @@
         <q-avatar>
           <img src="https://cdn.quasar.dev/img/avatar.png" />
         </q-avatar>
-        <div class="text-center q-ml-md">{{ user?.givenName }}</div>
+        <div class="text-center q-ml-md" data-testid="my-name">
+          {{ user?.givenName }}
+        </div>
       </div>
     </template>
 

@@ -8,7 +8,7 @@ Feature: Login
     Given the following accounts exist
       | email                | password  | given_name   | family_name  |
       | mike@cpu.edu.ph      | mike      | Mike         | Coo          |
-      | richard@cpu.edu.ph   | rich      | Rich         | Kid          |
+      | richard@cpu.edu.ph   | rich      | Ricardo      | Dalisay      |
 
   Scenario Outline: Wrong credentials
     Given that I'm not logged-in
@@ -26,3 +26,4 @@ Feature: Login
     And I'm on the login page
     When I login with "richard@cpu.edu.ph" and "rich"
     Then I should be redirected to the home page
+    And I should see myself as the currently logged-in user
