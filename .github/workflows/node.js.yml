@@ -92,8 +92,11 @@ jobs:
 
       # My educated guess: Node/Nest.js and Codegen does not run as root:root
       - name: Fix File Permissions
-        run: chmod -Rv a+w frontend && chmod -Rv a+w backend
         # don't do this on the prod server, CI is okay
+        run: >
+          chmod -Rv a+w frontend && 
+          mkdir -p backend/cypress/.run &&
+          touch backend/cypress/cucumber-report.json
 
       - name: Install Cypress Dependencies
         run: >
