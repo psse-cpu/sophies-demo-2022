@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import LoginJumbotron from 'src/components/login-jumbotron.vue'
-import LoginForm from 'src/components/login-form.vue'
+import LoginJumbotron from 'src/components/guest/login-jumbotron.vue'
+import LoginForm from 'src/components/guest/login-form.vue'
 import ShipThatFeatures from 'src/components/shipthat-features.vue'
 </script>
 

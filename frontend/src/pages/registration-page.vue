@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import RegistrationForm from 'src/components/registration-form.vue'
+import RegistrationForm from 'src/components/guest/registration-form.vue'
 </script>
 
 <style scoped lang="scss">

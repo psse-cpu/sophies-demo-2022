@@ -90,6 +90,7 @@ import { UserWithoutHash } from 'backend/src/users/user-without-hash.dto'
 import { AxiosError } from 'axios'
 import { useVisibilityToggle } from 'src/composables/use-visibility-toggle'
 import { useSaveAndRedirect } from 'src/composables/use-save-and-redirect'
+
 import GoogleSignInButton from './google-sign-in-button.vue'
 
 const { passwordVisible, togglePasswordVisibility } = useVisibilityToggle()
