@@ -1,6 +1,6 @@
 <template>
   <q-card>
-    <q-img src="../assets/agile.png" height="440px">
+    <q-img src="../../assets/agile.png" height="440px">
       <div class="absolute-bottom">
         <h4 class="q-mt-md q-mb-md">
           Opinionated Jira for Agile and Scrum beginners
