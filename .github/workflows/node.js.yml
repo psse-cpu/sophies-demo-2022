@@ -96,7 +96,7 @@ jobs:
         run: >
           chmod -Rv a+w frontend && 
           mkdir -p backend/cypress/.run &&
-          touch backend/cypress/cucumber-report.json
+          touch backend/cypress/.run/cucumber-report.json
 
       - name: Install Cypress Dependencies
         run: >
