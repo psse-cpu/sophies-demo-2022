@@ -36,3 +36,6 @@ lerna-debug.log*
 
 cypress/videos
 cypress/screenshots
+cucumber-messages.ndjson
+cucumber-reports
+cypress/.run
