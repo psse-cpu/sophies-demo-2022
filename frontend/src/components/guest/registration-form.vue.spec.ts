@@ -22,6 +22,13 @@ vi.mock('src/composables/use-save-and-redirect', () => ({
 
 // @urql/vue doesn't use the inject('$urql') result
 vi.mock('@urql/vue', () => ({
+  useQuery: vi.fn().mockReturnValue({
+    data: {
+      value: {
+        emailExists: false,
+      },
+    },
+  }),
   useMutation: vi.fn(),
 }))
 
