@@ -10,7 +10,7 @@ Background:
     | mike@cpu.edu.ph      | mike      | Mike         | Coo          |
     | richard@cpu.edu.ph   | rich      | Ricardo      | Dalisay      |
 
-Scenario:
+Scenario: happy path
   Given that I'm on the register page
   When I enter "fifi@cpu.edu.ph" as email
   And I enter "feef" as password
@@ -36,3 +36,8 @@ Scenario Outline: test a bunch of users
     | elon@musk.com           | elonrulez   | Elon            | Musk          |
     | rmcoo@cpu.edu.ph        | mike!       | Richard Michael | Coo           |
     | dumbledore@hogwarts.uk  | Avada!      | Albus Wulfric   | dumbledore    |
+
+  Scenario: email already exists
+    Given that I'm on the register page
+    When I enter "mike@cpu.edu.ph" as email
+    Then I should see an error "Email already exists"

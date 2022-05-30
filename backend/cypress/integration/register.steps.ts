@@ -10,3 +10,7 @@ Then(
     cy.get('[data-testid="my-name"').should('have.text', givenName)
   }
 )
+
+Then('I should see an error {string}', (message) => {
+  cy.get('form').should('contain.text', message)
+})
