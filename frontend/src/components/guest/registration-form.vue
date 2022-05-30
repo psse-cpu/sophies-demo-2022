@@ -77,7 +77,7 @@
 
     <div class="q-ma-md flex buttons">
       <q-btn
-        data-testid="sign-in-button"
+        data-testid="sign-up-button"
         :loading="isLoading"
         type="submit"
         icon="mdi-account-plus"
@@ -102,11 +102,12 @@ import { User } from 'backend/src/users/user.entity'
 import { useVisibilityToggle } from 'src/composables/use-visibility-toggle'
 import { useMutation } from '@urql/vue'
 import { Registrant, RegistrationSource } from 'src/generated/graphql'
+import { useSaveAndRedirect } from 'src/composables/use-save-and-redirect'
 import { RegisterDocument } from './register.generated'
 
 const { executeMutation } = useMutation(RegisterDocument)
-
 const { passwordVisible, togglePasswordVisibility } = useVisibilityToggle()
+const { saveUserAndRedirect } = useSaveAndRedirect()
 
 const user: Registrant = reactive(
   Object.assign(
@@ -159,9 +160,9 @@ const handleSubmit = async () => {
 
   if (valid) {
     const { data } = await executeMutation({ registrant: user })
-    alert(
-      `${data?.newUser.familyName}, ${data?.newUser.givenName} has been created!`
-    )
+    if (data) {
+      saveUserAndRedirect(data.newUser)
+    }
   }
 }
 </script>

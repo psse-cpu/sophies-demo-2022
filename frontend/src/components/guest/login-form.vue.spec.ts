@@ -92,12 +92,8 @@ describe('LoginPage', () => {
     await wrapper.find(formSelector).trigger('submit')
 
     expect(saveRedirectSpy).toHaveBeenCalledWith({
-      // TODO: unnest data contents for better design
-      // labels: tech-debt
-      data: {
-        id: 1,
-        email: 'mike@yahoo.com',
-      },
+      id: 1,
+      email: 'mike@yahoo.com',
     })
   })
 

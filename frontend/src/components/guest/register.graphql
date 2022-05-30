@@ -5,6 +5,7 @@ mutation Register($registrant: Registrant!) {
     familyName
     givenName
     id
+    registrationSource
     updatedAt
   }
 }

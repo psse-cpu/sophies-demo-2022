@@ -26,7 +26,7 @@ onMounted(() => {
           },
         }
       )
-      .then(saveUserAndRedirect)
+      .then(({ data }) => saveUserAndRedirect(data))
       .catch((error: AxiosError) => {
         emit(
           'google-error',

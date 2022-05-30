@@ -1,5 +1,4 @@
 import localforage from 'localforage'
-import { AxiosResponse } from 'axios'
 import { UserWithoutHash } from 'app/../backend/src/users/user-without-hash.dto'
 import { useSaveAndRedirect } from './use-save-and-redirect'
 
@@ -26,11 +25,9 @@ describe('useSaveAndRedirect()', () => {
       const spy = vi.spyOn(localforage, 'setItem')
 
       saveUserAndRedirect({
-        data: {
-          id: 1,
-          email: 'mike@yahoo.com',
-        },
-      } as AxiosResponse<UserWithoutHash>)
+        id: 1,
+        email: 'mike@yahoo.com',
+      } as UserWithoutHash)
 
       expect(spy).toHaveBeenCalledWith('currentUser', {
         id: 1,
@@ -41,11 +38,9 @@ describe('useSaveAndRedirect()', () => {
     it('redirects the user', () => {
       const { saveUserAndRedirect } = useSaveAndRedirect()
       saveUserAndRedirect({
-        data: {
-          id: 1,
-          email: 'mike@yahoo.com',
-        },
-      } as AxiosResponse<UserWithoutHash>)
+        id: 1,
+        email: 'mike@yahoo.com',
+      } as UserWithoutHash)
 
       expect(pushSpy).toHaveBeenCalledWith('/somewhere')
     })

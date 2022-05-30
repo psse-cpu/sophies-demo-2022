@@ -111,7 +111,7 @@ const login = async () => {
   isLoading.value = true
   backend
     .post<UserWithoutHash>('/auth/login', credentials)
-    .then(saveUserAndRedirect)
+    .then((response) => saveUserAndRedirect(response.data))
     .catch((error: AxiosError) => {
       authError.value =
         error.response?.status === 401
