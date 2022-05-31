@@ -35,6 +35,7 @@ module.exports = defineConfig({
     commonjsOptions: {
       include: [/typeorm/, /@nestjs\/graphql/, /node_modules/],
     },
+    sourcemap: true,
   },
   plugins: [
     vue({
