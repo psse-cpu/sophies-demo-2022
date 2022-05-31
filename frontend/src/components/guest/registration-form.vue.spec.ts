@@ -149,6 +149,9 @@ describe('RegistrationForm', () => {
     )
   })
 
+  // TODO: this seems hard to test, due to urql mocks breaking reactivity, but E2E should cover this
+  it.todo('shows email is taken even when just typing after submit')
+
   it('shows an error when email is invalid', async () => {
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike')
