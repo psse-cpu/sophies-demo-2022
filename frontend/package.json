@@ -38,7 +38,8 @@
     "localforage": "^1.10.0",
     "quasar": "^2.6.0",
     "vite": "^2.9.9",
-    "vue-router": "^4.0.0"
+    "vue-router": "^4.0.0",
+    "wonka": "^4.0.15"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
