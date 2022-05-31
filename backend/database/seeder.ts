@@ -26,7 +26,6 @@ interface RegularDatabaseSeedOptions {
   tableName: string
   onlyWhenEmpty?: boolean
   clearOldData?: boolean
-  useFaker?: unknown // TODO: implement this
 }
 
 const connect = async (): Promise<Connection> => {
@@ -86,10 +85,14 @@ export const seedNormalDatabase = async ({
 }: RegularDatabaseSeedOptions): Promise<boolean> => {
   const {
     sampleData,
-    _customFunction,
+    customFunction,
     // eslint-disable-next-line global-require, import/no-dynamic-require -- need to be dynamic
   } = require(`./seeds/${tableName}.seed.ts`)
   // TODO: 👆 custom function may handle special cases like User
+
+  if (typeof customFunction === 'function') {
+    return seedDatabase({ tableName, data: customFunction() })
+  }
 
   if (!Array.isArray(sampleData)) {
     const message = `${chalk.red.bold(
