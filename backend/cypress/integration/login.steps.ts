@@ -10,10 +10,6 @@ After(function clearUser() {
   this.user = undefined
 })
 
-Given("that I'm not logged-in", () => {
-  localStorage.clear()
-})
-
 Given(/(that )?I'm on the login page/, () => {
   cy.visit('/guest/login')
 })

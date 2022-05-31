@@ -104,6 +104,7 @@ importers:
       istanbul-badges-readme: ^1.8.1
       jest: 28.0.3
       jest-html-reporters: ^3.0.6
+      localforage: ^1.10.0
       lodash: ^4.17.21
       multiple-cucumber-html-reporter: ^1.21.2
       passport: ^0.5.2
@@ -183,6 +184,7 @@ importers:
       istanbul-badges-readme: 1.8.1
       jest: 28.0.3_2cnx3q6hfnpx7nryv75xx7ahte
       jest-html-reporters: 3.0.8
+      localforage: 1.10.0
       multiple-cucumber-html-reporter: 1.21.2
       source-map-support: 0.5.21
       supertest: 6.2.3
@@ -9265,7 +9267,6 @@ packages:
 
   /immediate/3.0.6:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
-    dev: false
 
   /immutable/3.7.6:
     resolution: {integrity: sha512-AizQPcaofEtO11RZhPPHBOJRdo/20MKQF9mBLnVkBoyHi1/zXK8fzVdnEpSV9gxqtnh6Qomfp3F0xT5qP/vThw==}
@@ -10655,7 +10656,6 @@ packages:
     resolution: {integrity: sha1-mkNrLMd0bKWd56QfpGmz77dr2H4=}
     dependencies:
       immediate: 3.0.6
-    dev: false
 
   /lilconfig/2.0.5:
     resolution: {integrity: sha512-xaYmXZtTHPAw5m+xLN8ab9C+3a8YmV3asNSPOATITbtwrfbwaLJj8h66H1WMIpALCkqsIzK3h7oQ+PdX+LQ9Eg==}
@@ -10801,7 +10801,6 @@ packages:
     resolution: {integrity: sha512-14/H1aX7hzBBmmh7sGPd+AOMkkIrHM3Z1PAyGgZigA1H1p5O5ANnMyWzvpAETtG68/dC4pC0ncy3+PPGzXZHPg==}
     dependencies:
       lie: 3.1.1
-    dev: false
 
   /locate-path/2.0.0:
     resolution: {integrity: sha512-NCI2kiDkyR7VeEKm27Kda/iQHyKJe1Bu0FlTbYp3CqJu+9IFe9bLyAjMxf5ZDDbEg+iMPzB5zYyUTSm8wVTKmA==}

@@ -90,6 +90,7 @@
     "istanbul-badges-readme": "^1.8.1",
     "jest": "28.0.3",
     "jest-html-reporters": "^3.0.6",
+    "localforage": "^1.10.0",
     "multiple-cucumber-html-reporter": "^1.21.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
