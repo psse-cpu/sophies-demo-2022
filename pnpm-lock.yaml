@@ -62,6 +62,7 @@ importers:
     specifiers:
       '@badeball/cypress-cucumber-preprocessor': ^10.0.2
       '@cypress/browserify-preprocessor': ^3.0.2
+      '@faker-js/faker': ^7.1.0
       '@nestjs/apollo': ^10.0.11
       '@nestjs/cli': ^8.0.0
       '@nestjs/common': ^8.0.0
@@ -161,6 +162,7 @@ importers:
     devDependencies:
       '@badeball/cypress-cucumber-preprocessor': 10.0.2_qlabdrhj7olooxf2lzkgmdtzpq
       '@cypress/browserify-preprocessor': 3.0.2
+      '@faker-js/faker': 7.1.0
       '@nestjs/cli': 8.2.6_@swc+core@1.2.196
       '@nestjs/schematics': 8.0.11_typescript@4.7.2
       '@nestjs/testing': 8.4.5_v4yws7ywn2lpbkufzf4c3ewbaq
@@ -2135,6 +2137,11 @@ packages:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@faker-js/faker/7.1.0:
+    resolution: {integrity: sha512-G+EvE29QUd9/6GTrwA/TK2AiN79W4ZG6kyJqj2RAqUqEd8A8ICnjA3Rj3F2IaaA+sq6WJzs4lh8GJJRDG1UH7A==}
+    engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: true
 
   /@graphql-codegen/add/3.1.1_graphql@15.8.0:
