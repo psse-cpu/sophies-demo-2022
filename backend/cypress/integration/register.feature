@@ -40,4 +40,4 @@ Scenario Outline: test a bunch of users
   Scenario: email already exists
     Given that I'm on the register page
     When I enter "mike@cpu.edu.ph" as email
-    Then I should see an error "Email already exists"
+    Then I should see an error "Email already taken"
