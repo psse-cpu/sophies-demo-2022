@@ -9,6 +9,5 @@ const client = createClient({
   url: `${import.meta.env.VITE_BACKEND_ORIGIN}/graphql`,
 })
 
-// TODO: investigate calling this in src/boot (could be the cause of testability issues)
 provideClient(client)
 </script>
