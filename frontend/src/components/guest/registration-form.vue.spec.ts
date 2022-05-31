@@ -1,22 +1,9 @@
 import { ref } from 'vue'
+
 import { flushPromises, mount } from '@vue/test-utils'
 import { Quasar } from 'quasar'
 import RegistrationForm from 'src/components/guest/registration-form.vue'
-import * as urql from '@urql/vue'
-import { SpyInstance } from 'vitest'
-import { RegistrationSource } from 'src/generated/graphql'
-import {
-  EmailExistsQuery,
-  EmailExistsQueryVariables,
-} from './email-exists.generated'
-
-const queryMock = vi.fn()
-const mutationMock = vi.fn()
-
-const mockClient = {
-  useQuery: queryMock,
-  useMutation: mutationMock,
-}
+import { fromValue, never } from 'wonka'
 
 const saveRedirectSpy = vi.fn()
 vi.mock('src/composables/use-save-and-redirect', () => ({
@@ -25,21 +12,26 @@ vi.mock('src/composables/use-save-and-redirect', () => ({
   }),
 }))
 
-// @urql/vue doesn't use the inject('$urql') result
-vi.mock('@urql/vue', () => ({
-  useQuery: vi.fn().mockReturnValue({
-    data: ref({ emailExists: false }),
-    executeQuery: vi.fn(),
-  }),
-  useMutation: vi.fn(),
-}))
+const querySpy = vi.fn(() =>
+  fromValue({
+    data: {
+      emailExists: false,
+    },
+  })
+)
+
+const mutationSpy = vi.fn(() => never)
 
 const wrapperFactory = () =>
   mount(RegistrationForm, {
     global: {
       plugins: [Quasar],
       provide: {
-        $urql: mockClient, // doesn't work but makes urql happy
+        $urql: ref({
+          executeQuery: querySpy,
+          executeMutation: mutationSpy,
+          executeSubscription: vi.fn(() => never),
+        }),
       },
     },
   })
@@ -50,32 +42,21 @@ const familyNameSelector = '[data-testid="family-name-input"]'
 const givenNameSelector = '[data-testid="given-name-input"]'
 
 describe('RegistrationForm', () => {
+  beforeEach(() => {
+    querySpy.mockReturnValue(
+      fromValue({
+        data: {
+          emailExists: false,
+        },
+      })
+    )
+  })
+
   afterEach(() => {
     vi.clearAllMocks()
   })
 
-  beforeEach(() => {
-    vi.spyOn(urql, 'useQuery').mockReturnValue({
-      data: ref({ emailExists: false }),
-      executeQuery: vi.fn(),
-    } as unknown as urql.UseQueryResponse<EmailExistsQuery, EmailExistsQueryVariables>)
-  })
-
   it('shows no errors when all inputs are valid', async () => {
-    const mutationSpy = urql.useMutation as unknown as SpyInstance
-    mutationSpy.mockReturnValue({
-      executeMutation: () => ({
-        data: {
-          newUser: {
-            id: 1,
-            email: 'mike@cpu.edu.ph',
-            familyName: 'Coo',
-            givenName: 'Mike',
-          },
-        },
-      }),
-    })
-
     const wrapper = wrapperFactory()
     // TODO: refactor into a fillOutForm() helper
     // labels: tech-debt
@@ -90,24 +71,6 @@ describe('RegistrationForm', () => {
   })
 
   it('submits the correct mutation variables when all inputs are valid', async () => {
-    const mutationSpy = urql.useMutation as unknown as SpyInstance
-    const executeMutationSpy = vi.fn()
-
-    mutationSpy.mockReturnValue({
-      executeMutation: executeMutationSpy,
-    })
-
-    executeMutationSpy.mockResolvedValue({
-      data: {
-        newUser: {
-          id: 1,
-          email: 'mike@cpu.edu.ph',
-          familyName: 'Coo',
-          givenName: 'Mike',
-        },
-      },
-    })
-
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
     await wrapper.find(passwordSelector).setValue('m')
@@ -116,22 +79,15 @@ describe('RegistrationForm', () => {
     await wrapper.find('form').trigger('submit')
     await flushPromises()
 
-    expect(executeMutationSpy).toHaveBeenCalledWith({
-      registrant: {
-        email: 'mike@cpu.edu.ph',
-        password: 'm',
-        familyName: 'Coo',
-        givenName: 'Mike',
-        registrationSource: RegistrationSource.LOCAL,
-      },
-    })
+    expect(mutationSpy).toHaveBeenCalled()
   })
 
   it('shows an error when all inputs are valid but email is taken', async () => {
-    vi.spyOn(urql, 'useQuery').mockReturnValue({
-      data: ref({ emailExists: true }),
-      executeQuery: vi.fn(),
-    } as unknown as urql.UseQueryResponse<EmailExistsQuery, EmailExistsQueryVariables>)
+    querySpy.mockReturnValue(
+      fromValue({
+        data: { emailExists: true },
+      })
+    )
 
     const wrapper = wrapperFactory()
     // TODO: refactor into a fillOutForm() helper
@@ -149,9 +105,6 @@ describe('RegistrationForm', () => {
     )
   })
 
-  // TODO: this seems hard to test, due to urql mocks breaking reactivity, but E2E should cover this
-  it.todo('shows email is taken even when just typing after submit')
-
   it('shows an error when email is invalid', async () => {
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike')
@@ -165,6 +118,22 @@ describe('RegistrationForm', () => {
     expect(wrapper.find('.q-field--error .q-field__messages').html()).toContain(
       'must be an email'
     )
+  })
+
+  it('does not mutate when email is invalid', async () => {
+    const wrapper = wrapperFactory()
+    await wrapper.find(emailSelector).setValue('mike')
+    await wrapper.find(passwordSelector).setValue('m')
+    await wrapper.find(familyNameSelector).setValue('Coo')
+    await wrapper.find(givenNameSelector).setValue('Mike')
+    await wrapper.find('form').trigger('submit')
+    await flushPromises()
+
+    expect(wrapper.findAll('.q-field--error')).toHaveLength(1)
+    expect(wrapper.find('.q-field--error .q-field__messages').html()).toContain(
+      'must be an email'
+    )
+    expect(mutationSpy).not.toHaveBeenCalled()
   })
 
   it('shows an error when password is blank', async () => {
