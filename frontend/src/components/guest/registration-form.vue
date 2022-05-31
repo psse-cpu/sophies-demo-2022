@@ -13,9 +13,8 @@
         dense
         rounded
         outlined
-        debounce="500"
-        :error="!!validationErrors.email || emailCheckResult?.emailExists"
-        :error-message="validationErrors.email ?? duplicateEmailMessage"
+        :error="!!validationErrors.email || !!duplicateEmailMesage"
+        :error-message="validationErrors.email ?? duplicateEmailMesage"
         v-model="user.email"
         label="E-mail"
       />
@@ -92,7 +91,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, watch, computed } from 'vue'
+import { ref, reactive, watch, toRef, computed } from 'vue'
 import { validate as validateClass } from 'class-validator'
 import { plainToClass } from 'class-transformer'
 import { User } from 'backend/src/users/user.entity'
@@ -101,6 +100,7 @@ import { useVisibilityToggle } from 'src/composables/use-visibility-toggle'
 import { useMutation, useQuery } from '@urql/vue'
 import { Registrant, RegistrationSource } from 'src/generated/graphql'
 import { useSaveAndRedirect } from 'src/composables/use-save-and-redirect'
+import { debounce } from 'quasar'
 import { RegisterDocument } from './register.generated'
 import { EmailExistsDocument } from './email-exists.generated'
 
@@ -120,15 +120,15 @@ const user: Registrant = reactive(
 )
 
 const { executeMutation } = useMutation(RegisterDocument)
-const emailReactive = computed(() => user.email)
 
-const { data: emailCheckResult } = useQuery({
+const emailCheckResult = useQuery({
   query: EmailExistsDocument,
-  variables: { email: emailReactive as unknown as string },
+  variables: { email: toRef(user, 'email') as unknown as string },
+  pause: true,
 })
 
-const duplicateEmailMessage = computed(() =>
-  emailCheckResult.value?.emailExists ? 'Email already exists' : ''
+const duplicateEmailMesage = computed(() =>
+  emailCheckResult.data.value?.emailExists ? 'Email already taken' : ''
 )
 
 let hasSubmitted = false
@@ -138,7 +138,14 @@ const validationErrors = ref<Partial<Record<keyof Registrant, string>>>({})
 
 const hasValidationErrors = () =>
   Object.keys(validationErrors.value).length > 0 ||
-  emailCheckResult.value?.emailExists
+  emailCheckResult.data.value?.emailExists
+
+watch(
+  toRef(user, 'email'),
+  debounce(() => {
+    emailCheckResult.executeQuery({ requestPolicy: 'network-only' })
+  }, 500)
+)
 
 const validate = async () => {
   if (!hasSubmitted) {
@@ -163,6 +170,7 @@ const validate = async () => {
   }
 
   validationErrors.value = result
+
   return hasValidationErrors()
 }
 
@@ -171,9 +179,8 @@ watch(user, validate)
 const handleSubmit = async () => {
   hasSubmitted = true
   await validate()
+  await emailCheckResult.executeQuery()
 
-  // TODO: investigate possible race condition due to debounce
-  // I can't think, it's 2am
   if (!hasValidationErrors()) {
     const { data } = await executeMutation({ registrant: user })
     if (data) {
