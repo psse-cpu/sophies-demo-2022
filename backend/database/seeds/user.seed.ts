@@ -1,10 +1,5 @@
+import { Registrant } from 'src/users/registrant.dto'
 import { RegistrationSource } from '../../src/users/registration-source'
-import { User } from '../../src/users/user.entity'
-
-type Registrant = Omit<
-  User,
-  'id' | 'passwordHash' | 'createdAt' | 'updatedAt'
-> & { password: string }
 
 export const sampleData: Registrant[] = [
   {
