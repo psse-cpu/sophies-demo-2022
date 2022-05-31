@@ -2,6 +2,21 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Project {
+  id: Int!
+  name: String!
+  description: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+  members: [User!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: Int!
   email: String!
@@ -11,6 +26,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime!
+  projects: [Project!]!
 }
 
 enum RegistrationSource {
@@ -18,14 +34,10 @@ enum RegistrationSource {
   GOOGLE
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Query {
   emailExists(email: String!): Boolean!
   users: [User!]!
+  allProjects: [Project!]!
 }
 
 type Mutation {
