@@ -170,7 +170,6 @@ const validate = async () => {
   }
 
   validationErrors.value = result
-
   return hasValidationErrors()
 }
 

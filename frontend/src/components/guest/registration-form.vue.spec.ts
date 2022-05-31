@@ -1,9 +1,14 @@
+import { ref } from 'vue'
 import { flushPromises, mount } from '@vue/test-utils'
 import { Quasar } from 'quasar'
 import RegistrationForm from 'src/components/guest/registration-form.vue'
 import * as urql from '@urql/vue'
 import { SpyInstance } from 'vitest'
 import { RegistrationSource } from 'src/generated/graphql'
+import {
+  EmailExistsQuery,
+  EmailExistsQueryVariables,
+} from './email-exists.generated'
 
 const queryMock = vi.fn()
 const mutationMock = vi.fn()
@@ -23,11 +28,8 @@ vi.mock('src/composables/use-save-and-redirect', () => ({
 // @urql/vue doesn't use the inject('$urql') result
 vi.mock('@urql/vue', () => ({
   useQuery: vi.fn().mockReturnValue({
-    data: {
-      value: {
-        emailExists: false,
-      },
-    },
+    data: ref({ emailExists: false }),
+    executeQuery: vi.fn(),
   }),
   useMutation: vi.fn(),
 }))
@@ -50,6 +52,13 @@ const givenNameSelector = '[data-testid="given-name-input"]'
 describe('RegistrationForm', () => {
   afterEach(() => {
     vi.clearAllMocks()
+  })
+
+  beforeEach(() => {
+    vi.spyOn(urql, 'useQuery').mockReturnValue({
+      data: ref({ emailExists: false }),
+      executeQuery: vi.fn(),
+    } as unknown as urql.UseQueryResponse<EmailExistsQuery, EmailExistsQueryVariables>)
   })
 
   it('shows no errors when all inputs are valid', async () => {
@@ -118,12 +127,29 @@ describe('RegistrationForm', () => {
     })
   })
 
-  it('shows an error when email is invalid', async () => {
-    const mutationSpy = urql.useMutation as unknown as SpyInstance
-    mutationSpy.mockReturnValue({
-      executeMutation: vi.fn(),
-    })
+  it('shows an error when all inputs are valid but email is taken', async () => {
+    vi.spyOn(urql, 'useQuery').mockReturnValue({
+      data: ref({ emailExists: true }),
+      executeQuery: vi.fn(),
+    } as unknown as urql.UseQueryResponse<EmailExistsQuery, EmailExistsQueryVariables>)
 
+    const wrapper = wrapperFactory()
+    // TODO: refactor into a fillOutForm() helper
+    // labels: tech-debt
+    await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
+    await wrapper.find(passwordSelector).setValue('m')
+    await wrapper.find(familyNameSelector).setValue('Coo')
+    await wrapper.find(givenNameSelector).setValue('Mike')
+    await wrapper.find('form').trigger('submit')
+    await flushPromises()
+
+    expect(wrapper.findAll('.q-field--error')).toHaveLength(1)
+    expect(wrapper.find('.q-field--error .q-field__messages').html()).toContain(
+      'Email already taken'
+    )
+  })
+
+  it('shows an error when email is invalid', async () => {
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike')
     await wrapper.find(passwordSelector).setValue('m')
@@ -139,11 +165,6 @@ describe('RegistrationForm', () => {
   })
 
   it('shows an error when password is blank', async () => {
-    const mutationSpy = urql.useMutation as unknown as SpyInstance
-    mutationSpy.mockReturnValue({
-      executeMutation: vi.fn(),
-    })
-
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
     await wrapper.find(passwordSelector).setValue('')
@@ -159,11 +180,6 @@ describe('RegistrationForm', () => {
   })
 
   it('shows an error when family name is blank', async () => {
-    const mutationSpy = urql.useMutation as unknown as SpyInstance
-    mutationSpy.mockReturnValue({
-      executeMutation: vi.fn(),
-    })
-
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
     await wrapper.find(passwordSelector).setValue('asdf')
@@ -179,11 +195,6 @@ describe('RegistrationForm', () => {
   })
 
   it('shows an error when given name is blank', async () => {
-    const mutationSpy = urql.useMutation as unknown as SpyInstance
-    mutationSpy.mockReturnValue({
-      executeMutation: vi.fn(),
-    })
-
     const wrapper = wrapperFactory()
     await wrapper.find(emailSelector).setValue('mike@cpu.edu.ph')
     await wrapper.find(passwordSelector).setValue('asdf')
