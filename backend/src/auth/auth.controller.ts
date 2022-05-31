@@ -41,4 +41,14 @@ export class AuthController {
       httpOnly: true,
     })
   }
+
+  @Post('/logout')
+  async logout(
+    @Res({ passthrough: true }) response: Express.Response
+  ): Promise<{
+    success: true
+  }> {
+    response.clearCookie('jwt', { httpOnly: true })
+    return { success: true }
+  }
 }

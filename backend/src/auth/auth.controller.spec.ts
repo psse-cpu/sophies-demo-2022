@@ -54,4 +54,22 @@ describe('AuthController', () => {
       expect(spy).toHaveBeenCalledWith('jwt', 'token', { httpOnly: true })
     })
   })
+
+  describe('#logout()', () => {
+    it('clears the JWT cookie', async () => {
+      const mockResponse = { clearCookie: jest.fn() }
+      await authController.logout(mockResponse as unknown as Express.Response)
+      expect(mockResponse.clearCookie).toHaveBeenCalledWith('jwt', {
+        httpOnly: true,
+      })
+    })
+
+    it('responds with a simple success object', async () => {
+      const mockResponse = { clearCookie: jest.fn() }
+
+      return expect(
+        authController.logout(mockResponse as unknown as Express.Response)
+      ).resolves.toStrictEqual({ success: true })
+    })
+  })
 })
