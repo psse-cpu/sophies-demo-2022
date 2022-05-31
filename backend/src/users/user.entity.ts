@@ -63,7 +63,7 @@ export class User {
   @JoinTable({
     name: 'membership',
   })
-  projects: Project[]
+  projects?: Project[]
 }
 
 registerEnumType(RegistrationSource, { name: 'RegistrationSource' })
