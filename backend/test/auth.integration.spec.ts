@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import request from 'supertest'
 
 import { getConnection } from 'typeorm'
+import { Project } from '../src/projects/project.entity'
 import { RegistrationSource } from '../src/users/registration-source'
 
 import { AuthModule } from '../src/auth/auth.module'
@@ -38,7 +39,7 @@ describe('AuthController (integration)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot(),
-        ...typeOrmInMemoryModules([User]),
+        ...typeOrmInMemoryModules([User, Project]),
         AuthModule,
       ],
     }).compile()
