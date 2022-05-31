@@ -5,6 +5,7 @@ import {
   Connection,
   getConnection,
   getConnectionManager,
+  MoreThan,
   Repository,
 } from 'typeorm'
 import chalk from 'chalk'
@@ -59,7 +60,7 @@ const seedDatabase = async <T>({
       return false
     }
   } else if (clearOldData) {
-    await repository.clear()
+    await repository.delete({ id: MoreThan(0) }) // can't truncate with FKs
     console.log(`${chalk.yellow.bold('Table truncated: ')}: ${tableName}`)
   }
 
