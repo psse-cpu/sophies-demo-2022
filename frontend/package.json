@@ -71,7 +71,7 @@
     "vite-tsconfig-paths": "^3.4.1",
     "vitest": "^0.12.9",
     "vue": "^3.2.33",
-    "vue-tsc": "^0.34.11"
+    "vue-tsc": ">=0.35"
   },
   "engines": {
     "node": "^16",
