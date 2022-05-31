@@ -12,6 +12,7 @@ import { getConnection } from 'typeorm'
 import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
 import { AppController } from './app.controller'
+import { ProjectsModule } from './projects/projects.module'
 
 import ormConfig from '../ormconfig'
 
@@ -27,6 +28,7 @@ import ormConfig from '../ormconfig'
     }),
     AuthModule,
     UsersModule,
+    ProjectsModule,
   ],
   providers: [
     {
