@@ -4,4 +4,5 @@ import { User } from './user.entity'
 @InputType()
 export class UserWithoutHash extends OmitType(User, [
   'passwordHash',
+  'memberships',
 ] as const) {}
