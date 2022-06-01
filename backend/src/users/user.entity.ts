@@ -1,17 +1,13 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
-
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  DeleteDateColumn,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm'
 import { IsEmail, IsNotEmpty } from 'class-validator'
-import { Project } from '../projects/project.entity'
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 import { RegistrationSource } from './registration-source'
 
 @Entity()
@@ -57,13 +53,6 @@ export class User {
   @DeleteDateColumn()
   @Field()
   deletedAt?: Date
-
-  @ManyToMany(() => Project, (project) => project.members)
-  @Field(() => [Project])
-  @JoinTable({
-    name: 'membership',
-  })
-  projects?: Project[]
 }
 
 registerEnumType(RegistrationSource, { name: 'RegistrationSource' })

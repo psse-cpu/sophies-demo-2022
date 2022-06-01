@@ -1,3 +1,4 @@
+import { Field, Int, ObjectType } from '@nestjs/graphql'
 import {
   Column,
   CreateDateColumn,
@@ -5,10 +6,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToMany,
 } from 'typeorm'
-import { Int, Field, ObjectType } from '@nestjs/graphql'
-import { User } from '../users/user.entity'
 
 @Entity()
 @ObjectType()
@@ -36,8 +34,4 @@ export class Project {
   @DeleteDateColumn()
   @Field()
   deletedAt?: Date
-
-  @ManyToMany(() => User, (user) => user.projects)
-  @Field(() => [User])
-  members?: User[]
 }
