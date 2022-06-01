@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, GraphQLISODateTime, Int, ObjectType } from '@nestjs/graphql'
 import {
   TypeormLoaderExtension,
   TypeormLoaderMiddleware,
@@ -43,7 +43,7 @@ export class Project {
   createdAt: Date
 
   @UpdateDateColumn()
-  @Field()
+  @Field(() => GraphQLISODateTime)
   updatedAt: Date
 
   @DeleteDateColumn()
