@@ -25,6 +25,10 @@ import ormConfig from '../ormconfig'
       autoSchemaFile: path.join(process.cwd(), '../frontend/schema.graphql'),
       debug: process.env.NODE_ENV !== 'production',
       playground: true, // TODO: revert later to ➡ process.env.NODE_ENV !== 'production',
+      cors: {
+        origin: process.env.FRONTEND_ORIGIN,
+        credentials: true,
+      },
     }),
     AuthModule,
     UsersModule,
