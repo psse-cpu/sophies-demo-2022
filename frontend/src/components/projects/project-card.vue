@@ -1,6 +1,10 @@
 <template>
-  <q-card bordered>
-    <q-card-section data-testid="project-card-name">
+  <q-card
+    class="project-card"
+    bordered
+    style="display: flex; flex-direction: column"
+  >
+    <q-card-section data-testid="project-card-name" style="height: 60px">
       <div class="text-h6">
         <router-link
           class="project-link"
@@ -13,11 +17,15 @@
 
     <q-separator inset />
 
-    <q-card-section data-testid="project-card-description"
-      >{{ project.description }}
+    <q-card-section data-testid="project-card-description" style="flex: 1">
+      {{ project.description }}
     </q-card-section>
 
-    <q-card-section class="text-grey-5" data-testid="project-card-date">
+    <q-card-section
+      class="text-grey-5"
+      data-testid="project-card-date"
+      style="height: 48px"
+    >
       Created {{ project.createdAt.toLocaleDateString() }}
     </q-card-section>
   </q-card>
@@ -34,6 +42,10 @@ defineProps<CardProps>()
 </script>
 
 <style lang="scss" scoped>
+.project-card {
+  height: 200px;
+}
+
 .project-link {
   color: $primary;
 }

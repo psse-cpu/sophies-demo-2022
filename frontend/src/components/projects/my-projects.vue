@@ -39,7 +39,7 @@ import { Project } from 'src/generated/graphql'
 import ProjectCard from './project-card.vue'
 
 interface MyProjectsProps {
-  projects: Project[]
+  projects: Pick<Project, 'id' | 'name' | 'description' | 'createdAt'>[]
 }
 
 defineProps<MyProjectsProps>()
