@@ -1,7 +1,8 @@
 import { ConfigModule } from '@nestjs/config'
 import { Test } from '@nestjs/testing'
-import { User } from 'src/users/user.entity'
-import { Project } from 'src/projects/project.entity'
+import { User } from '../users/user.entity'
+import { Project } from '../projects/project.entity'
+import { Membership } from '../projects/membership.entity'
 import { typeOrmInMemoryModules } from '../../test/helpers/typeorm-in-memory-modules'
 import { UsersModule } from './users.module'
 import { UserResolver } from './user.resolver'
@@ -12,7 +13,7 @@ describe('UserModule', () => {
       imports: [
         UsersModule,
         ConfigModule.forRoot(),
-        ...typeOrmInMemoryModules([User, Project]),
+        ...typeOrmInMemoryModules([User, Project, Membership]),
       ],
     }).compile()
 
