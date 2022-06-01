@@ -57,6 +57,7 @@ type Query {
   emailExists(email: String!): Boolean!
   users: [User!]!
   allProjects: [Project!]!
+  myProjects: [Project!]!
 }
 
 type Mutation {
