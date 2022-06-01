@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { Project } from 'src/generated/graphql'
 import { ref } from 'vue'
-import MyProjects from './my-projects.vue'
+import MyProjects from 'src/components/projects/my-projects.vue'
 
 const projects = ref<Project[]>([])
 </script>
