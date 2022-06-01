@@ -6,10 +6,10 @@ type Project {
   id: Int!
   name: String!
   description: String!
+  memberships: [Membership!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime!
-  members: [User!]!
 }
 
 """
@@ -17,21 +17,74 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Membership {
+  id: Int!
+  projectId: Int!
+  userId: Int!
+  projectRole: ProjectRole!
+  user: User!
+  project: Project!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+}
+
+enum ProjectRole {
+  OWNER
+  MAINTAINER
+  MEMBER
+  REPORTER
+}
+
 type User {
   id: Int!
   email: String!
   familyName: String!
   givenName: String!
   registrationSource: RegistrationSource!
+  memberships: [Membership!]!
   createdAt: DateTime!
   updatedAt: DateTime!
   deletedAt: DateTime!
-  projects: [Project!]!
 }
 
 enum RegistrationSource {
   LOCAL
   GOOGLE
+}
+
+input ProjectInput {
+  id: Int!
+  name: String!
+  description: String!
+  memberships: [MembershipInput!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+}
+
+input MembershipInput {
+  id: Int!
+  projectId: Int!
+  userId: Int!
+  projectRole: ProjectRole!
+  user: UserInput!
+  project: ProjectInput!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
+}
+
+input UserInput {
+  id: Int!
+  email: String!
+  familyName: String!
+  givenName: String!
+  registrationSource: RegistrationSource!
+  memberships: [MembershipInput!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime!
 }
 
 type Query {
@@ -49,5 +102,6 @@ input Registrant {
   familyName: String!
   givenName: String!
   registrationSource: RegistrationSource!
+  memberships: [MembershipInput!]!
   password: String!
 }
