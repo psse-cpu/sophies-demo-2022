@@ -89,6 +89,7 @@ importers:
       '@types/passport-local': ^1.0.34
       '@types/supertest': ^2.0.11
       '@typescript-eslint/parser': ^5.23.0
+      '@webundsoehne/nestjs-graphql-typeorm-dataloader': ^3.3.2
       apollo-server-express: ^3.7.0
       bcrypt: ^5.0.1
       better-sqlite3: ^7.5.3
@@ -138,6 +139,7 @@ importers:
       '@nestjs/platform-express': 8.4.5_ydewkhgqdrhc2o62hf5fyq4ami
       '@nestjs/typeorm': 8.0.4_romqothtzaoqqrwlx2i25asuca
       '@swc/core': 1.2.196
+      '@webundsoehne/nestjs-graphql-typeorm-dataloader': 3.3.2_7bfyqluleexttqleuad4jil5eu
       apollo-server-express: 3.8.1_jfj6k5cqxqbusbdzwqjdzioxzm
       bcrypt: 5.0.1
       chalk: 4.1.2
@@ -4555,6 +4557,28 @@ packages:
       '@webassemblyjs/ast': 1.11.1
       '@xtuc/long': 4.2.2
     dev: true
+
+  /@webundsoehne/nestjs-graphql-typeorm-dataloader/3.3.2_7bfyqluleexttqleuad4jil5eu:
+    resolution: {integrity: sha512-1pfHuDeU2BzniiCWqZEp33Brty7hrssssKkKBW2woCmCma4si1urQA1iz3e8Iect46Gk4scqv2uqS77KJuhDuQ==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      '@nestjs/common': '>= 8 < 10'
+      '@nestjs/core': '>= 8 < 10'
+      rxjs: '>= 7 < 8'
+    dependencies:
+      '@nestjs/common': 8.4.5_kgmvgmqc4iohdboj3f7yqhrie4
+      '@nestjs/core': 8.4.5_suymtzhiym5sovixgkii2bos7m
+      apollo-server-plugin-base: 3.6.0_graphql@15.8.0
+      dataloader: 2.1.0
+      lodash: 4.17.21
+      reflect-metadata: 0.1.13
+      rxjs: 7.5.5
+      typedi: 0.10.0
+      uuid: 8.3.2
+    transitivePeerDependencies:
+      - encoding
+      - graphql
+    dev: false
 
   /@xtuc/ieee754/1.2.0:
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -14065,6 +14089,10 @@ packages:
 
   /typedarray/0.0.6:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=}
+
+  /typedi/0.10.0:
+    resolution: {integrity: sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==}
+    dev: false
 
   /typeorm-naming-strategies/4.1.0_typeorm@0.2.45:
     resolution: {integrity: sha512-vPekJXzZOTZrdDvTl1YoM+w+sUIfQHG4kZTpbFYoTsufyv9NIBRe4Q+PdzhEAFA2std3D9LZHEb1EjE9zhRpiQ==}

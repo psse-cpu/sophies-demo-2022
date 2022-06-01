@@ -26,6 +26,10 @@ module.exports = defineConfig({
         __dirname,
         '../backend/node_modules/@nestjs/graphql/dist/extra/graphql-model-shim.js'
       ),
+      '@webundsoehne/nestjs-graphql-typeorm-dataloader': path.resolve(
+        __dirname,
+        './src/shims/typeorm-dataloader.ts'
+      ),
     },
   },
   optimizeDeps: {
