@@ -78,6 +78,7 @@ importers:
       '@swc/core': ^1.2.182
       '@swc/jest': ^0.2.21
       '@types/bcrypt': ^5.0.0
+      '@types/cookie-parser': ^1.4.3
       '@types/express': ^4.17.13
       '@types/inflection': ^1.13.0
       '@types/jest': 27.5.0
@@ -96,6 +97,7 @@ importers:
       chalk: 4.x
       class-transformer: ^0.5.1
       class-validator: ^0.13.2
+      cookie-parser: ^1.4.6
       cypress: ^9.7.0
       dotenv: ^16.0.1
       eslint: ^8.14.0
@@ -139,12 +141,14 @@ importers:
       '@nestjs/platform-express': 8.4.5_ydewkhgqdrhc2o62hf5fyq4ami
       '@nestjs/typeorm': 8.0.4_romqothtzaoqqrwlx2i25asuca
       '@swc/core': 1.2.196
+      '@types/cookie-parser': 1.4.3
       '@webundsoehne/nestjs-graphql-typeorm-dataloader': 3.3.2_7bfyqluleexttqleuad4jil5eu
       apollo-server-express: 3.8.1_jfj6k5cqxqbusbdzwqjdzioxzm
       bcrypt: 5.0.1
       chalk: 4.1.2
       class-transformer: 0.5.1
       class-validator: 0.13.2
+      cookie-parser: 1.4.6
       dotenv: 16.0.1
       express: 4.18.1
       graphql: 15.8.0
@@ -3869,6 +3873,12 @@ packages:
     dependencies:
       '@types/node': 16.11.36
 
+  /@types/cookie-parser/1.4.3:
+    resolution: {integrity: sha512-CqSKwFwefj4PzZ5n/iwad/bow2hTCh0FlNAeWLtQM3JA/NX/iYagIpWG2cf1bQKQ2c9gU2log5VUCrn7LDOs0w==}
+    dependencies:
+      '@types/express': 4.17.13
+    dev: false
+
   /@types/cookiejar/2.1.2:
     resolution: {integrity: sha512-t73xJJrvdTjXrn4jLS9VSGRbz0nUY3cl2DMGDU48lKl+HR9dbbjW2A9r3g40VA++mQpy6uuHg33gy7du2BKpog==}
     dev: true
@@ -6432,8 +6442,21 @@ packages:
       safe-buffer: 5.1.2
     dev: true
 
+  /cookie-parser/1.4.6:
+    resolution: {integrity: sha512-z3IzaNjdwUC2olLIB5/ITd0/setiaFMLYiZJle7xg5Fe9KWAceil7xszYfHHBtDFYLSgJduS2Ty0P1uJdPDJeA==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      cookie: 0.4.1
+      cookie-signature: 1.0.6
+    dev: false
+
   /cookie-signature/1.0.6:
     resolution: {integrity: sha1-4wOogrNCzD7oylE6eZmXNNqzriw=}
+
+  /cookie/0.4.1:
+    resolution: {integrity: sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==}
+    engines: {node: '>= 0.6'}
+    dev: false
 
   /cookie/0.5.0:
     resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
