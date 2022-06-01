@@ -12,4 +12,14 @@ export class ProjectsService {
   allProjects(): Promise<Project[]> {
     return this.projectRepository.find()
   }
+
+  findByUserId(userId: number): Promise<Project[]> {
+    // TODO: this waste a join due to dataloader "rejoining" stuff
+    // should probably start with Membership
+    return this.projectRepository
+      .createQueryBuilder('project')
+      .innerJoinAndSelect('project.memberships', 'membership')
+      .where('membership.user_id = :id', { id: userId })
+      .getMany()
+  }
 }
