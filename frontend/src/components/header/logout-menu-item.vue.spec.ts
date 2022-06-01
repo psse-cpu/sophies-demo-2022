@@ -1,9 +1,11 @@
-import { flushPromises, shallowMount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import localforage from 'localforage'
+import { Quasar } from 'quasar'
 import { backend } from 'src/axios'
 import LogoutMenuItem from './logout-menu-item.vue'
 
-const wrapperFactory = () => shallowMount(LogoutMenuItem)
+const wrapperFactory = () =>
+  mount(LogoutMenuItem, { global: { plugins: [Quasar] } })
 
 const pushSpy = vi.fn()
 
