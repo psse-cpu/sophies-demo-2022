@@ -12,6 +12,7 @@ const mockProjectService = {
 const mockProject: Project = {
   id: 3,
   name: 'Nami nga project',
+  description: 'Lawlaw nga project  hehehe',
   createdAt: new Date(),
   updatedAt: new Date(),
 }
