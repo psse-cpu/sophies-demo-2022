@@ -1,17 +1,31 @@
-import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
+import {
+  Field,
+  InputType,
+  Int,
+  ObjectType,
+  registerEnumType,
+} from '@nestjs/graphql'
+
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  OneToMany,
+} from 'typeorm'
 import { IsEmail, IsNotEmpty } from 'class-validator'
 import {
-  Column,
-  CreateDateColumn,
-  DeleteDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm'
+  TypeormLoaderMiddleware,
+  TypeormLoaderExtension,
+} from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
+import { Membership } from '../projects/membership.entity'
 import { RegistrationSource } from './registration-source'
 
 @Entity()
 @ObjectType()
+@InputType('UserInput')
 export class User {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
@@ -41,6 +55,15 @@ export class User {
   })
   @Field(() => RegistrationSource)
   registrationSource: RegistrationSource
+
+  @OneToMany(() => Membership, (membership) => membership.user, {
+    cascade: true,
+  })
+  @Field(() => [Membership], { middleware: [TypeormLoaderMiddleware] })
+  @TypeormLoaderExtension((membership: Membership) => membership.userId, {
+    selfKey: true,
+  })
+  memberships?: Membership[]
 
   @CreateDateColumn()
   @Field()
