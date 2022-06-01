@@ -1,0 +1,8 @@
+query MyProjects {
+  myProjects {
+    createdAt
+    description
+    id
+    name
+  }
+}
