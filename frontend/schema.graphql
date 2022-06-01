@@ -53,40 +53,6 @@ enum RegistrationSource {
   GOOGLE
 }
 
-input ProjectInput {
-  id: Int!
-  name: String!
-  description: String!
-  memberships: [MembershipInput!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime!
-}
-
-input MembershipInput {
-  id: Int!
-  projectId: Int!
-  userId: Int!
-  projectRole: ProjectRole!
-  user: UserInput!
-  project: ProjectInput!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime!
-}
-
-input UserInput {
-  id: Int!
-  email: String!
-  familyName: String!
-  givenName: String!
-  registrationSource: RegistrationSource!
-  memberships: [MembershipInput!]!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  deletedAt: DateTime!
-}
-
 type Query {
   emailExists(email: String!): Boolean!
   users: [User!]!
@@ -102,6 +68,5 @@ input Registrant {
   familyName: String!
   givenName: String!
   registrationSource: RegistrationSource!
-  memberships: [MembershipInput!]!
   password: String!
 }

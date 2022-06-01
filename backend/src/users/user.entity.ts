@@ -1,10 +1,4 @@
-import {
-  Field,
-  InputType,
-  Int,
-  ObjectType,
-  registerEnumType,
-} from '@nestjs/graphql'
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql'
 
 import {
   Entity,
@@ -25,7 +19,6 @@ import { RegistrationSource } from './registration-source'
 
 @Entity()
 @ObjectType()
-@InputType('UserInput')
 export class User {
   @PrimaryGeneratedColumn()
   @Field(() => Int)

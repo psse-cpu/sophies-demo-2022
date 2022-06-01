@@ -1,4 +1,4 @@
-import { Field, InputType, Int, ObjectType } from '@nestjs/graphql'
+import { Field, Int, ObjectType } from '@nestjs/graphql'
 import {
   TypeormLoaderExtension,
   TypeormLoaderMiddleware,
@@ -16,7 +16,6 @@ import { Membership } from './membership.entity'
 
 @Entity()
 @ObjectType()
-@InputType('ProjectInput')
 export class Project {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
