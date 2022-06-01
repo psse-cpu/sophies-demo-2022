@@ -16,6 +16,7 @@
     "badges": "FORCE_COLOR=1 pnpm --parallel --aggregate-output badges",
     "badges:ci": "pnpm --parallel --aggregate-output badges:ci",
     "test:unit": "pnpm --color=always --parallel --aggregate-output test:cov && pnpm badges",
+    "test:cov": "pnpm --parallel --aggregate-output test:cov",
     "test:integration": "pnpm --filter backend test:integration",
     "test": "run-p test:*",
     "start:fe": "pnpm fe start:test:compiled",
