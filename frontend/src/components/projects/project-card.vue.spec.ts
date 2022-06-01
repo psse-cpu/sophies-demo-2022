@@ -9,6 +9,7 @@ const wrapperFactory = () =>
         id: 3,
         name: 'Awesome Project',
         description: 'cool cool cool',
+        createdAt: new Date(),
       },
     },
     global: { plugins: [Quasar] },
@@ -16,6 +17,7 @@ const wrapperFactory = () =>
 
 const cardTitleSelector = '[data-testid="project-card-name"]'
 const cardBodySelector = '[data-testid="project-card-description"]'
+const cardDateSelector = '[data-testid="project-card-date"]'
 
 describe('ProjectCard', () => {
   it('displays the project name', () => {
@@ -26,5 +28,13 @@ describe('ProjectCard', () => {
   it('displays the project body', () => {
     const wrapper = wrapperFactory()
     expect(wrapper.get(cardBodySelector).text()).toBe('cool cool cool')
+  })
+
+  it('displays the project creation date', () => {
+    const wrapper = wrapperFactory()
+    console.log('linti', wrapper.html())
+    expect(wrapper.get(cardDateSelector).text()).toMatch(
+      /^Created \d\d?\/\d\d?/
+    )
   })
 })

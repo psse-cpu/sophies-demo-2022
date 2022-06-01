@@ -1,23 +1,28 @@
 <template>
-  <div class="root flex-center">
-    <div v-if="projects.length === 0" class="empty-state">
-      <q-avatar
-        class="q-pa-xs"
-        size="300px"
-        font-size="256px"
-        color="green-3"
-        icon="mdi-gauge-empty"
-        text-color="white"
-      />
+  <div v-if="projects.length === 0" class="empty-state">
+    <q-avatar
+      class="q-pa-xs"
+      size="300px"
+      font-size="256px"
+      color="green-3"
+      icon="mdi-gauge-empty"
+      text-color="white"
+    />
 
-      <h3>Wow, such empty!</h3>
-      <p class="empty-message">You have no projects right now.</p>
+    <h3>Wow, such empty!</h3>
+    <p class="empty-message">You have no projects right now.</p>
 
+    <q-btn color="primary" icon="mdi-briefcase-plus">
+      <span class="q-px-sm">Create new project</span>
+    </q-btn>
+  </div>
+  <div v-else class="col projects">
+    <div class="actions row q-pa-md" style="justify-content: flex-end">
       <q-btn color="primary" icon="mdi-briefcase-plus">
-        <span class="q-px-sm">Create one</span>
+        <span class="q-px-sm">Create new project</span>
       </q-btn>
     </div>
-    <div v-else class="row projects">
+    <div class="row">
       <div
         v-for="project of projects"
         :key="project.id"
