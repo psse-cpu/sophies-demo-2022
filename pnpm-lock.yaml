@@ -233,7 +233,7 @@ importers:
       npm-run-all: ^4.1.5
       postcss: ^8.4.13
       prettier: ^2.5.1
-      quasar: ^2.6.0
+      quasar: ^2.7.1
       rollup: ^2.72.0
       start-server-and-test: ^1.14.0
       ts-node: ^10.7.0
