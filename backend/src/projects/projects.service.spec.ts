@@ -144,7 +144,7 @@ describe('ProjectsService', () => {
         memberships: [
           Object.assign(new Membership(), {
             project: expectedProject,
-            scrumRole: ScrumRole.PRODUCT_OWNER,
+            scrumRole: ScrumRole.SCRUM_MASTER,
             userId: 7,
           }),
         ],

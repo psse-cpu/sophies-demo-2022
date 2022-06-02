@@ -36,7 +36,7 @@ export class ProjectsService {
     const membership = new Membership()
     membership.project = projectToBeCreated
     membership.userId = ownerId
-    membership.scrumRole = ScrumRole.PRODUCT_OWNER
+    membership.scrumRole = ScrumRole.SCRUM_MASTER
 
     projectToBeCreated.memberships = [membership]
 
