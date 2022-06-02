@@ -62,6 +62,7 @@ type Query {
 
 type Mutation {
   register(registrant: Registrant!): User!
+  createProject(project: ProjectInput!): Project!
 }
 
 input Registrant {
@@ -70,4 +71,9 @@ input Registrant {
   givenName: String!
   registrationSource: RegistrationSource!
   password: String!
+}
+
+input ProjectInput {
+  name: String!
+  description: String!
 }

@@ -7,6 +7,7 @@ import { ProjectsService } from './projects.service'
 const mockProjectService = {
   allProjects: jest.fn(),
   findByUserId: jest.fn(),
+  createProjectWithOwner: jest.fn(),
 }
 
 const mockProject: Project = {
@@ -63,6 +64,43 @@ describe('ProjectResolver', () => {
       return expect(
         projectResolver.myProjects({ id: 55, email: 'foo@bar.baz' } as User)
       ).resolves.toStrictEqual([mockProject])
+    })
+  })
+
+  describe('#createProject', () => {
+    it('calls the service method correctly', async () => {
+      const spy = jest.spyOn(projectsService, 'createProjectWithOwner')
+      await projectResolver.createProject(
+        {
+          name: 'tahom system',
+          description: 'tahom3x gid kaayo',
+        },
+        { id: 7, email: 'mike@cpu.edu.ph' } as User
+      )
+
+      expect(spy).toHaveBeenCalledWith(
+        {
+          name: 'tahom system',
+          description: 'tahom3x gid kaayo',
+        },
+        7
+      )
+    })
+
+    it('returns the created project', async () => {
+      jest
+        .spyOn(projectsService, 'createProjectWithOwner')
+        .mockResolvedValue(mockProject)
+
+      return expect(
+        projectResolver.createProject(
+          {
+            name: 'tahom system',
+            description: 'tahom3x gid kaayo',
+          },
+          { id: 7, email: 'mike@cpu.edu.ph' } as User
+        )
+      ).resolves.toStrictEqual(mockProject)
     })
   })
 })
