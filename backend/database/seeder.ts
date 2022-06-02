@@ -1,13 +1,7 @@
 /* eslint-disable unicorn/prefer-module -- seeder is ran in CJS */
 /* eslint-disable no-console -- it's a CLI script */
 
-import {
-  Connection,
-  getConnection,
-  getConnectionManager,
-  MoreThan,
-  Repository,
-} from 'typeorm'
+import { DataSource, MoreThan, Repository } from 'typeorm'
 import chalk from 'chalk'
 import _ from 'lodash'
 import { User } from '../src/users/user.entity'
@@ -29,25 +23,18 @@ interface RegularDatabaseSeedOptions {
   clearOldData?: boolean
 }
 
-const connect = async (): Promise<Connection> => {
-  const manager = getConnectionManager()
-  const connection = manager.has('default')
-    ? getConnection()
-    : manager.create(ormConfig)
-
-  if (!connection.isConnected) {
-    await connection.connect()
-  }
-
-  return connection
+const connect = async (): Promise<DataSource> => {
+  const datasource = new DataSource(ormConfig)
+  await datasource.initialize()
+  return datasource
 }
 
 // entity class reference does not work with Cypress
 const seedDatabase = async <T>({
   tableName,
   data,
-  onlyWhenEmpty,
-  clearOldData,
+  onlyWhenEmpty = true,
+  clearOldData = false,
 }: DatabaseSeedOptions<T>): Promise<boolean> => {
   const connection = await connect()
   const repository = connection.getRepository(tableName)

@@ -25,7 +25,6 @@
     "test:integration": "jest --config ./test/jest-integration.json",
     "typecheck": "tsc --noEmit -p tsconfig.json  # exists coz test/ aren't typechecked by `nest build`",
     "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js",
-    "erd": "ts-node -P tsconfig.json ./node_modules/typeorm-uml/bin/run ormconfig.ts --with-table-names-only -d erd.png --handwritten",
     "seed": "ts-node ./database/seed.ts",
     "migrate:gen": "pnpm typeorm migration:generate",
     "migrate": "pnpm typeorm migration:run",
@@ -64,7 +63,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "0.2",
+    "typeorm": "0.3",
     "typeorm-naming-strategies": "^4.1.0"
   },
   "devDependencies": {
@@ -101,7 +100,6 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.7.0",
     "tsconfig-paths": "4.0.0",
-    "typeorm-uml": "^1.6.5",
     "typescript": "^4.6.4",
     "webpack": "^5.72.0"
   }

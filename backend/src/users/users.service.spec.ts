@@ -34,11 +34,10 @@ const mockUsers: User[] = [
 ]
 
 const mockRepository = {
-  find: jest.fn().mockResolvedValue(mockUsers),
-  findOne: jest.fn().mockResolvedValue(mockUsers[0]),
+  findBy: jest.fn().mockResolvedValue(mockUsers),
   save: jest.fn().mockResolvedValue(mockUsers[0]),
   delete: jest.fn().mockResolvedValue(mockUsers[0]),
-  count: jest.fn(),
+  countBy: jest.fn(),
 }
 
 describe('UsersService', () => {
@@ -74,9 +73,9 @@ describe('UsersService', () => {
     })
 
     it('gives the correct arguments to repository#find', async () => {
-      const spy = jest.spyOn(repository, 'findOne')
+      const spy = jest.spyOn(repository, 'findBy')
       await service.findByEmail('asdf')
-      expect(spy).toHaveBeenCalledWith({ where: { email: 'asdf' } })
+      expect(spy).toHaveBeenCalledWith({ email: 'asdf' })
     })
   })
 
@@ -115,17 +114,17 @@ describe('UsersService', () => {
 
   describe('#emailExists()', () => {
     it('returns true when the repository counts 1', () => {
-      jest.spyOn(repository, 'count').mockResolvedValue(1)
+      jest.spyOn(repository, 'countBy').mockResolvedValue(1)
       return expect(service.emailExists('some@cpu.edu.ph')).resolves.toBe(true)
     })
 
     it('returns true when the repository counts 0', () => {
-      jest.spyOn(repository, 'count').mockResolvedValue(0)
+      jest.spyOn(repository, 'countBy').mockResolvedValue(0)
       return expect(service.emailExists('some@cpu.edu.ph')).resolves.toBe(false)
     })
 
     it('calls the count method correctly', async () => {
-      const spy = jest.spyOn(repository, 'count')
+      const spy = jest.spyOn(repository, 'countBy')
       await service.emailExists('some@cpu.edu.ph')
       expect(spy).toHaveBeenCalledWith({ email: 'some@cpu.edu.ph' })
     })

@@ -13,13 +13,11 @@ export class UsersService {
   ) {}
 
   findByEmail(email: string): Promise<User | undefined> {
-    return this.userRepository.findOne({
-      where: { email },
-    })
+    return this.userRepository.findBy({ email }).then((results) => results[0])
   }
 
   emailExists(email: string): Promise<boolean> {
-    return this.userRepository.count({ email }).then((count) => count > 0)
+    return this.userRepository.countBy({ email }).then((count) => count > 0)
   }
 
   async register(user: Registrant): Promise<User> {
