@@ -26,8 +26,8 @@
     "typecheck": "tsc --noEmit -p tsconfig.json  # exists coz test/ aren't typechecked by `nest build`",
     "typeorm": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js",
     "seed": "ts-node ./database/seed.ts",
-    "migrate:gen": "pnpm typeorm migration:generate",
-    "migrate": "pnpm typeorm migration:run",
+    "migrate:gen": "pnpm typeorm migration:generate -d datasource.ts -p",
+    "migrate": "pnpm typeorm migration:run -d datasource.ts",
     "deploy": "pnpm install && pnpm build && pnpm migrate && pnpm seed"
   },
   "dependencies": {
