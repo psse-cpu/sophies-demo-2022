@@ -1,12 +1,15 @@
 import { Test } from '@nestjs/testing'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { Membership } from './membership.entity'
+import { ProjectRole } from './project-role.enum'
 import { Project } from './project.entity'
 import { ProjectsService } from './projects.service'
 
 const innerJoinAndSelectSpy = jest.fn().mockReturnThis()
 const whereSpy = jest.fn().mockReturnThis()
 const getManySpy = jest.fn()
+const saveSpy = jest.fn()
 
 const mockProjectRepo = {
   find: jest.fn(),
@@ -15,6 +18,23 @@ const mockProjectRepo = {
     where: whereSpy,
     getMany: getManySpy,
   })),
+  save: saveSpy,
+}
+
+const mockProjectWithOwner = {
+  name: 'awesome project hala bira iloio nice',
+  id: '14',
+  description: 'cool cool cool',
+  createdAt: '2022-06-01T21:20:21.128Z',
+  memberships: [
+    {
+      user: {
+        id: 1,
+        familyName: 'Coo',
+        givenName: 'Mike',
+      },
+    },
+  ],
 }
 
 describe('ProjectsService', () => {
@@ -85,6 +105,48 @@ describe('ProjectsService', () => {
       return expect(projectsService.findByUserId(1)).resolves.toStrictEqual([
         { id: 1, name: 'awesome project', description: 'cool cool cool' },
       ])
+    })
+  })
+
+  describe('#createProjectWithOwner()', () => {
+    it('returns the saved project', async () => {
+      saveSpy.mockResolvedValue(mockProjectWithOwner)
+
+      return expect(
+        projectsService.createProjectWithOwner(
+          {
+            name: 'awesome project hala bira iloio nice',
+            description: 'cool cool cool',
+          },
+          3
+        )
+      ).resolves.toStrictEqual(mockProjectWithOwner)
+    })
+
+    it('calls save with the correct nested object', async () => {
+      await projectsService.createProjectWithOwner(
+        {
+          name: 'nami akon project',
+          description: 'nami nami gid ya 1.0 kay sir',
+        },
+        7
+      )
+
+      const expectedProject = new Project()
+
+      Object.assign(expectedProject, {
+        name: 'nami akon project',
+        description: 'nami nami gid ya 1.0 kay sir',
+        memberships: [
+          Object.assign(new Membership(), {
+            project: expectedProject,
+            projectRole: ProjectRole.OWNER,
+            userId: 7,
+          }),
+        ],
+      })
+
+      expect(saveSpy).toHaveBeenCalledWith(expectedProject)
     })
   })
 })
