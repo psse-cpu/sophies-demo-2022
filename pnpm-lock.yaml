@@ -6,25 +6,25 @@ importers:
     specifiers:
       '@commitlint/cli': ^16.3.0
       '@commitlint/config-conventional': ^16.2.4
-      '@types/node': ^12.20.54
-      '@typescript-eslint/eslint-plugin': ^5.27.0
-      '@typescript-eslint/parser': ^5.27.0
+      '@types/node': ^12.20.52
+      '@typescript-eslint/eslint-plugin': ^5.26.0
+      '@typescript-eslint/parser': ^5.26.0
       commitizen: ^4.2.4
       commitizen-emoji: ^1.0.5
       eslint: ^8.16.0
       eslint-config-airbnb-base: ^15.0.0
       eslint-config-prettier: ^8.5.0
-      eslint-plugin-boundaries: ^2.10.1
+      eslint-plugin-boundaries: ^2.9.0
       eslint-plugin-eslint-comments: ^3.2.0
       eslint-plugin-import: ^2.26.0
-      eslint-plugin-jest: ^26.4.6
+      eslint-plugin-jest: ^26.3.0
       eslint-plugin-jsonc: ^2.3.0
       eslint-plugin-no-secrets: ^0.8.9
       eslint-plugin-unicorn: ^42.0.0
       eslint-plugin-vue: ^8.7.1
       husky: ^7.0.4
       istanbul-badges-readme: ^1.8.1
-      lint-staged: ^12.5.0
+      lint-staged: ^12.4.2
       npm-run-all: ^4.1.5
       prettier: ^2.6.2
       start-server-and-test: ^1.14.0
@@ -208,47 +208,47 @@ importers:
       '@graphql-codegen/typed-document-node': ^2.2.11
       '@graphql-codegen/typescript': ^2.4.11
       '@graphql-codegen/typescript-operations': ^2.4.0
-      '@graphql-eslint/eslint-plugin': ^3.10.4
+      '@graphql-eslint/eslint-plugin': ^3.10.3
       '@graphql-typed-document-node/core': ^3.1.1
-      '@quasar/app-vite': ^1.0.1
-      '@quasar/extras': ^1.14.0
+      '@quasar/app-vite': ^1.0.0-alpha.0
+      '@quasar/extras': ^1.0.0
       '@quasar/vite-plugin': ^1.0.10
       '@types/cypress-cucumber-preprocessor': ^4.0.1
-      '@types/node': ^12.20.54
+      '@types/node': ^12.20.52
       '@urql/core': ^2.5.0
       '@urql/exchange-graphcache': ^4.4.2
       '@urql/vue': ^0.6.2
       '@vitejs/plugin-vue': ^2.3.3
       '@vue/compiler-sfc': ^3.2.36
       '@vue/test-utils': ^2.0.0
-      autoprefixer: ^10.4.7
+      autoprefixer: ^10.4.2
       axios: ^0.27.2
       backend: workspace:^0.0.1
       c8: ^7.11.3
       class-transformer: ^0.5.1
       class-validator: ^0.13.2
       dotenv: ^16.0.1
-      graphql: ^15.8.0
+      graphql: ^15
       graphql-config: ^4.3.1
-      happy-dom: ^4.1.0
-      http-server: ^14.1.1
+      happy-dom: ^4.0.1
+      http-server: ^14.1.0
       istanbul-badges-readme: ^1.8.1
       localforage: ^1.10.0
       npm-run-all: ^4.1.5
-      postcss: ^8.4.14
-      prettier: ^2.6.2
+      postcss: ^8.4.13
+      prettier: ^2.5.1
       quasar: ^2.7.1
-      rollup: ^2.75.5
+      rollup: ^2.72.0
       start-server-and-test: ^1.14.0
-      ts-node: ^10.8.0
-      typescript: ^4.7.2
+      ts-node: ^10.7.0
+      typescript: ^4.6.4
       vite: ^2.9.9
       vite-plugin-commonjs: ^0.4.7
-      vite-tsconfig-paths: ^3.5.0
-      vitest: ^0.12.10
-      vue: ^3.2.36
-      vue-router: ^4.0.15
-      vue-tsc: ^0.35.2
+      vite-tsconfig-paths: ^3.4.1
+      vitest: ^0.12.9
+      vue: ^3.2.33
+      vue-router: ^4.0.0
+      vue-tsc: '>=0.35'
       wonka: ^4.0.15
     dependencies:
       '@graphql-typed-document-node/core': 3.1.1_graphql@15.8.0
@@ -1897,10 +1897,10 @@ packages:
       '@commitlint/execute-rule': 16.2.1
       '@commitlint/resolve-extends': 16.2.1
       '@commitlint/types': 16.2.1
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 2.0.1_i6lyshcleqootoaqpkb46kfifq
+      cosmiconfig-typescript-loader: 2.0.1_bduezlpfhhu2salo6sf734d7nq
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.7.2
@@ -1918,10 +1918,10 @@ packages:
       '@commitlint/execute-rule': 17.0.0
       '@commitlint/resolve-extends': 17.0.0
       '@commitlint/types': 17.0.0
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
       chalk: 4.1.2
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 2.0.1_i6lyshcleqootoaqpkb46kfifq
+      cosmiconfig-typescript-loader: 2.0.1_bduezlpfhhu2salo6sf734d7nq
       lodash: 4.17.21
       resolve-from: 5.0.0
       typescript: 4.7.2
@@ -3782,7 +3782,7 @@ packages:
   /@types/concat-stream/1.6.1:
     resolution: {integrity: sha512-eHE4cQPoj6ngxBZMvVf6Hw7Mh4jMW4U9lpGmS5GBPB9RYxlFg+CHaVN7ErNY4W9XfLIEn20b4VDYaIrbq0q4uA==}
     dependencies:
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
     dev: true
 
   /@types/connect/3.4.35:
@@ -3848,7 +3848,7 @@ packages:
   /@types/form-data/0.0.33:
     resolution: {integrity: sha512-8BSvG1kGm83cyJITQMZSulnl6QV8jqAGreJsc5tPu1Jq0vTSOiY/k24Wx82JRpWwZSqrala6sd5rWi6aNXvqcw==}
     dependencies:
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
     dev: true
 
   /@types/graceful-fs/4.1.5:
@@ -3908,7 +3908,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
     dev: true
 
   /@types/lodash/4.14.182:
@@ -3930,6 +3930,7 @@ packages:
 
   /@types/node/12.20.54:
     resolution: {integrity: sha512-CFMnEPkSXWALI73t1oIWyb8QOmVrp6RruAqIx349sd+1ImaFwzlKcz55mwrx/yLyOyz1gkq/UKuNOigt27PXqg==}
+    dev: true
 
   /@types/node/14.18.20:
     resolution: {integrity: sha512-Q8KKwm9YqEmUBRsqJ2GWJDtXltBDxTdC4m5vTdXBolu2PeQh8LX+f6BTwU+OuXPu37fLxoN6gidqBmnky36FXA==}
@@ -4013,7 +4014,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
     dev: true
 
   /@types/serve-static/1.13.10:
@@ -4054,7 +4055,7 @@ packages:
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}
     dependencies:
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
 
   /@types/yargs-parser/21.0.0:
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -6416,16 +6417,16 @@ packages:
     dependencies:
       '@iarna/toml': 2.2.5
 
-  /cosmiconfig-typescript-loader/2.0.1_i6lyshcleqootoaqpkb46kfifq:
+  /cosmiconfig-typescript-loader/2.0.1_bduezlpfhhu2salo6sf734d7nq:
     resolution: {integrity: sha512-B9s6sX/omXq7I6gC6+YgLmrBFMJhPWew7ty/X5Tuwtd2zOSgWaUdXjkuVwbe3qqcdETo60+1nSVMekq//LIXVA==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@types/node': '*'
       typescript: '>=3'
     dependencies:
-      '@types/node': 12.20.54
+      '@types/node': 16.11.38
       cosmiconfig: 7.0.1
-      ts-node: 10.8.0_i6lyshcleqootoaqpkb46kfifq
+      ts-node: 10.8.0_bduezlpfhhu2salo6sf734d7nq
       typescript: 4.7.2
     transitivePeerDependencies:
       - '@swc/core'
@@ -13842,6 +13843,37 @@ packages:
     resolution: {integrity: sha512-DEQrfv6l7IvN2jlzc/VTdZJYsWUnQNCsueYjMkC/iXoEoi5fNan6MjeDqkvhfzbmHgdz9UxDUluX3V5HdjTydQ==}
     dev: true
 
+  /ts-node/10.8.0_bduezlpfhhu2salo6sf734d7nq:
+    resolution: {integrity: sha512-/fNd5Qh+zTt8Vt1KbYZjRHCE9sI5i7nqfD/dzBBRDeVXZXS6kToW6R7tTU6Nd4XavFs0mAVCg29Q//ML7WsZYA==}
+    hasBin: true
+    peerDependencies:
+      '@swc/core': '>=1.2.50'
+      '@swc/wasm': '>=1.2.50'
+      '@types/node': '*'
+      typescript: '>=2.7'
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      '@swc/wasm':
+        optional: true
+    dependencies:
+      '@cspotcode/source-map-support': 0.8.1
+      '@tsconfig/node10': 1.0.8
+      '@tsconfig/node12': 1.0.9
+      '@tsconfig/node14': 1.0.1
+      '@tsconfig/node16': 1.0.2
+      '@types/node': 16.11.38
+      acorn: 8.7.1
+      acorn-walk: 8.2.0
+      arg: 4.1.3
+      create-require: 1.1.1
+      diff: 4.0.2
+      make-error: 1.3.6
+      typescript: 4.7.2
+      v8-compile-cache-lib: 3.0.1
+      yn: 3.1.1
+    dev: true
+
   /ts-node/10.8.0_i6lyshcleqootoaqpkb46kfifq:
     resolution: {integrity: sha512-/fNd5Qh+zTt8Vt1KbYZjRHCE9sI5i7nqfD/dzBBRDeVXZXS6kToW6R7tTU6Nd4XavFs0mAVCg29Q//ML7WsZYA==}
     hasBin: true
@@ -14409,7 +14441,7 @@ packages:
       stylus:
         optional: true
     dependencies:
-      esbuild: 0.14.29
+      esbuild: 0.14.42
       postcss: 8.4.14
       resolve: 1.22.0
       rollup: 2.75.5
