@@ -23,6 +23,11 @@ const routes: RouteRecordRaw[] = [
         path: '/project/:projectId',
         component: () => import('src/pages/projects/my-projects-page.vue'),
       },
+      {
+        name: 'new-project',
+        path: '/project/new',
+        component: () => import('src/pages/projects/new-project-page.vue'),
+      },
     ],
   },
   {

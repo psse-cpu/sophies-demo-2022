@@ -12,13 +12,13 @@
     <h3>Wow, such empty!</h3>
     <p class="empty-message">You have no projects right now.</p>
 
-    <q-btn color="primary" icon="mdi-briefcase-plus">
+    <q-btn color="primary" icon="mdi-briefcase-plus" to="/project/new">
       <span class="q-px-sm">Create new project</span>
     </q-btn>
   </div>
   <div v-else class="col projects">
     <div class="actions row q-pa-md" style="justify-content: flex-end">
-      <q-btn color="primary" icon="mdi-briefcase-plus">
+      <q-btn color="primary" icon="mdi-briefcase-plus" to="/project/new">
         <span class="q-px-sm">Create new project</span>
       </q-btn>
     </div>
