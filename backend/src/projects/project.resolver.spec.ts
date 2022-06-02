@@ -14,6 +14,7 @@ const mockProject: Project = {
   id: 3,
   name: 'Nami nga project',
   description: 'Lawlaw nga project  hehehe',
+  sprintLength: 2,
   createdAt: new Date(),
   updatedAt: new Date(),
 }
@@ -74,6 +75,7 @@ describe('ProjectResolver', () => {
         {
           name: 'tahom system',
           description: 'tahom3x gid kaayo',
+          sprintLength: 2,
         },
         { id: 7, email: 'mike@cpu.edu.ph' } as User
       )
@@ -82,6 +84,7 @@ describe('ProjectResolver', () => {
         {
           name: 'tahom system',
           description: 'tahom3x gid kaayo',
+          sprintLength: 2,
         },
         7
       )
@@ -97,6 +100,7 @@ describe('ProjectResolver', () => {
           {
             name: 'tahom system',
             description: 'tahom3x gid kaayo',
+            sprintLength: 2,
           },
           { id: 7, email: 'mike@cpu.edu.ph' } as User
         )
