@@ -8,13 +8,17 @@ import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import path from 'node:path'
 import { APP_INTERCEPTOR } from '@nestjs/core'
-import { getConnection } from 'typeorm'
+import { createConnection, getConnection } from 'typeorm'
 import { AuthModule } from './auth/auth.module'
 import { UsersModule } from './users/users.module'
 import { AppController } from './app.controller'
 import { ProjectsModule } from './projects/projects.module'
-
 import ormConfig from '../ormconfig'
+
+// TODO: keep track of this temporary workaround
+// remove when the Typeorm Dataloader package supports TypeORM 0.3.0
+// https://github.com/tailoredmedia/backend-nx-skeleton/search?q=typeormgetconnection
+createConnection(omit(ormConfig, 'cli', 'migrations'))
 
 @Module({
   imports: [
