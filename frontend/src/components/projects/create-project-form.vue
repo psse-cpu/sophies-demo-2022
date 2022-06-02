@@ -30,18 +30,26 @@
       />
     </div>
 
-    <q-select
-      v-model="sprintLength"
-      :options="sprintLengths"
-      rounded
-      outlined
-      label="Not yet implemented"
-      style="width: 96%; margin-left: auto; margin-right: auto"
-    />
+    <div class="row q-ma-md q-gutter-md">
+      <label for="sprintLengthSlider" class="text-grey-7">
+        <span>Sprint Length in Weeks:</span>
+      </label>
+      <q-slider
+        name="sprint-length"
+        data-testid="sprint-length-input"
+        v-model="project.sprintLength"
+        :min="1"
+        :max="4"
+        :step="1"
+        label
+        label-always
+        color="light-green-5"
+      />
+    </div>
 
     <div class="q-ma-md flex buttons">
       <q-btn
-        data-testid="sign-up-button"
+        data-testid="create-project-button"
         type="submit"
         icon="mdi-account-plus"
         color="primary"
@@ -58,23 +66,15 @@
 
 <script lang="ts" setup>
 import { useMutation } from '@urql/vue'
-import { reactive, ref } from 'vue'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { ProjectInput } from '../../generated/graphql'
 import { CreateProjectDocument } from './create-project.generated'
 
-const sprintLengths = [
-  { value: 1, label: '1 week' },
-  { value: 2, label: '2 weeks' },
-  { value: 3, label: '3 weeks' },
-  { value: 4, label: '4 weeks' },
-]
-
-const sprintLength = ref(sprintLengths[1])
-
 const project = reactive<ProjectInput>({
   name: '',
   description: '',
+  sprintLength: 2,
 })
 
 const router = useRouter()
