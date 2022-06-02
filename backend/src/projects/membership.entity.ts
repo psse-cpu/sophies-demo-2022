@@ -13,7 +13,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm'
 import { User } from '../users/user.entity'
-import { ProjectRole } from './project-role.enum'
+import { ScrumRole } from './scrum-role.enum'
 import { Project } from './project.entity'
 
 @Entity()
@@ -33,11 +33,11 @@ export class Membership {
 
   @Column({
     type: 'simple-enum',
-    enum: ProjectRole,
-    default: ProjectRole.MEMBER,
+    enum: ScrumRole,
+    default: ScrumRole.MEMBER,
   })
-  @Field(() => ProjectRole)
-  projectRole: ProjectRole
+  @Field(() => ScrumRole)
+  scrumRole: ScrumRole
 
   @ManyToOne(() => User, (user) => user.memberships)
   @Field(() => User, { middleware: [TypeormLoaderMiddleware] })

@@ -6,6 +6,7 @@ type Project {
   id: Int!
   name: String!
   description: String!
+  sprintLength: Int!
   memberships: [Membership!]!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -21,7 +22,7 @@ type Membership {
   id: Int!
   projectId: Int!
   userId: Int!
-  projectRole: ProjectRole!
+  scrumRole: ScrumRole!
   user: User!
   project: Project!
   createdAt: DateTime!
@@ -29,11 +30,10 @@ type Membership {
   deletedAt: DateTime!
 }
 
-enum ProjectRole {
-  OWNER
-  MAINTAINER
+enum ScrumRole {
+  PRODUCT_OWNER
+  SCRUM_MASTER
   MEMBER
-  REPORTER
 }
 
 type User {
@@ -57,10 +57,12 @@ type Query {
   emailExists(email: String!): Boolean!
   users: [User!]!
   allProjects: [Project!]!
+  myProjects: [Project!]!
 }
 
 type Mutation {
   register(registrant: Registrant!): User!
+  createProject(project: ProjectInput!): Project!
 }
 
 input Registrant {
@@ -69,4 +71,10 @@ input Registrant {
   givenName: String!
   registrationSource: RegistrationSource!
   password: String!
+}
+
+input ProjectInput {
+  name: String!
+  description: String!
+  sprintLength: Int!
 }

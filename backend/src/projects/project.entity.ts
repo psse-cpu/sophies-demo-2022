@@ -1,8 +1,9 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, GraphQLISODateTime, Int, ObjectType } from '@nestjs/graphql'
 import {
   TypeormLoaderExtension,
   TypeormLoaderMiddleware,
 } from '@webundsoehne/nestjs-graphql-typeorm-dataloader'
+import { IsInt, IsNotEmpty, Max, Min } from 'class-validator'
 import {
   Column,
   CreateDateColumn,
@@ -23,11 +24,20 @@ export class Project {
 
   @Column()
   @Field()
+  @IsNotEmpty()
   name: string
 
   @Column('text')
   @Field()
+  @IsNotEmpty()
   description: string
+
+  @Column('int')
+  @Field(() => Int)
+  @IsInt()
+  @Min(1)
+  @Max(4)
+  sprintLength: number
 
   @OneToMany(() => Membership, (membership) => membership.project, {
     cascade: true,
@@ -43,7 +53,7 @@ export class Project {
   createdAt: Date
 
   @UpdateDateColumn()
-  @Field()
+  @Field(() => GraphQLISODateTime)
   updatedAt: Date
 
   @DeleteDateColumn()

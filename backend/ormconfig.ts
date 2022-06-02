@@ -6,6 +6,7 @@ import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConne
 // eslint-disable-next-line import/no-default-export -- it's a config file!
 export default {
   type: 'postgres',
+  migrationsRun: false, // of course!
   url:
     process.env.NODE_ENV === 'test'
       ? process.env.TEST_DATABASE_URL

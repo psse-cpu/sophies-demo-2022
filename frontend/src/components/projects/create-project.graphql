@@ -1,0 +1,16 @@
+mutation CreateProject($project: ProjectInput!) {
+  createProject(project: $project) {
+    createdAt
+    description
+    id
+    memberships {
+      id
+      user {
+        familyName
+        givenName
+        id
+      }
+    }
+    name
+  }
+}
