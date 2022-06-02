@@ -58,6 +58,7 @@ describe('CreateProjectForm', () => {
   it('redirects to the project page', async () => {
     mutationSpy.mockReturnValue(fromValue({} as any))
     const wrapper = wrapperFactory()
+
     await wrapper.find(projectNameSelector).setValue('wicked project')
     await wrapper
       .find(projectDescriptionSelector)
