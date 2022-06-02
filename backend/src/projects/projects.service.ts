@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Membership } from './membership.entity'
 import { ProjectInput } from './project-input.dto'
-import { ProjectRole } from './project-role.enum'
+import { ScrumRole } from './scrum-role.enum'
 import { Project } from './project.entity'
 
 @Injectable()
@@ -36,7 +36,7 @@ export class ProjectsService {
     const membership = new Membership()
     membership.project = projectToBeCreated
     membership.userId = ownerId
-    membership.projectRole = ProjectRole.OWNER
+    membership.scrumRole = ScrumRole.PRODUCT_OWNER
 
     projectToBeCreated.memberships = [membership]
 

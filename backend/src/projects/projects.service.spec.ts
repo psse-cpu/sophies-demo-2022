@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing'
 import { getRepositoryToken } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Membership } from './membership.entity'
-import { ProjectRole } from './project-role.enum'
+import { ScrumRole } from './scrum-role.enum'
 import { Project } from './project.entity'
 import { ProjectsService } from './projects.service'
 
@@ -25,6 +25,7 @@ const mockProjectWithOwner = {
   name: 'awesome project hala bira iloio nice',
   id: '14',
   description: 'cool cool cool',
+  sprintLength: 2,
   createdAt: '2022-06-01T21:20:21.128Z',
   memberships: [
     {
@@ -117,6 +118,7 @@ describe('ProjectsService', () => {
           {
             name: 'awesome project hala bira iloio nice',
             description: 'cool cool cool',
+            sprintLength: 2,
           },
           3
         )
@@ -128,6 +130,7 @@ describe('ProjectsService', () => {
         {
           name: 'nami akon project',
           description: 'nami nami gid ya 1.0 kay sir',
+          sprintLength: 2,
         },
         7
       )
@@ -137,10 +140,11 @@ describe('ProjectsService', () => {
       Object.assign(expectedProject, {
         name: 'nami akon project',
         description: 'nami nami gid ya 1.0 kay sir',
+        sprintLength: 2,
         memberships: [
           Object.assign(new Membership(), {
             project: expectedProject,
-            projectRole: ProjectRole.OWNER,
+            scrumRole: ScrumRole.PRODUCT_OWNER,
             userId: 7,
           }),
         ],
