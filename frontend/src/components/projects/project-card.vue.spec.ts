@@ -32,7 +32,6 @@ describe('ProjectCard', () => {
 
   it('displays the project creation date', () => {
     const wrapper = wrapperFactory()
-    console.log('linti', wrapper.html())
     expect(wrapper.get(cardDateSelector).text()).toMatch(
       /^Created \d\d?\/\d\d?/
     )
