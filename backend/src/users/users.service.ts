@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt'
-import { Repository } from 'typeorm'
+import { ILike, Repository } from 'typeorm'
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './user.entity'
@@ -14,6 +14,16 @@ export class UsersService {
 
   findByEmail(email: string): Promise<User | undefined> {
     return this.userRepository.findBy({ email }).then((results) => results[0])
+  }
+
+  searchUsers(searchPhrase: string): Promise<User[]> {
+    return this.userRepository.find({
+      where: [
+        { givenName: ILike(`${searchPhrase}%`) },
+        { familyName: ILike(`${searchPhrase}%`) },
+        { email: ILike(`${searchPhrase}%`) },
+      ],
+    })
   }
 
   emailExists(email: string): Promise<boolean> {
