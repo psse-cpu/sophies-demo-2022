@@ -1,15 +1,21 @@
 <template>
   <div class="project q-pa-md">
     <div class="row">
-      <div id="sprint-length" class="col-md-1 col-xs-2">
+      <div
+        id="sprint-length"
+        data-testid="sprint-length"
+        class="col-md-1 col-xs-2"
+      >
         <q-tooltip anchor="bottom middle" self="top middle">
           Sprint length (coming soon: project logo goes here)
         </q-tooltip>
-        <div data-testid="sprint-length" class="text-h4 text-center">
+        <div class="text-h4 text-center">
           <q-icon name="mdi-calendar-refresh" style="font-size: 0.7em" />
           {{ props.project.sprintLength }}
         </div>
-        <div class="row text-center flex-center">weeks</div>
+        <div class="row text-center flex-center">
+          week{{ props.project.sprintLength === 1 ? '' : 's' }}
+        </div>
       </div>
       <div class="col-md-7 col-xs-10">
         <h4 class="title" data-testid="project-name">
@@ -33,23 +39,68 @@
     <div class="row">
       <div id="members" class="col-md-8 col-xs-12">
         <h5 class="members-title text-primary">
-          <q-icon name="mdi-account-group" /><span class="q-ml-md"
-            >Members:</span
-          >
+          <q-icon name="mdi-account-group" />
+          <span class="q-ml-md">Members:</span>
         </h5>
 
+        <div class="row q-mb-md">
+          <q-select
+            class="col-8"
+            rounded
+            outlined
+            clearable
+            v-model="newMember"
+            :options="options"
+            stack-label
+            label="Add Member"
+            color="secondary"
+          >
+            <template v-slot:selected-item="scope">
+              <div>
+                <q-avatar size="sm" :color="randomColor()" text-color="white">
+                  {{ scope.opt.label[0] }}
+                </q-avatar>
+                <span class="q-ml-sm">{{ scope.opt.label }}</span>
+              </div>
+            </template>
+
+            <template v-slot:option="scope">
+              <q-item v-bind="scope.itemProps">
+                <q-item-section avatar>
+                  <q-avatar :color="randomColor()" text-color="white">{{
+                    scope.opt.label[0]
+                  }}</q-avatar>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ scope.opt.label }}</q-item-label>
+                  <q-item-label caption>{{ scope.opt.extra }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
+          <q-btn
+            round
+            icon="mdi-account-plus"
+            color="primary"
+            size="md"
+            style="margin-left: 16px; align-self: center"
+          >
+            <q-tooltip>Add Member</q-tooltip>
+          </q-btn>
+        </div>
+
         <q-table
+          data-testid="members-table"
           hide-pagination
-          :grid="$q?.screen.xs ?? false"
           :rows="rows"
           :columns="columns"
           row-key="name"
         >
           <template v-slot:body-cell-member="props">
             <q-td :props="props">
-              <q-avatar text-color="white" :color="randomColor()">{{
-                props.row.member.givenName[0]
-              }}</q-avatar>
+              <q-avatar text-color="white" :color="randomColor()">
+                {{ props.row.member.givenName[0] }}
+              </q-avatar>
               {{
                 props.row.member.familyName + ', ' + props.row.member.givenName
               }}
@@ -69,6 +120,7 @@
 <script lang="ts" setup>
 import { Project } from 'src/generated/graphql'
 import { sample } from 'lodash'
+import { ref } from 'vue'
 
 interface ProjectViewProps {
   project: Pick<
@@ -83,6 +135,13 @@ const columns = [
   { name: 'member', label: 'Member', field: 'member', align: 'left' as const },
   { name: 'role', label: 'Role', field: 'scrumRole', align: 'left' as const },
   { name: 'actions', label: 'Remove', field: 'id', align: 'center' as const },
+]
+
+const newMember = ref(null) // eslint-disable-line unicorn/no-null -- annoying
+
+const options = [
+  { label: 'Richard Michael Coo', value: 1, extra: 'foo@bar.ph' },
+  { label: 'Huhu', value: 2, extra: 'baz@quux.com' },
 ]
 
 const rows = props.project.memberships.map(({ id, user, scrumRole }) => ({
