@@ -67,9 +67,9 @@
             <template v-slot:option="scope">
               <q-item v-bind="scope.itemProps">
                 <q-item-section avatar>
-                  <q-avatar :color="randomColor()" text-color="white">{{
-                    scope.opt.label[0]
-                  }}</q-avatar>
+                  <q-avatar :color="randomColor()" text-color="white">
+                    {{ scope.opt.label[0] }}
+                  </q-avatar>
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>{{ scope.opt.label }}</q-item-label>
@@ -78,15 +78,38 @@
               </q-item>
             </template>
           </q-select>
-          <q-btn
-            round
+          <q-btn-dropdown
+            split
             icon="mdi-account-plus"
             color="primary"
+            rounded
             size="md"
-            style="margin-left: 16px; align-self: center"
+            @click="addAsRole(ScrumRole.MEMBER)"
+            style="height: 48px; align-self: center; margin-left: 16px"
+            :label="$q.screen.gt.md ? 'Add as Member' : ''"
           >
-            <q-tooltip>Add Member</q-tooltip>
-          </q-btn>
+            <q-list>
+              <q-item
+                clickable
+                v-close-popup
+                @click="addAsRole(ScrumRole.PRODUCT_OWNER)"
+              >
+                <q-item-section>
+                  <q-item-label>Add as Scrum Master</q-item-label>
+                </q-item-section>
+              </q-item>
+
+              <q-item
+                clickable
+                v-close-popup
+                @click="addAsRole(ScrumRole.SCRUM_MASTER)"
+              >
+                <q-item-section>
+                  <q-item-label>Add as Product Owner</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
         </div>
 
         <q-table
@@ -118,7 +141,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Project } from 'src/generated/graphql'
+import { Project, ScrumRole } from 'src/generated/graphql'
 import { sample } from 'lodash'
 import { ref } from 'vue'
 
@@ -138,6 +161,10 @@ const columns = [
 ]
 
 const newMember = ref(null) // eslint-disable-line unicorn/no-null -- annoying
+
+const addAsRole = (_scrumRole: ScrumRole) => {
+  /* pass */
+}
 
 const options = [
   { label: 'Richard Michael Coo', value: 1, extra: 'foo@bar.ph' },
