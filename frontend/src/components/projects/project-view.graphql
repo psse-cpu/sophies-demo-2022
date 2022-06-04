@@ -1,0 +1,18 @@
+query ProjectView($id: Int!) {
+  project(id: $id) {
+    description
+    id
+    memberships {
+      id
+      scrumRole
+      user {
+        email
+        familyName
+        givenName
+        id
+      }
+    }
+    name
+    sprintLength
+  }
+}

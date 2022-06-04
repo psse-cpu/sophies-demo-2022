@@ -1,28 +1,23 @@
 <template>
-  <project-view :project="project" />
+  <div v-if="fetching">Loading...</div>
+  <div v-else-if="error">Something wrong...</div>
+  <project-view v-else-if="data?.project" :project="data?.project" />
+  <div v-else>Nothing here...</div>
 </template>
 
 <script lang="ts" setup>
-import { Membership, ScrumRole } from 'src/generated/graphql'
+import { useQuery } from '@urql/vue'
+import { ProjectViewDocument } from './project-view.generated'
 import ProjectView from './project-view.vue'
 
-const project = {
-  id: 1,
-  name: 'hehe',
-  description: 'hehehehehe',
-  sprintLength: 2,
-  memberships: [
-    {
-      id: 1,
-      user: { givenName: 'Mike', familyName: 'Choi' },
-      scrumRole: ScrumRole.PRODUCT_OWNER,
-    },
-    {
-      id: 2,
-      user: { givenName: 'Hyeon Moo', familyName: 'Park' },
-      scrumRole: ScrumRole.MEMBER,
-    },
-  ] as Membership[],
-  createdAt: new Date(),
+interface ProjectViewContainerProps {
+  projectId: number
 }
+
+const props = defineProps<ProjectViewContainerProps>()
+
+const { data, fetching, error } = useQuery({
+  query: ProjectViewDocument,
+  variables: { id: props.projectId },
+})
 </script>

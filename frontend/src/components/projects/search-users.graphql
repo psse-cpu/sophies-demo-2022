@@ -1,0 +1,8 @@
+query SearchUsers($keyword: String!) {
+  users: searchUsers(keyword: $keyword) {
+    email
+    familyName
+    givenName
+    id
+  }
+}

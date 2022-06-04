@@ -2,9 +2,12 @@ import { mount } from '@vue/test-utils'
 import { Project } from 'app/../backend/src/projects/project.entity'
 import { Quasar } from 'quasar'
 import { ScrumRole } from 'src/generated/graphql'
+import { ref } from 'vue'
+import { fromValue, never } from 'wonka'
 import ProjectView from './project-view.vue'
 
 const project = Object.assign(new Project(), {
+  id: 1,
   name: 'anti-brownout system',
   description: 'power interruptions are a thing of the past',
   sprintLength: 2,
@@ -39,11 +42,23 @@ const project = Object.assign(new Project(), {
   ],
 })
 
+const querySpy = vi.fn(() => fromValue({}))
+const mutationSpy = vi.fn(() => never)
+
 const wrapperFactory = () =>
   mount(ProjectView, {
     global: { plugins: [Quasar] },
     props: {
       project,
+    },
+    provide: {
+      // TODO: refactor - component is not supposed to need urql mocks, but since it's
+      // a full mount, it has to provide $urql for the <add-member /> child 😢
+      $urql: ref({
+        executeQuery: querySpy,
+        executeMutation: mutationSpy,
+        executeSubscription: vi.fn(() => never),
+      }),
     },
   })
 
@@ -78,6 +93,14 @@ describe('ProjectView', () => {
       global: { plugins: [Quasar] },
       props: {
         project: oneWeekSprintsProject,
+      },
+      provide: {
+        // TODO: refactor --yeah test code like this hurts
+        $urql: ref({
+          executeQuery: querySpy,
+          executeMutation: mutationSpy,
+          executeSubscription: vi.fn(() => never),
+        }),
       },
     })
 
