@@ -24,11 +24,11 @@ export class MembershipsService {
         case ScrumRole.SCRUM_MASTER:
         case ScrumRole.PRODUCT_OWNER:
           await this.membershipRepository.update(
-            {
+            /* WHERE */ {
               scrumRole: membershipInput.scrumRole,
               projectId: membershipInput.projectId,
             },
-            {
+            /* SET */ {
               scrumRole: ScrumRole.MEMBER,
             }
           )
