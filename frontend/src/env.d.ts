@@ -17,6 +17,7 @@ declare module '@vue/runtime-dom' {
 declare module '@vue/runtime-core' {
   declare interface AllowedComponentProps {
     dataTestid?: string
+    ariaLabel?: string
   }
 }
 
