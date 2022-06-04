@@ -26,6 +26,10 @@ export class ProjectsService {
       .getMany()
   }
 
+  findByProjectId(projectId: number): Promise<Project | null> {
+    return this.projectRepository.findOneBy({ id: projectId })
+  }
+
   createProjectWithOwner(
     project: ProjectInput,
     ownerId: number

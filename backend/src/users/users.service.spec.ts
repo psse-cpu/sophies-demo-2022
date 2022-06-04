@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing'
-import { Repository } from 'typeorm'
+import { ILike, Repository } from 'typeorm'
 import { getRepositoryToken } from '@nestjs/typeorm'
 
 import { UsersService } from './users.service'
@@ -35,6 +35,7 @@ const mockUsers: User[] = [
 
 const mockRepository = {
   findBy: jest.fn().mockResolvedValue(mockUsers),
+  find: jest.fn().mockResolvedValue(mockUsers),
   save: jest.fn().mockResolvedValue(mockUsers[0]),
   delete: jest.fn().mockResolvedValue(mockUsers[0]),
   countBy: jest.fn(),
@@ -127,6 +128,26 @@ describe('UsersService', () => {
       const spy = jest.spyOn(repository, 'countBy')
       await service.emailExists('some@cpu.edu.ph')
       expect(spy).toHaveBeenCalledWith({ email: 'some@cpu.edu.ph' })
+    })
+  })
+
+  describe('#searchUsers()', () => {
+    it('returns whatever the repository returns', () => {
+      return expect(service.searchUsers('bar')).resolves.toStrictEqual(
+        mockUsers
+      )
+    })
+
+    it('calls the find method correctly', async () => {
+      const spy = jest.spyOn(repository, 'find')
+      await service.searchUsers('mike')
+      expect(spy).toHaveBeenCalledWith({
+        where: [
+          { givenName: ILike('mike%') },
+          { familyName: ILike('mike%') },
+          { email: ILike('mike%') },
+        ],
+      })
     })
   })
 })

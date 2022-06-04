@@ -13,6 +13,7 @@ const saveSpy = jest.fn()
 
 const mockProjectRepo = {
   find: jest.fn(),
+  findOneBy: jest.fn(),
   createQueryBuilder: jest.fn(() => ({
     innerJoinAndSelect: innerJoinAndSelectSpy,
     where: whereSpy,
@@ -21,12 +22,16 @@ const mockProjectRepo = {
   save: saveSpy,
 }
 
-const mockProjectWithOwner = {
+const mockProject = {
   name: 'awesome project hala bira iloio nice',
   id: '14',
   description: 'cool cool cool',
   sprintLength: 2,
   createdAt: '2022-06-01T21:20:21.128Z',
+}
+
+const mockProjectWithOwner = {
+  ...mockProject,
   memberships: [
     {
       user: {
@@ -151,6 +156,30 @@ describe('ProjectsService', () => {
       })
 
       expect(saveSpy).toHaveBeenCalledWith(expectedProject)
+    })
+  })
+
+  describe('#findByProjectId()', () => {
+    it('returns the project given its ID', () => {
+      jest
+        .spyOn(projectRepository, 'findOneBy')
+        .mockResolvedValue(mockProject as unknown as Project)
+
+      return expect(projectsService.findByProjectId(3)).resolves.toStrictEqual(
+        mockProject
+      )
+    })
+
+    it('returns null if the service returns null', () => {
+      // eslint-disable-next-line unicorn/no-null -- that's the TypeORM return
+      jest.spyOn(projectRepository, 'findOneBy').mockResolvedValue(null)
+      return expect(projectsService.findByProjectId(3)).resolves.toBeNull()
+    })
+
+    it('calls findOneBy with the correct args', async () => {
+      const spy = jest.spyOn(projectRepository, 'findOneBy')
+      await projectsService.findByProjectId(38)
+      expect(spy).toHaveBeenCalledWith({ id: 38 })
     })
   })
 })

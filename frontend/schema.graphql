@@ -56,13 +56,16 @@ enum RegistrationSource {
 type Query {
   emailExists(email: String!): Boolean!
   users: [User!]!
+  searchUsers(keyword: String!): [User!]!
   allProjects: [Project!]!
   myProjects: [Project!]!
+  project(id: Int!): Project
 }
 
 type Mutation {
   register(registrant: Registrant!): User!
   createProject(project: ProjectInput!): Project!
+  addMember(membershipInput: MembershipInput!): [Membership!]!
 }
 
 input Registrant {
@@ -77,4 +80,10 @@ input ProjectInput {
   name: String!
   description: String!
   sprintLength: Int!
+}
+
+input MembershipInput {
+  projectId: Int!
+  userId: Int!
+  scrumRole: ScrumRole!
 }

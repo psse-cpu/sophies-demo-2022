@@ -32,4 +32,9 @@ export class UserResolver {
   async users(): Promise<UserWithoutHash[]> {
     return this.usersService.allUsers()
   }
+
+  @Query(() => [User])
+  async searchUsers(@Args('keyword') keyword: string): Promise<User[]> {
+    return this.usersService.searchUsers(keyword)
+  }
 }

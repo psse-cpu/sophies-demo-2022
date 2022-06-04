@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const { execSync, execFileSync } = require('child_process')
 
 const frontendReadme = fs
   .readFileSync(path.join(__dirname, 'frontend/README.md'))

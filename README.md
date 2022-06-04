@@ -1,5 +1,5 @@
-![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-87.33%25-yellow.svg?style=flat&logo=jest)
-![Statements](https://img.shields.io/badge/Frontend%20Code%20Coverage-97.34%25-brightgreen.svg?style=flat&logo=jest)
+![Statements](https://img.shields.io/badge/Backend%20Code%20Coverage-88.7%25-yellow.svg?style=flat&logo=jest)
+![Statements](https://img.shields.io/badge/Frontend%20Code%20Coverage-96.11%25-brightgreen.svg?style=flat&logo=jest)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
@@ -187,19 +187,13 @@ describe('NumberHelper', () => {
 })
 ```
 
-### Important links
-
-- [TypeORM 0.2.x Docs](https://orkhan.gitbook.io/typeorm/docs)
-- TypeORM 0.3.x has breaking changes that don't work with `@nestjs/typeorm ` yet.
-  - See [Github Issue][1] and [the warning in their docs][2].
-
 ## IMPORTANT NOTES: Deployment on [Render](https://render.com)
 
 - Staging is auto-deployed when CI passes after a `git push origin main`
 - Prod is manually deployed, per our minimum requirement.
 - Databases are provisioned by Railway.
-- Heroku is another free no-credit-card alternative, but [there's this ongoing issue][6]
-  as of May 19, 2022.
+- Heroku is another free no-credit-card alternative. ~~but [there's this ongoing issue][6]
+  as of May 19, 2022.~~
 
 ## For absent-minded / forgetful people
 

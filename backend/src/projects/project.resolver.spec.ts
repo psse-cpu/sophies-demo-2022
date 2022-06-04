@@ -8,6 +8,7 @@ const mockProjectService = {
   allProjects: jest.fn(),
   findByUserId: jest.fn(),
   createProjectWithOwner: jest.fn(),
+  findByProjectId: jest.fn(),
 }
 
 const mockProject: Project = {
@@ -105,6 +106,31 @@ describe('ProjectResolver', () => {
           { id: 7, email: 'mike@cpu.edu.ph' } as User
         )
       ).resolves.toStrictEqual(mockProject)
+    })
+  })
+
+  // TODO: no security, can find any project
+  // labels: security
+  describe('project()', () => {
+    it('returns a project given its ID', () => {
+      jest
+        .spyOn(projectsService, 'findByProjectId')
+        .mockResolvedValue(mockProject)
+      return expect(projectResolver.project(3)).resolves.toStrictEqual(
+        mockProject
+      )
+    })
+
+    it('returns null if the service returns null', () => {
+      // eslint-disable-next-line unicorn/no-null -- TypeORM returns null
+      jest.spyOn(projectsService, 'findByProjectId').mockResolvedValue(null)
+      return expect(projectResolver.project(3)).resolves.toBeNull()
+    })
+
+    it('calls findByProjectId with the correct args', async () => {
+      const spy = jest.spyOn(projectsService, 'findByProjectId')
+      await projectsService.findByProjectId(3)
+      expect(spy).toHaveBeenCalledWith(3)
     })
   })
 })
