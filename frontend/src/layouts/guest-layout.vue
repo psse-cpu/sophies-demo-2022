@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fff">
-    <q-header elevated glossy>
+    <q-header elevated>
       <q-toolbar class="bg-blue-grey-8 q-pa-xs q-pt-sm">
         <q-toolbar-title class="branding">
           <img

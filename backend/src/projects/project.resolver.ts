@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common'
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { CurrentUser } from '../users/current-user.decorator'
 import { User } from '../users/user.entity'
 import { JwtGuard } from '../auth/jwt.guard'
@@ -28,5 +28,12 @@ export class ProjectResolver {
     @CurrentUser() user: User
   ): Promise<Project> {
     return this.projectsService.createProjectWithOwner(project, user.id)
+  }
+
+  @Query(() => Project, { nullable: true })
+  project(
+    @Args('id', { type: () => Int }) id: number
+  ): Promise<Project | null> {
+    return this.projectsService.findByProjectId(id)
   }
 }

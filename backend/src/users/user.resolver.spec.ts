@@ -18,6 +18,7 @@ const mockUsersService = {
   allUsers: jest.fn().mockResolvedValue([mockUser]),
   register: jest.fn().mockResolvedValue(mockUser),
   emailExists: jest.fn().mockResolvedValue(true),
+  searchUsers: jest.fn().mockResolvedValue([mockUser]),
 }
 
 describe('UserResolver', () => {
@@ -76,6 +77,20 @@ describe('UserResolver', () => {
         .mockResolvedValue(false)
       await mockUsersService.emailExists('some@cpu.edu.ph')
       expect(spy).toHaveBeenCalledWith('some@cpu.edu.ph')
+    })
+  })
+
+  describe('#searchUsers()', () => {
+    it('returns whatever the service returns', () => {
+      return expect(resolver.searchUsers('mykee')).resolves.toStrictEqual([
+        mockUser,
+      ])
+    })
+
+    it('calls the service method correctly', async () => {
+      const spy = jest.spyOn(mockUsersService, 'searchUsers')
+      await resolver.searchUsers('ricardo')
+      expect(spy).toHaveBeenCalledWith('ricardo')
     })
   })
 })

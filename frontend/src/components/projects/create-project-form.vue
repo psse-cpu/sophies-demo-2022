@@ -45,6 +45,13 @@
         label-always
         color="light-green-5"
       />
+      <q-banner class="bg-info text-white">
+        <template v-slot:avatar>
+          <q-icon name="mdi-information" color="white" />
+        </template>
+        Once the first sprint starts, you can only edit this after Sprint
+        retrospectives.
+      </q-banner>
     </div>
 
     <div class="q-ma-md flex buttons">

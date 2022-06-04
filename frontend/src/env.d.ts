@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/prevent-abbreviations -- Env is well-accepted */
-
 declare namespace NodeJS {
   interface ProcessEnv {
     NODE_ENV: string
@@ -8,4 +6,19 @@ declare namespace NodeJS {
   }
 }
 
-/* eslint-enable unicorn/prevent-abbreviations */
+// for native html elements
+declare module '@vue/runtime-dom' {
+  interface HTMLAttributes {
+    dataTestid?: string
+  }
+}
+
+// for vue components
+declare module '@vue/runtime-core' {
+  declare interface AllowedComponentProps {
+    dataTestid?: string
+    ariaLabel?: string
+  }
+}
+
+export {}

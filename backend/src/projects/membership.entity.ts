@@ -8,16 +8,19 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  Index,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm'
+import { IsEnum, IsInt } from 'class-validator'
 import { User } from '../users/user.entity'
 import { ScrumRole } from './scrum-role.enum'
 import { Project } from './project.entity'
 
 @Entity()
 @ObjectType()
+@Index(['projectId', 'userId'], { unique: true })
 export class Membership {
   @PrimaryGeneratedColumn()
   @Field(() => Int)
@@ -25,10 +28,12 @@ export class Membership {
 
   @Column('int')
   @Field(() => Int)
+  @IsInt()
   projectId: number
 
   @Column('int')
   @Field(() => Int)
+  @IsInt()
   userId: number
 
   @Column({
@@ -37,6 +42,7 @@ export class Membership {
     default: ScrumRole.MEMBER,
   })
   @Field(() => ScrumRole)
+  @IsEnum(ScrumRole)
   scrumRole: ScrumRole
 
   @ManyToOne(() => User, (user) => user.memberships)

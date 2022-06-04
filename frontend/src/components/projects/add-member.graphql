@@ -1,0 +1,12 @@
+mutation AddMember($membershipInput: MembershipInput!) {
+  members: addMember(membershipInput: $membershipInput) {
+    id
+    scrumRole
+    user {
+      email
+      familyName
+      givenName
+      id
+    }
+  }
+}
