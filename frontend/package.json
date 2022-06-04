@@ -30,6 +30,8 @@
     "@urql/core": "^2.5.0",
     "@urql/exchange-graphcache": "^4.4.2",
     "@urql/vue": "^0.6.2",
+    "@vue/runtime-core": "^3.2.36",
+    "@vue/runtime-dom": "^3.2.36",
     "axios": "^0.27.2",
     "backend": "workspace:^0.0.1",
     "class-transformer": "^0.5.1",
@@ -75,7 +77,7 @@
     "vite-tsconfig-paths": "^3.4.1",
     "vitest": "^0.12.9",
     "vue": "^3.2.33",
-    "vue-tsc": ">=0.35"
+    "vue-tsc": "0.36"
   },
   "engines": {
     "node": "^16",
