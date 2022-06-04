@@ -9,7 +9,7 @@ import {
   DeleteDateColumn,
   OneToMany,
 } from 'typeorm'
-import { IsEmail, IsEnum, IsNotEmpty } from 'class-validator'
+import { IsEmail, IsNotEmpty } from 'class-validator'
 import {
   TypeormLoaderMiddleware,
   TypeormLoaderExtension,
@@ -47,7 +47,6 @@ export class User {
     enum: RegistrationSource,
   })
   @Field(() => RegistrationSource)
-  @IsEnum(RegistrationSource)
   registrationSource: RegistrationSource
 
   @OneToMany(() => Membership, (membership) => membership.user, {
