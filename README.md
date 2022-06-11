@@ -7,6 +7,9 @@
 
 # Sophies Demo
 
+## Archived June 11, 2022 -- no time to continue
+_(Some components are untested, e.g. [this](https://github.com/psse-cpu/sophies-demo-2022/blob/main/frontend/src/components/projects/add-member.vue.spec.ts), which is a bad example that should not be emulated. :grin:)_
+
 Demo project for SE-2223 and SE-2226: AY-2021-2022.
 
 - Showcase baseline expectations and minimum requirements.
